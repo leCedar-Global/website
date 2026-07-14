@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>leCedar Global: ERP, Business Intelligence & Data Systems | Beirut · Abidjan · Kuwait</title>
+<meta name="description" content="leCedar Global builds the operational backbone of ambitious businesses across Africa, the Gulf and the Levant: ERP, CRM, Power BI dashboards, GIS, regulatory compliance and AI automation.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F1F0EB; --ink:#10150C; --ghost:rgba(16,21,12,.18); --soft:rgba(16,21,12,.46);
+  --cedar:#1B2415; --cedar-2:#232E1C; --lime:#D7F05A; --lime-ink:#2A3510;
+  --sand:#E5E1D3; --line:rgba(16,21,12,.10); --line-w:rgba(241,240,235,.14); --white:#FFFFFF;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter Tight',sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--lime);color:var(--lime-ink)}
+.serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400}
+.wrap{max-width:1280px;margin:0 auto;padding:0 24px}
+@media(min-width:768px){.wrap{padding:0 40px}}
+.eyebrow{font-size:13px;font-weight:500;letter-spacing:.02em;color:var(--soft)}
+.pill{display:inline-flex;align-items:center;gap:9px;border-radius:9999px;font-size:14px;font-weight:600;text-decoration:none;padding:12px 22px;transition:background .2s,transform .2s;cursor:pointer;border:none;white-space:nowrap}
+.pill.dark{background:#111409;color:#fff}
+.pill.dark:hover{background:#2b331e}
+.pill.line{border:1px solid var(--line);color:var(--ink);background:transparent}
+.pill.line:hover{background:rgba(16,21,12,.05)}
+.pill.lime{background:var(--lime);color:var(--lime-ink)}
+.pill.lime:hover{background:#e3f97a}
+.pill .dot{width:17px;height:17px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center}
+.pill .dot i{width:6px;height:6px;border-radius:50%;background:#fff;display:block}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:90;background:rgba(241,240,235,.85);backdrop-filter:blur(12px)}
+nav .bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:15px 40px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);justify-self:start}
+.brand svg{width:26px;height:26px}
+.brand b{font-size:17px;font-weight:500;letter-spacing:-.01em}
+.brand b i{font-style:normal;font-weight:700}
+.brand b span{color:#54713a;font-weight:500}
+.navlinks{display:flex;gap:6px;justify-self:center}
+.navlinks a{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-decoration:none;padding:8px 14px;transition:opacity .2s}
+.navlinks a:hover{opacity:.5}
+nav .nav-cta{justify-self:end}
+@media(max-width:860px){.navlinks{display:none}nav .bar{grid-template-columns:1fr auto;padding:14px 24px}}
+
+.hero{min-height:100vh;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 28%,rgba(219,219,209,.7) 0%,transparent 70%);pointer-events:none}
+.hero-copy{position:relative;z-index:2;text-align:center;padding-top:130px;display:flex;flex-direction:column;align-items:center}
+@media(min-width:768px){.hero-copy{padding-top:150px}}
+.hero h1{font-weight:500;letter-spacing:-.035em;line-height:1.05;font-size:clamp(38px,6.6vw,72px);margin-top:14px}
+.hero h1 .l1{color:var(--ghost);display:block}
+.hero h1 .l2{color:var(--ink);display:block}
+.hero h1 .serif{letter-spacing:-.01em}
+.hero .sub{margin-top:20px;max-width:520px;font-size:clamp(14px,1.6vw,17px);font-weight:500;color:var(--soft);line-height:1.55}
+.hero .ctas{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap;justify-content:center}
+
+.dash-zone{position:relative;z-index:1;margin-top:auto;display:flex;justify-content:center;pointer-events:none;padding-top:56px}
+.dash{width:min(880px,92vw);background:#FBFAF7;border:1px solid rgba(16,21,12,.09);border-bottom:none;border-radius:14px 14px 0 0;box-shadow:0 -8px 80px rgba(16,21,12,.10),0 40px 120px rgba(16,21,12,.10);overflow:hidden;font-size:12px}
+.dash .chrome{display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--line)}
+.dash .chrome .dots{display:flex;gap:5px}
+.dash .chrome .dots i{width:9px;height:9px;border-radius:50%;background:#DAD7CB;display:block}
+.dash .chrome .ttl{flex:1;text-align:center;font-size:11.5px;color:var(--soft);font-weight:500}
+.dash .chrome .live{display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:600;color:var(--lime-ink);background:var(--lime);border-radius:20px;padding:3px 10px}
+.dash .chrome .live i{width:5px;height:5px;border-radius:50%;background:var(--lime-ink);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.dash .body{display:grid;grid-template-columns:158px 1fr}
+.dash aside{border-right:1px solid var(--line);padding:14px 10px;display:flex;flex-direction:column;gap:2px}
+.dash aside .it{padding:8px 12px;border-radius:8px;color:var(--soft);font-weight:500;font-size:12px}
+.dash aside .it.on{background:var(--cedar);color:#fff;font-weight:600}
+.dash main{padding:16px 18px 0}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 12px}
+.kpi .lb{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);font-weight:600}
+.kpi .vl{font-size:16px;font-weight:600;letter-spacing:-.02em;margin-top:4px}
+.kpi .vl small{font-size:10px;color:var(--soft);font-weight:500}
+.kpi.fne{background:var(--cedar);border-color:var(--cedar)}
+.kpi.fne .lb{color:rgba(255,255,255,.55)}
+.kpi.fne .vl{color:var(--lime)}
+.dash .split{display:grid;grid-template-columns:1.5fr 1fr;gap:10px;margin-top:10px;padding-bottom:16px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.panel .ph{display:flex;justify-content:space-between;font-size:11px;font-weight:600;color:var(--soft);margin-bottom:10px}
+.bars{display:flex;align-items:flex-end;gap:8px;height:104px}
+.bars .b{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:5px;height:100%}
+.bars .b i{display:block;background:var(--sand);border-radius:4px 4px 0 0;height:var(--h)}
+.bars .b.hot i{background:var(--lime)}
+.bars .b em{font-style:normal;font-size:9px;color:var(--soft);text-align:center;font-weight:500}
+.alerts .row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-top:1px solid var(--line);font-size:11px;font-weight:500}
+.alerts .row:first-of-type{border-top:none}
+.alerts .tag{font-size:9.5px;font-weight:600;padding:2px 8px;border-radius:10px;background:#F6EBDD;color:#8a5a1d}
+.alerts .tag.ok{background:#E9F3D8;color:#4a6420}
+@media(max-width:680px){.dash .body{grid-template-columns:1fr}.dash aside{display:none}.kpis{grid-template-columns:repeat(2,1fr)}.dash .split{grid-template-columns:1fr}}
+
+.hero .fade{position:absolute;bottom:0;left:0;right:0;height:190px;background:linear-gradient(to top,rgba(20,26,14,.85) 0%,rgba(20,26,14,.45) 45%,transparent 100%);pointer-events:none;z-index:2}
+.scroll-ind{position:absolute;bottom:12px;left:0;right:0;margin:0 auto;width:fit-content;z-index:3;display:flex;align-items:center;gap:8px;color:#fff;font-size:13.5px;font-weight:500;letter-spacing:-.01em}
+.scroll-ind svg{width:14px;height:14px}
+
+.statement{padding:100px 0}
+.statement .eb{font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:var(--soft)}
+.statement p.big{font-size:clamp(26px,3.4vw,46px);font-weight:500;letter-spacing:-.025em;line-height:1.22;max-width:1000px;margin-top:28px}
+.statement .hl{color:#54713a}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:72px;border-top:1px solid var(--line);padding-top:44px}
+.stat b{font-size:clamp(34px,4vw,58px);font-weight:500;letter-spacing:-.03em;display:block;line-height:1}
+.stat b i{font-style:normal;color:#54713a}
+.stat span{font-size:13px;color:var(--soft);margin-top:9px;display:block;font-weight:500}
+@media(max-width:860px){.stats{grid-template-columns:repeat(2,1fr);gap:36px 20px}}
+
+.services{background:var(--cedar);color:var(--paper);padding:120px 0;border-radius:32px 32px 0 0}
+.services .eb{font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:rgba(241,240,235,.4)}
+.services h2{font-size:clamp(36px,5vw,72px);font-weight:500;letter-spacing:-.03em;line-height:1.05;margin-top:22px}
+.services h2 .dim{color:rgba(241,240,235,.28)}
+.svc-list{margin-top:64px;border-top:1px solid var(--line-w)}
+.svc{border-bottom:1px solid var(--line-w);cursor:pointer}
+.svc-head{display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:22px;padding:30px 8px}
+.svc .num{font-size:13px;color:rgba(241,240,235,.35);font-weight:500}
+.svc h3{font-size:clamp(20px,2.4vw,32px);font-weight:500;letter-spacing:-.015em;transition:transform .35s cubic-bezier(.22,1,.36,1),color .3s}
+.svc:hover h3{transform:translateX(10px);color:var(--lime)}
+.svc .plus{width:38px;height:38px;border:1px solid var(--line-w);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:400;transition:transform .4s,background .3s,color .3s;flex-shrink:0;color:var(--paper)}
+.svc.open .plus{transform:rotate(45deg);background:var(--lime);color:var(--lime-ink);border-color:var(--lime)}
+.svc-body{max-height:0;overflow:hidden;transition:max-height .55s cubic-bezier(.22,1,.36,1)}
+.svc-inner{display:grid;grid-template-columns:64px 1fr;gap:22px;padding:0 8px 36px}
+.svc-inner p{font-size:15px;font-weight:400;color:rgba(241,240,235,.62);max-width:600px;line-height:1.6}
+.svc-inner .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.svc-inner .tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line-w);border-radius:20px;padding:6px 13px;color:rgba(241,240,235,.5);font-weight:500}
+@media(max-width:700px){.svc-head{grid-template-columns:40px 1fr auto;gap:12px}.svc-inner{grid-template-columns:1fr}}
+
+.markets{padding:100px 0;background:var(--paper)}
+.markets .eb{font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:var(--soft)}
+.markets h2{font-size:clamp(34px,4.6vw,66px);font-weight:500;letter-spacing:-.03em;margin-top:22px}
+.mk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:64px}
+.mk{border-radius:22px;padding:36px 30px;min-height:420px;display:flex;flex-direction:column;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.mk:hover{transform:translateY(-7px)}
+.mk .mt{font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;opacity:.6}
+.mk h3{font-size:26px;font-weight:500;letter-spacing:-.02em;margin:15px 0 12px;line-height:1.18}
+.mk p{font-size:14px;font-weight:400;opacity:.8;line-height:1.6}
+.mk ul{list-style:none;margin-top:auto;padding-top:24px}
+.mk li{font-size:13.5px;font-weight:500;padding:9px 0;border-top:1px solid currentColor;display:flex;justify-content:space-between;opacity:.9}
+.mk li::after{content:"→";opacity:.5}
+.mk.lime{background:var(--lime);color:var(--lime-ink)}
+.mk.lime li{border-color:rgba(42,53,16,.25)}
+.mk.dark{background:var(--cedar);color:var(--paper)}
+.mk.dark li{border-color:rgba(241,240,235,.2)}
+.mk.sand{background:var(--sand);color:var(--ink)}
+.mk.sand li{border-color:rgba(16,21,12,.18)}
+@media(max-width:900px){.mk-grid{grid-template-columns:1fr}.mk{min-height:auto}}
+
+.process{padding:100px 0;background:var(--paper)}
+.process .head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:22px}
+.process h2{font-size:clamp(32px,4.2vw,60px);font-weight:500;letter-spacing:-.03em;margin-top:22px}
+.process .eb{font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:var(--soft)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:64px}
+.step{border-top:2px solid var(--ink);padding-top:20px}
+.step .n{font-size:12px;font-weight:600;color:#54713a;letter-spacing:.16em}
+.step h4{font-size:20px;font-weight:600;margin:10px 0 8px;letter-spacing:-.01em}
+.step p{font-size:13.5px;font-weight:400;color:var(--soft);line-height:1.6}
+@media(max-width:860px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+
+.founder{background:var(--sand);padding:120px 0;border-radius:32px}
+.founder .inner{display:grid;grid-template-columns:1fr 1.45fr;gap:64px;align-items:center}
+.founder .portrait{aspect-ratio:4/4.6;border-radius:20px;background:linear-gradient(155deg,var(--cedar-2) 0%,var(--cedar) 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.founder .portrait svg{width:36%;opacity:.92}
+.founder .portrait .ring{position:absolute;width:140%;aspect-ratio:1;border:1px solid rgba(215,240,90,.15);border-radius:50%}
+.founder .portrait .ring:nth-child(2){width:100%}
+.founder .portrait .ring:nth-child(3){width:60%}
+.founder blockquote{font-size:clamp(22px,2.4vw,33px);line-height:1.32;font-weight:500;letter-spacing:-.015em}
+.founder blockquote .serif{color:#54713a}
+.founder .who{margin-top:26px;font-size:14px;color:var(--soft);line-height:1.6}
+.founder .who b{font-weight:600;color:var(--ink);font-size:15.5px;display:block;margin-bottom:3px}
+.founder .eb{font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:var(--soft)}
+@media(max-width:900px){.founder .inner{grid-template-columns:1fr;gap:40px}.founder .portrait{max-width:320px}}
+
+.cta{background:var(--cedar);color:var(--paper);padding:120px 0;text-align:center;border-radius:32px 32px 0 0;margin-top:-22px;position:relative;overflow:hidden}
+.cta .glow{position:absolute;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(215,240,90,.12),transparent 65%);top:-190px;left:50%;transform:translateX(-50%)}
+.cta .eb{font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:rgba(241,240,235,.4);position:relative}
+.cta h2{font-size:clamp(38px,6.2vw,92px);font-weight:500;letter-spacing:-.035em;line-height:1.04;margin-top:26px;position:relative}
+.cta h2 .serif{color:var(--lime)}
+.cta p{font-weight:400;color:rgba(241,240,235,.6);max-width:460px;margin:24px auto 0;position:relative;font-size:16px}
+.cta .ctas{display:flex;gap:12px;justify-content:center;margin-top:42px;flex-wrap:wrap;position:relative}
+.cta .pill.line{border-color:var(--line-w);color:var(--paper)}
+.cta .pill.line:hover{background:rgba(241,240,235,.08)}
+
+
+.clarity{padding:100px 0;background:var(--paper);position:relative;overflow:hidden}
+.clarity .chead{text-align:center;max-width:760px;margin:0 auto}
+.clarity h2{font-size:clamp(32px,4.4vw,60px);font-weight:500;letter-spacing:-.03em;line-height:1.1;margin-top:22px}
+.cl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:64px;position:relative;z-index:2}
+.clc{border-radius:20px;padding:26px;min-height:252px;display:flex;flex-direction:column}
+.clc .ct{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;opacity:.55;margin-bottom:18px}
+.clc.glass{background:rgba(255,255,255,.62);border:1px solid rgba(16,21,12,.09);backdrop-filter:blur(10px)}
+.clc.glass .mini{display:flex;gap:7px;align-items:flex-end;height:44px;margin-bottom:16px}
+.clc.glass .mini i{flex:1;background:var(--sand);border-radius:4px 4px 0 0;height:var(--h)}
+.clc.glass .mini i.hot{background:var(--lime)}
+.clc.glass .crow{display:flex;justify-content:space-between;padding:10px 2px;border-top:1px solid var(--line);font-size:14px;font-weight:500;color:var(--soft)}
+.clc.glass .crow b{font-weight:600;color:var(--ink)}
+.clc.darkc{background:var(--cedar);color:var(--paper)}
+.clc.darkc .kln{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line-w);padding:13px 2px;font-size:14px}
+.clc.darkc .kln b{font-size:17px;font-weight:600;color:var(--lime)}
+.clc.darkc .note{margin-top:auto;font-size:12px;color:rgba(241,240,235,.45);padding-top:12px}
+.clc.mapc{background:var(--sand);position:relative}
+.clc.mapc svg{width:100%;height:auto;margin-top:auto}
+.sig-zone{display:flex;justify-content:center;margin-top:30px;position:relative;z-index:3;padding:0 16px}
+.sig{width:min(440px,100%);border-radius:24px;padding:26px 24px 18px;background:linear-gradient(160deg,#37481f 0%,#1B2415 72%);color:var(--paper);position:relative;box-shadow:0 44px 90px rgba(16,21,12,.35)}
+.sig .st{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:600}
+.sig .st i{width:8px;height:8px;border-radius:50%;background:var(--lime);display:block}
+.sig svg{width:100%;height:auto;margin:18px 0 8px}
+.sig .task{display:flex;align-items:center;gap:11px;padding:11px 2px;border-top:1px dashed rgba(241,240,235,.16);font-size:13px;font-weight:500;color:rgba(241,240,235,.85)}
+.sig .task i{width:15px;height:15px;border-radius:50%;border:1.5px solid rgba(215,240,90,.6);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--lime);flex-shrink:0}
+.tipa{position:absolute;left:-120px;top:30px;background:#EBE9DF;color:var(--ink);border-radius:16px;padding:14px 16px;box-shadow:0 22px 48px rgba(16,21,12,.25);width:180px;z-index:4}
+.tipa b{font-size:19px;font-weight:600;letter-spacing:-.02em;display:block}
+.tipa span{font-size:12px;color:var(--soft);display:block;margin-top:2px}
+.tipa .vi{display:inline-flex;margin-top:12px;background:var(--ink);color:var(--paper);border-radius:20px;padding:8px 15px;font-size:12px;font-weight:600}
+.tipb{position:absolute;right:-96px;top:56%;background:rgba(235,233,223,.94);color:var(--ink);border-radius:13px;padding:11px 14px;box-shadow:0 18px 40px rgba(16,21,12,.22);width:170px;z-index:4}
+.tipb b{font-size:12px;font-weight:600;display:block}
+.tipb span{font-size:11px;color:var(--soft);display:block;margin-top:3px;line-height:1.45}
+@media(max-width:1180px){.tipa,.tipb{display:none}}
+@media(max-width:900px){.cl-grid{grid-template-columns:1fr}.clc{min-height:auto}}
+.sigemerge{opacity:0;transform:translateY(-110px) scale(.95)}
+
+.layers{padding:100px 0;background:var(--paper);position:relative;overflow:hidden}
+.layers .glow2{position:absolute;width:680px;height:680px;left:4%;top:30px;background:radial-gradient(circle,rgba(215,240,90,.20),transparent 62%);border-radius:50%;pointer-events:none}
+.layers h2{font-size:clamp(34px,5vw,68px);font-weight:500;letter-spacing:-.03em;line-height:1.08;position:relative}
+.layers h2 .gh{color:var(--ghost);display:block}
+.layers h2 .sd{color:var(--ink);display:block}
+.net{position:relative;margin:64px auto 0;width:min(900px,100%);height:390px;background-image:linear-gradient(rgba(16,21,12,.06) .5px,transparent .5px),linear-gradient(90deg,rgba(16,21,12,.06) .5px,transparent .5px);background-size:45px 45px}
+.net svg.links{position:absolute;inset:0;width:100%;height:100%}
+.net svg.links line{stroke:rgba(16,21,12,.3);stroke-width:1.3;stroke-dasharray:4 7}
+.node{position:absolute;transform:translate(-50%,-50%);background:#fff;border:1px solid rgba(16,21,12,.13);border-radius:12px;padding:11px 17px;font-size:13px;font-weight:600;box-shadow:0 10px 26px rgba(16,21,12,.09);white-space:nowrap;display:flex;align-items:center;gap:8px}
+.node i{width:8px;height:8px;border-radius:2.5px;background:var(--lime);display:block}
+.node.core{background:var(--cedar);color:var(--lime);letter-spacing:.16em;font-size:12px;padding:16px 24px;border-radius:14px;box-shadow:0 22px 50px rgba(16,21,12,.3)}
+.net-tag{text-align:center;margin-top:60px}
+.net-tag b{font-size:17px;font-weight:600;letter-spacing:-.01em;display:block}
+.net-tag p{font-size:14.5px;color:var(--soft);max-width:520px;margin:12px auto 0;line-height:1.6}
+@media(max-width:760px){.net{height:330px}.node{font-size:11px;padding:8px 11px}.node.core{font-size:10px;padding:11px 15px}}
+
+.contact2{background:var(--paper);padding:100px 0 0}
+.contact2 .copyr{margin-top:72px;font-size:13px;color:var(--soft);border-top:1px solid var(--line);padding:26px 0 48px}
+.rocksfoot{background:var(--paper);padding:0;margin:0;border:none;line-height:0}
+.rocksfoot img{width:100%;height:auto;display:block;mix-blend-mode:multiply}
+.contact2 .rule{border-top:1px solid var(--line);margin-bottom:72px}
+.contact2 .cgrid{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:52px}
+.contact2 h2{font-size:clamp(34px,4.4vw,56px);font-weight:500;letter-spacing:-.03em;line-height:1.1}
+.contact2 .csub{color:var(--soft);margin-top:22px;font-size:15px;max-width:300px;line-height:1.6}
+.cbox{border-left:1px solid var(--line);padding-left:38px;display:flex;flex-direction:column;min-height:210px}
+.cbox h4{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.cbox p{font-size:14px;color:var(--soft);margin-top:12px;line-height:1.65}
+.cbox a{margin-top:auto;padding-top:36px;font-size:15px;font-weight:600;color:var(--ink);text-decoration:none;display:flex;gap:10px;align-items:center}
+.cbox a:hover{color:#54713a}
+.cbox a .ar{width:20px;height:20px;border-radius:5px;background:var(--lime);color:var(--lime-ink);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+@media(max-width:880px){.contact2 .cgrid{grid-template-columns:1fr;gap:40px}.cbox{border-left:none;border-top:1px solid var(--line);padding:32px 0 0;min-height:auto}}
+
+.stone{position:absolute;bottom:0;height:clamp(260px,60vh,700px);cursor:crosshair;opacity:0}
+.stone.sl{left:0;transform:translateX(-40px)}
+.stone.sr{right:0;transform:translateX(40px)}
+.stone img{height:100%;width:auto;display:block;pointer-events:none;user-select:none}
+.stone .grass{position:absolute;inset:0;-webkit-mask-image:radial-gradient(circle 0px at 0px 0px,black 0%,black 40%,transparent 100%);mask-image:radial-gradient(circle 0px at 0px 0px,black 0%,black 40%,transparent 100%)}
+.stone.sl{z-index:1}
+.stone.sr{z-index:3}
+.hero .hero-copy{z-index:6}
+.hero .dash-zone{z-index:2}
+.hero .fade{z-index:4}
+.hero .scroll-ind{z-index:5}
+@media(max-width:640px){.stone{height:180px}}
+
+.finder{background:var(--paper);padding:100px 0;border-radius:32px 32px 0 0;margin-top:-24px;position:relative;z-index:2}
+.finder .eb{font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:var(--soft)}
+.finder h2{font-size:clamp(32px,4.6vw,64px);font-weight:500;letter-spacing:-.03em;margin-top:22px;text-align:center}
+.finder .eb{display:block;text-align:center}
+.finder .fsub{text-align:center;color:var(--soft);font-size:15px;margin-top:14px}
+.fbox{width:min(720px,100%);margin:36px auto 0;padding:5px;border-radius:24px;border:.5px solid rgba(0,0,0,.05);background:rgba(27,36,21,.07);backdrop-filter:blur(30px)}
+.fcard{background:#fff;border-radius:19px;border:1px solid rgba(27,36,21,.06);padding:16px 16px 12px}
+.fcard input{width:100%;border:none;outline:none;font-family:'Inter Tight',sans-serif;font-size:16.5px;font-weight:500;color:var(--ink);background:transparent;padding:2px 2px 12px}
+.fcard input::placeholder{color:rgba(16,21,12,.38)}
+.ftools{display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid var(--line);padding-top:11px}
+.fchips{display:flex;gap:6px;flex-wrap:wrap}
+.fchip{font-size:12px;font-weight:600;padding:7px 13px;border-radius:8px;background:rgba(16,21,12,.05);color:var(--soft);border:none;cursor:pointer;font-family:'Inter Tight',sans-serif;transition:background .2s,color .2s}
+.fchip:hover{background:rgba(16,21,12,.1)}
+.fchip.on{background:var(--cedar);color:var(--lime)}
+.fsend{width:42px;height:42px;border-radius:13px;background:linear-gradient(180deg,#2b3a1e 0%,#1B2415 100%);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 10px 24px rgba(27,36,21,.28),inset 0 1px 2px rgba(215,240,90,.35);transition:transform .2s}
+.fsend:hover{transform:scale(1.06)}
+.fsend svg{width:17px;height:17px}
+.fmeta{width:min(1060px,100%);margin:42px auto 0;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--soft);font-weight:500}
+.fgrid{width:min(1060px,100%);margin:14px auto 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:14px}
+.fp{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;cursor:pointer;transition:transform .3s cubic-bezier(.22,1,.36,1),border-color .25s,box-shadow .3s;display:flex;flex-direction:column;gap:10px}
+.fp:hover{transform:translateY(-5px);border-color:rgba(16,21,12,.28);box-shadow:0 18px 40px rgba(16,21,12,.09)}
+.fp .cat{font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:#54713a}
+.fp .viz{height:62px;border-radius:10px;background:#F5F4EE;border:1px solid var(--line);position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;gap:5px;padding:9px}
+.fp .viz .vb{width:11%;background:var(--sand);border-radius:3px 3px 0 0}
+.fp .viz .vb.hot{background:var(--lime)}
+.fp .viz .dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--lime);border:2px solid var(--cedar)}
+.fp .viz .ln{position:absolute;height:5px;border-radius:3px;background:rgba(16,21,12,.12)}
+.fp .viz .sq{position:absolute;border-radius:4px;background:var(--cedar)}
+.fp h4{font-size:15.5px;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+.fp p{font-size:12.5px;color:var(--soft);line-height:1.5;font-weight:400}
+.fp .wa{margin-top:auto;display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:#54713a;padding-top:4px}
+.fp .wa i{width:7px;height:7px;border-radius:50%;background:var(--lime);border:1.5px solid var(--cedar);display:block}
+.fempty{display:none;text-align:center;padding:50px 20px;color:var(--soft);font-size:15px}
+.fempty a{color:#54713a;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.fempty.show{display:block}
+
+@media(max-width:900px){
+  .statement,.clarity,.layers,.process,.markets,.finder{padding:80px 0}
+  .contact2{padding:80px 0 0}
+  .services,.founder{padding:88px 0}
+  .cta{padding:96px 0}
+  .stats{margin-top:52px;padding-top:36px}
+  .svc-list,.mk-grid,.steps,.cl-grid,.net{margin-top:48px}
+  .contact2 .rule{margin-bottom:56px}
+  .contact2 .copyr{margin-top:56px}
+  .process .head{margin-bottom:0}
+  .net-tag{margin-top:44px}
+}
+@media(max-width:640px){
+  .tipa,.tipb{display:none}
+  .node{font-size:10.5px;padding:7px 10px;gap:6px}
+  .net div.node:nth-of-type(4){left:72%!important}
+  .net div.node:nth-of-type(6){left:66%!important}
+  .net div.node:nth-of-type(8){left:56%!important}
+}
+@media(max-width:520px){
+  .wrap{padding:0 20px}
+  nav .bar{padding:11px 16px;gap:10px}
+  .brand{gap:8px}
+  .brand svg{width:22px;height:22px}
+  .brand b{font-size:14.5px;white-space:nowrap}
+  nav .nav-cta{padding:9px 14px;font-size:13px;gap:7px}
+  nav .nav-cta .dot{width:14px;height:14px}
+  .hero-copy{padding-top:100px}
+  .hero .ctas .pill{padding:11px 18px;font-size:13.5px}
+  .statement p.big{font-size:23px;margin-top:20px}
+  .stat b{font-size:32px}
+  .steps{gap:30px}
+  .cta .ctas{flex-direction:column;align-items:stretch}
+  .cta .ctas .pill{justify-content:center}
+  .fmeta{flex-direction:column;gap:6px;align-items:flex-start}
+  .fbox{margin-top:28px}
+  .cbox a{word-break:break-all}
+}
+.brand b{white-space:nowrap}
+
+/* ══ Service vignettes ══ */
+.svc-cols{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+.lcv{min-height:230px;display:flex;align-items:center;justify-content:center;position:relative}
+@media(max-width:900px){.svc-cols{grid-template-columns:1fr;gap:28px}.lcv{min-height:0;justify-content:flex-start}}
+@keyframes lcvIn{from{opacity:0;transform:translateY(5px)}}
+@keyframes lcvGrow{from{transform:scaleY(0)}}
+@keyframes lcvRing{0%{transform:translate(-50%,-50%) scale(.25);opacity:0}18%{opacity:1}100%{transform:translate(-50%,-50%) scale(1);opacity:0}}
+@keyframes lcvBlink{50%{opacity:0}}
+@keyframes lcvPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.35)}}
+@keyframes lcvStamp{0%{opacity:0;transform:rotate(-8deg) scale(1.8)}55%{opacity:1;transform:rotate(-8deg) scale(.9)}100%{opacity:1;transform:rotate(-8deg) scale(1)}}
+@keyframes lcvDrop{from{opacity:0;transform:translate(-50%,-16px)}}
+@keyframes lcvDraw{from{stroke-dashoffset:170}}
+@keyframes lcvRoute{from{stroke-dashoffset:260}}
+@keyframes lcvCur{0%{top:20%;left:42%;opacity:1}25%{top:34%;left:74%;opacity:1}50%{top:70%;left:38%;opacity:1}75%{top:56%;left:78%;opacity:1}92%{opacity:1}100%{top:20%;left:42%;opacity:0}}
+@keyframes lcvLangA{0%,48%{background:var(--lime);color:var(--lime-ink)}49%,100%{background:transparent;color:rgba(241,240,235,.4)}}
+@keyframes lcvLangB{0%,48%{background:transparent;color:rgba(241,240,235,.4)}49%,100%{background:var(--lime);color:var(--lime-ink)}}
+@keyframes lcvW{0%,48%{width:62%}49%,100%{width:46%}}
+.lcvw{width:100%;max-width:420px;background:#12180D;border:1px solid var(--line-w);border-radius:12px;overflow:hidden;font-size:11px}
+.lcv-tbar{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:1px solid var(--line-w)}
+.lcv-tbar i{width:7px;height:7px;border-radius:50%;background:rgba(241,240,235,.16);flex-shrink:0}
+.lcv-tbar i.g{background:var(--lime)}
+.lcv-tbar span{margin-left:4px;color:rgba(241,240,235,.4);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 01 ERP */
+.lcv-erp .lcv-app{display:grid;grid-template-columns:96px 1fr;min-height:184px;position:relative}
+.lcv-erp .lcv-side{border-right:1px solid var(--line-w);padding:10px 8px;display:flex;flex-direction:column;gap:3px}
+.lcv-erp .lcv-side b{font-weight:500;color:rgba(241,240,235,.45);padding:6px 9px;border-radius:7px}
+.lcv-erp .lcv-side b.on{background:rgba(215,240,90,.14);color:var(--lime);font-weight:600}
+.svc.open .lcv-erp .lcv-side b{animation:lcvIn .35s ease both}
+.svc.open .lcv-erp .lcv-side b:nth-child(1){animation-delay:.25s}
+.svc.open .lcv-erp .lcv-side b:nth-child(2){animation-delay:.4s}
+.svc.open .lcv-erp .lcv-side b:nth-child(3){animation-delay:.55s}
+.svc.open .lcv-erp .lcv-side b:nth-child(4){animation-delay:.7s}
+.svc.open .lcv-erp .lcv-side b:nth-child(5){animation-delay:.85s}
+.lcv-erp .lcv-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 12px 0}
+.lcv-erp .k{background:rgba(255,255,255,.04);border:1px solid var(--line-w);border-radius:8px;padding:8px 9px}
+.lcv-erp .k em{font-style:normal;display:block;font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(241,240,235,.4);font-weight:600}
+.lcv-erp .k b{font-size:14px;font-weight:600;color:var(--paper);letter-spacing:-.01em}
+.lcv-erp .k.hot b{color:var(--lime)}
+.svc.open .lcv-erp .k{animation:lcvIn .4s ease both}
+.svc.open .lcv-erp .k:nth-child(1){animation-delay:1s}
+.svc.open .lcv-erp .k:nth-child(2){animation-delay:1.2s}
+.svc.open .lcv-erp .k:nth-child(3){animation-delay:1.4s}
+.lcv-erp .lcv-rows{padding:14px 12px;display:flex;flex-direction:column;gap:8px}
+.lcv-erp .lcv-rows i{height:9px;border-radius:4px;background:rgba(255,255,255,.07)}
+.lcv-erp .lcv-rows i:nth-child(2){width:76%}
+.lcv-erp .lcv-rows i:nth-child(3){width:54%}
+.svc.open .lcv-erp .lcv-rows i{animation:lcvIn .35s ease both}
+.svc.open .lcv-erp .lcv-rows i:nth-child(1){animation-delay:1.7s}
+.svc.open .lcv-erp .lcv-rows i:nth-child(2){animation-delay:1.9s}
+.svc.open .lcv-erp .lcv-rows i:nth-child(3){animation-delay:2.1s}
+.lcv-erp .lcv-cursor{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--lime);opacity:0;pointer-events:none}
+.svc.open .lcv-erp .lcv-cursor{animation:lcvCur 5.5s ease-in-out 2.5s infinite}
+/* 02 FNE / Compliance */
+.lcv-fne{flex-direction:column;gap:16px}
+.lcv-inv{position:relative;width:100%;max-width:330px;background:var(--paper);color:var(--ink);border-radius:12px;padding:16px 16px 14px;box-shadow:0 26px 60px rgba(0,0,0,.4)}
+.lcv-inv .ih{display:flex;justify-content:space-between;font-size:10.5px;font-weight:700;letter-spacing:.02em}
+.lcv-inv .ih span{color:var(--soft);font-weight:500}
+.lcv-inv .l{display:block;height:8px;border-radius:4px;background:rgba(16,21,12,.12);margin-top:10px}
+.lcv-inv .l.w70{width:70%}.lcv-inv .l.w50{width:50%}.lcv-inv .l.w62{width:62%}
+.lcv-inv .tot{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:14px;padding-top:10px;font-size:11.5px;font-weight:500;color:var(--soft)}
+.lcv-inv .tot b{font-weight:600;color:var(--ink)}
+.svc.open .lcv-fne .ih{animation:lcvIn .4s ease .25s both}
+.svc.open .lcv-fne .l:nth-of-type(1){animation:lcvIn .35s ease .55s both}
+.svc.open .lcv-fne .l:nth-of-type(2){animation:lcvIn .35s ease .75s both}
+.svc.open .lcv-fne .l:nth-of-type(3){animation:lcvIn .35s ease .95s both}
+.svc.open .lcv-fne .tot{animation:lcvIn .4s ease 1.2s both}
+.lcv-qr{position:absolute;right:14px;bottom:40px;display:grid;grid-template-columns:repeat(3,7px);gap:2px}
+.lcv-qr i{width:7px;height:7px;background:var(--ink);border-radius:1px}
+.lcv-qr i:nth-child(5){background:transparent}
+.svc.open .lcv-fne .lcv-qr i{animation:lcvIn .25s ease both}
+.svc.open .lcv-fne .lcv-qr i:nth-child(1){animation-delay:1.35s}
+.svc.open .lcv-fne .lcv-qr i:nth-child(2){animation-delay:1.4s}
+.svc.open .lcv-fne .lcv-qr i:nth-child(3){animation-delay:1.45s}
+.svc.open .lcv-fne .lcv-qr i:nth-child(4){animation-delay:1.5s}
+.svc.open .lcv-fne .lcv-qr i:nth-child(6){animation-delay:1.55s}
+.svc.open .lcv-fne .lcv-qr i:nth-child(7){animation-delay:1.6s}
+.svc.open .lcv-fne .lcv-qr i:nth-child(8){animation-delay:1.65s}
+.svc.open .lcv-fne .lcv-qr i:nth-child(9){animation-delay:1.7s}
+.lcv-stamp{position:absolute;right:12px;top:32px;border:2px solid #3F7D2F;color:#3F7D2F;font-weight:700;font-size:11.5px;letter-spacing:.09em;padding:5px 10px;border-radius:6px;transform:rotate(-8deg);opacity:0;background:rgba(241,240,235,.85)}
+.svc.open .lcv-fne .lcv-stamp{animation:lcvStamp .55s cubic-bezier(.2,1.4,.4,1) 1.9s both}
+.lcv-fne .lcv-chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.lcv-fne .lcv-chips span{font-size:10px;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(215,240,90,.35);border-radius:20px;padding:5px 12px;color:var(--lime);font-weight:600}
+.svc.open .lcv-fne .lcv-chips span{animation:lcvIn .4s ease both}
+.svc.open .lcv-fne .lcv-chips span:nth-child(1){animation-delay:2.5s}
+.svc.open .lcv-fne .lcv-chips span:nth-child(2){animation-delay:2.7s}
+.svc.open .lcv-fne .lcv-chips span:nth-child(3){animation-delay:2.9s}
+/* 03 BI */
+.lcv-bi .lcvw{padding:12px 14px 14px}
+.lcv-bi .bh{display:flex;justify-content:space-between;align-items:center;color:rgba(241,240,235,.45);font-weight:600;margin-bottom:10px;font-size:10.5px}
+.lcv-bi .bh .live{display:flex;gap:5px;align-items:center;color:var(--lime);font-weight:500;font-size:10px}
+.lcv-bi .bh .live i{width:5px;height:5px;border-radius:50%;background:var(--lime)}
+.svc.open .lcv-bi .bh .live i{animation:lcvPulse 1.5s ease-in-out infinite}
+.lcv-bi .bk{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.lcv-bi .bk .k{background:rgba(255,255,255,.04);border:1px solid var(--line-w);border-radius:8px;padding:8px 9px}
+.lcv-bi .bk em{font-style:normal;display:block;font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(241,240,235,.4);font-weight:600}
+.lcv-bi .bk b{font-size:16px;font-weight:600;color:var(--paper);letter-spacing:-.01em}
+.svc.open .lcv-bi .bk .k{animation:lcvIn .4s ease both}
+.svc.open .lcv-bi .bk .k:nth-child(1){animation-delay:.3s}
+.svc.open .lcv-bi .bk .k:nth-child(2){animation-delay:.45s}
+.svc.open .lcv-bi .bk .k:nth-child(3){animation-delay:.6s}
+.lcv-bi .bviz{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;height:82px}
+.lcv-bi .bbars,.lcv-bi .blinep{background:rgba(255,255,255,.03);border:1px solid var(--line-w);border-radius:8px;padding:8px}
+.lcv-bi .bbars{display:flex;align-items:flex-end;gap:6px}
+.lcv-bi .bbars i{flex:1;background:rgba(241,240,235,.16);border-radius:3px 3px 0 0;height:var(--h);transform-origin:bottom}
+.lcv-bi .bbars i.hot{background:var(--lime)}
+.svc.open .lcv-bi .bbars i{animation:lcvGrow .7s cubic-bezier(.22,1,.36,1) both}
+.svc.open .lcv-bi .bbars i:nth-child(1){animation-delay:.9s}
+.svc.open .lcv-bi .bbars i:nth-child(2){animation-delay:1s}
+.svc.open .lcv-bi .bbars i:nth-child(3){animation-delay:1.1s}
+.svc.open .lcv-bi .bbars i:nth-child(4){animation-delay:1.2s}
+.svc.open .lcv-bi .bbars i:nth-child(5){animation-delay:1.3s}
+.lcv-bi .blinep svg{width:100%;height:100%}
+.lcv-bi .blinep polyline{fill:none;stroke:var(--lime);stroke-width:2.6;stroke-dasharray:170;stroke-dashoffset:0}
+.lcv-bi .blinep polyline.dim{stroke:rgba(241,240,235,.2);stroke-width:1.8}
+.svc.open .lcv-bi .blinep polyline{animation:lcvDraw 1.3s ease 1.5s both}
+.svc.open .lcv-bi .blinep polyline.dim{animation-delay:1.7s}
+/* 04 GIS */
+.lcv-gis .lcv-map{position:relative;width:100%;max-width:420px;height:224px;background:#12180D;border:1px solid var(--line-w);border-radius:12px;overflow:hidden;background-image:linear-gradient(rgba(241,240,235,.05) .5px,transparent .5px),linear-gradient(90deg,rgba(241,240,235,.05) .5px,transparent .5px);background-size:34px 34px}
+.lcv-gis svg{position:absolute;inset:0;width:100%;height:100%}
+.lcv-gis .coast{fill:none;stroke:rgba(241,240,235,.2);stroke-width:1.2;stroke-dasharray:4 5}
+.lcv-gis .route{fill:none;stroke:var(--lime);stroke-width:1.6;stroke-dasharray:260;stroke-dashoffset:0;opacity:.85}
+.svc.open .lcv-gis .route{animation:lcvRoute 1.6s ease 1.5s both}
+.lcv-gis .pin{position:absolute;transform:translate(-50%,0)}
+.lcv-gis .pin i{display:block;width:9px;height:9px;border-radius:50%;background:var(--lime);border:2px solid var(--cedar)}
+.lcv-gis .pin::after{content:"";position:absolute;left:50%;top:50%;width:36px;height:36px;border:1px solid rgba(215,240,90,.45);border-radius:50%;opacity:0}
+.svc.open .lcv-gis .pin{animation:lcvDrop .5s cubic-bezier(.22,1.4,.36,1) both}
+.svc.open .lcv-gis .pin::after{animation:lcvRing 2.8s ease-out infinite}
+.svc.open .lcv-gis .pin:nth-of-type(1){animation-delay:.35s}.svc.open .lcv-gis .pin:nth-of-type(1)::after{animation-delay:.9s}
+.svc.open .lcv-gis .pin:nth-of-type(2){animation-delay:.6s}.svc.open .lcv-gis .pin:nth-of-type(2)::after{animation-delay:1.4s}
+.svc.open .lcv-gis .pin:nth-of-type(3){animation-delay:.85s}.svc.open .lcv-gis .pin:nth-of-type(3)::after{animation-delay:1.9s}
+.svc.open .lcv-gis .pin:nth-of-type(4){animation-delay:1.1s}.svc.open .lcv-gis .pin:nth-of-type(4)::after{animation-delay:2.4s}
+.lcv-gis .mlg{position:absolute;left:12px;bottom:12px;background:rgba(18,24,13,.88);border:1px solid var(--line-w);border-radius:9px;padding:8px 12px;font-size:10.5px;color:rgba(241,240,235,.5)}
+.lcv-gis .mlg b{color:var(--paper);display:block;font-size:12.5px;font-weight:600}
+.svc.open .lcv-gis .mlg{animation:lcvIn .45s ease 2.3s both}
+/* 05 AI */
+.lcv-ai .lcvw{background:#0D1309;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+.lcv-ai .tb{padding:13px 14px;display:flex;flex-direction:column;gap:9px;min-height:112px}
+.lcv-ai .tb p{color:rgba(241,240,235,.55);font-size:10.5px;line-height:1.5}
+.lcv-ai .tb .a{color:var(--lime);margin-right:6px}
+.lcv-ai .tb b{color:var(--lime);font-weight:600}
+.svc.open .lcv-ai .tb p{animation:lcvIn .35s ease both}
+.svc.open .lcv-ai .tb p:nth-child(1){animation-delay:.35s}
+.svc.open .lcv-ai .tb p:nth-child(2){animation-delay:.95s}
+.svc.open .lcv-ai .tb p:nth-child(3){animation-delay:1.55s}
+.svc.open .lcv-ai .tb p:nth-child(4){animation-delay:2.15s}
+.lcv-ai .tb p.cur::after{content:"";display:inline-block;width:6px;height:11px;background:var(--lime);margin-left:5px;vertical-align:-1px}
+.svc.open .lcv-ai .tb p.cur::after{animation:lcvBlink .9s step-end infinite}
+.lcv-ai .tf{display:flex;align-items:center;gap:7px;background:rgba(215,240,90,.07);border-top:1px solid rgba(215,240,90,.2);padding:7px 12px;color:rgba(241,240,235,.5);font-size:10px}
+.lcv-ai .tf i{width:6px;height:6px;border-radius:50%;background:#5FBF4A;flex-shrink:0}
+.svc.open .lcv-ai .tf{animation:lcvIn .4s ease 2.7s both}
+.svc.open .lcv-ai .tf i{animation:lcvPulse 1.5s ease-in-out infinite}
+/* 06 Web */
+.lcv-web{gap:14px;align-items:flex-end;justify-content:center}
+.lcv-web .wb{flex:1;max-width:290px;background:#12180D;border:1px solid var(--line-w);border-radius:12px;overflow:hidden;font-size:10px}
+.lcv-web .bh2{display:flex;align-items:center;gap:5px;padding:8px 10px;border-bottom:1px solid var(--line-w)}
+.lcv-web .bh2 i{width:6px;height:6px;border-radius:50%;background:rgba(241,240,235,.16);flex-shrink:0}
+.lcv-web .bh2 .url{flex:1;text-align:center;color:rgba(241,240,235,.35);font-weight:500}
+.lcv-web .lang{display:flex;border:1px solid var(--line-w);border-radius:12px;overflow:hidden;flex-shrink:0}
+.lcv-web .lang b{padding:2px 7px;font-weight:700;font-size:8.5px;color:rgba(241,240,235,.4)}
+.svc.open .lcv-web .lang .fr{animation:lcvLangA 6s step-end infinite}
+.svc.open .lcv-web .lang .en{animation:lcvLangB 6s step-end infinite}
+.lcv-web .pg{position:relative;height:150px}
+.lcv-web .pg i{position:absolute;border-radius:4px;background:rgba(255,255,255,.08)}
+.lcv-web .pg .pnav{top:10px;left:10px;right:10px;height:10px;background:rgba(215,240,90,.4)}
+.lcv-web .pg .ph1{top:34px;left:10px;height:13px;width:62%}
+.lcv-web .pg .ph2{top:55px;left:10px;height:8px;width:42%;background:rgba(255,255,255,.05)}
+.lcv-web .pg .pbtn{top:76px;left:10px;width:58px;height:15px;background:var(--lime);border-radius:8px}
+.lcv-web .pg .pimg{top:104px;left:10px;right:10px;height:34px;background:rgba(255,255,255,.05)}
+.svc.open .lcv-web .pg .pnav{animation:lcvIn .4s ease .3s both}
+.svc.open .lcv-web .pg .ph1{animation:lcvIn .4s ease .6s both,lcvW 6s step-end 1.6s infinite}
+.svc.open .lcv-web .pg .ph2{animation:lcvIn .4s ease .85s both}
+.svc.open .lcv-web .pg .pbtn{animation:lcvIn .4s ease 1.1s both}
+.svc.open .lcv-web .pg .pimg{animation:lcvIn .4s ease 1.35s both}
+.lcv-web .phn{width:76px;height:150px;border:1.5px solid var(--line-w);border-radius:13px;position:relative;background:rgba(255,255,255,.02);overflow:hidden;flex-shrink:0}
+.lcv-web .phn i{position:absolute;border-radius:3px;background:rgba(255,255,255,.08)}
+.lcv-web .phn .nn{top:6px;left:50%;transform:translateX(-50%);width:20px;height:4px;border-radius:3px;background:rgba(241,240,235,.14)}
+.lcv-web .phn .nh{top:17px;left:6px;right:6px;height:11px;background:rgba(215,240,90,.5)}
+.lcv-web .phn .nim{top:34px;left:6px;right:6px;height:38px;background:rgba(255,255,255,.05)}
+.lcv-web .phn .nl{top:80px;left:6px;width:44px;height:7px}
+.lcv-web .phn .nb{top:120px;left:14px;width:48px;height:13px;background:var(--lime);border-radius:7px}
+.svc.open .lcv-web .phn .nh{animation:lcvIn .4s ease .7s both}
+.svc.open .lcv-web .phn .nim{animation:lcvIn .4s ease 1s both}
+.svc.open .lcv-web .phn .nl{animation:lcvIn .4s ease 1.3s both}
+.svc.open .lcv-web .phn .nb{animation:lcvIn .4s ease 1.6s both}
+/* ══ Capability ticker ══ */
+.lcv-ticker{overflow:hidden;border-top:1px solid var(--line);padding:24px 0;background:var(--paper)}
+.lcv-ticker .ti{display:flex;align-items:center;width:max-content;animation:lcvTick 30s linear infinite}
+.lcv-ticker:hover .ti{animation-play-state:paused}
+.lcv-ticker span{font-size:13px;font-weight:600;letter-spacing:.18em;color:var(--soft);padding:0 20px;white-space:nowrap}
+.lcv-ticker span.sep{color:var(--lime);padding:0;font-size:11px}
+@keyframes lcvTick{to{transform:translateX(-50%)}}
+/* ══ Go-live panel (process step 03) ══ */
+.golive{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 14px;display:flex;gap:14px;align-items:center}
+.golive .glr{position:relative;width:52px;height:52px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+.golive .glr i{position:absolute;left:50%;top:50%;width:100%;height:100%;border:1px solid rgba(84,113,58,.45);border-radius:50%;animation:lcvRing 2.7s ease-out infinite}
+.golive .glr i:nth-child(2){animation-delay:.9s}
+.golive .glr i:nth-child(3){animation-delay:1.8s}
+.golive .glr .gld{width:9px;height:9px;border-radius:50%;background:var(--lime);border:2px solid var(--cedar);animation:lcvPulse 1.4s ease-in-out infinite}
+.golive .glr em{font-style:normal;font-size:7.5px;font-weight:700;letter-spacing:.1em;color:#54713a}
+.golive .glrows{flex:1;min-width:0}
+.golive .glrows p{display:flex;justify-content:space-between;gap:12px;font-size:11px;font-weight:500;color:var(--soft);padding:3.5px 0;border-top:1px dashed var(--line)}
+.golive .glrows p:first-child{border-top:none}
+.golive .glrows b{font-weight:600;color:var(--ink);white-space:nowrap}
+.golive .glrows b.g{color:#3F7D2F}
+@media(prefers-reduced-motion:reduce){
+  .lcv *,.lcv *::after,.lcv-ticker .ti,.golive .glr i,.golive .glr .gld{animation:none!important}
+  .lcv-fne .lcv-stamp{opacity:1}
+}
+
+.rv{opacity:0;transform:translateY(26px);filter:blur(8px)}
+.wln{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.12em;margin-bottom:-.12em}
+.wln>span{display:inline-block;transform:translateY(115%)}
+@media(prefers-reduced-motion:reduce){
+  .rv{opacity:1!important;transform:none!important;filter:none!important}
+  .sigemerge{opacity:1!important;transform:none!important}
+  .wln>span{transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="bar">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><line x1="24" y1="24" x2="24" y2="14" stroke="#1B2415" stroke-width="2.5"/><circle cx="24" cy="10" r="8" fill="#D7F05A"/><line x1="24" y1="24" x2="14" y2="30" stroke="#1B2415" stroke-width="2"/><line x1="14" y1="30" x2="8" y2="38" stroke="#1B2415" stroke-width="2"/><line x1="14" y1="30" x2="16" y2="40" stroke="#1B2415" stroke-width="2"/><line x1="24" y1="24" x2="34" y2="30" stroke="#1B2415" stroke-width="2"/><line x1="34" y1="30" x2="28" y2="40" stroke="#1B2415" stroke-width="2"/><line x1="34" y1="30" x2="40" y2="38" stroke="#1B2415" stroke-width="2"/><circle cx="8" cy="38" r="2.2" fill="#1B2415"/><circle cx="16" cy="40" r="2.2" fill="#1B2415"/><circle cx="28" cy="40" r="2.2" fill="#1B2415"/><circle cx="40" cy="38" r="2.2" fill="#1B2415"/></svg>
+      <b>le<i>Cedar</i> <span>Global</span></b>
+    </a>
+    <div class="navlinks">
+      <a href="/industries/">Industries</a>
+      <a href="/apps/">Apps</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#founder">About</a>
+    </div>
+    <a class="pill dark nav-cta" href="#finder"><span class="dot"><i></i></span>Start a project</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-copy">
+    <div class="eyebrow rv" data-d="0.1">Enterprise Systems · Business Intelligence · Compliance</div>
+    <h1>
+      <span class="l1 rv" data-d="0.2">We build systems</span>
+      <span class="l2 rv" data-d="0.32">that see <span class="serif">everything.</span></span>
+    </h1>
+    <p class="sub rv" data-d="0.45">The operational backbone of ambitious businesses across Africa, the Gulf and the Levant: systems that give CEOs full visibility, evidence-based decisions and nothing left hidden.</p>
+    <div class="ctas rv" data-d="0.58">
+      <a class="pill dark" href="#finder"><span class="dot"><i></i></span>Start a project</a>
+      <a class="pill line" href="https://wa.me/96170023313">WhatsApp us</a>
+    </div>
+  </div>
+
+  <div class="stone sl" aria-hidden="true">
+    <img src="https://qclay.design/lovable/synex/stone-left.png" alt="">
+    <img class="grass" src="https://qclay.design/lovable/synex/stone-g-left.png" alt="">
+  </div>
+  <div class="stone sr" aria-hidden="true">
+    <img src="https://qclay.design/lovable/synex/stone-right.png" alt="">
+    <img class="grass" src="https://qclay.design/lovable/synex/stone-g-right.png" alt="">
+  </div>
+
+  <div class="dash-zone">
+    <div class="dash rv" data-d="0.6" id="dash" role="img" aria-label="leCedar operations dashboard showing sales, stock and FNE compliance across branches">
+      <div class="chrome">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div class="ttl">leCedar Ops: all branches, one screen</div>
+        <div class="live"><i></i>LIVE</div>
+      </div>
+      <div class="body">
+        <aside>
+          <div class="it on">Dashboard</div>
+          <div class="it">Sales</div>
+          <div class="it">Inventory</div>
+          <div class="it">Purchasing</div>
+          <div class="it">Accounting</div>
+          <div class="it">HR</div>
+        </aside>
+        <main>
+          <div class="kpis">
+            <div class="kpi"><div class="lb">Today's sales</div><div class="vl">$82,400 <small>USD</small></div></div>
+            <div class="kpi"><div class="lb">Stock value</div><div class="vl">$528,000 <small>USD</small></div></div>
+            <div class="kpi"><div class="lb">Cash position</div><div class="vl">$161,300 <small>USD</small></div></div>
+            <div class="kpi fne"><div class="lb">FNE certified</div><div class="vl">100%</div></div>
+          </div>
+          <div class="split">
+            <div class="panel">
+              <div class="ph"><span>Sales by branch</span><span>This week</span></div>
+              <div class="bars" id="bars">
+                <div class="b" style="--h:42%"><i></i><em>Adjamé</em></div>
+                <div class="b hot" style="--h:78%"><i></i><em>Plateau</em></div>
+                <div class="b" style="--h:55%"><i></i><em>Cocody</em></div>
+                <div class="b" style="--h:36%"><i></i><em>Yopougon</em></div>
+                <div class="b hot" style="--h:92%"><i></i><em>Marcory</em></div>
+                <div class="b" style="--h:61%"><i></i><em>Lomé 1</em></div>
+                <div class="b" style="--h:48%"><i></i><em>Lomé 2</em></div>
+              </div>
+            </div>
+            <div class="panel alerts">
+              <div class="ph"><span>Low stock alerts</span><span>3</span></div>
+              <div class="row"><span>Samsung A15 · Plateau</span><span class="tag">Reorder</span></div>
+              <div class="row"><span>Tecno Spark · Marcory</span><span class="tag">Reorder</span></div>
+              <div class="row"><span>Chargers 25W · Adjamé</span><span class="tag">Reorder</span></div>
+              <div class="row"><span>Transfer #TR-0482 received</span><span class="tag ok">Done</span></div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <div class="fade"></div>
+  <div class="scroll-ind rv" data-d="1.1">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" id="star"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2L12 2z" fill="#D7F05A"/></svg>
+    <span>Scroll to explore</span>
+  </div>
+</header>
+
+<section class="statement">
+  <div class="wrap">
+    <div class="eb rv">Who we are</div>
+    <p class="big" data-words>Spreadsheets hide things. Paper hides more. We replace both with one integrated system: your stock, cash, sales and people, visible from your phone, wherever you are.</p>
+    <div class="stats">
+      <div class="stat rv"><b><i data-count="10">0</i>+</b><span>Years building data &amp; management systems</span></div>
+      <div class="stat rv"><b><i data-count="3">0</i></b><span>Regions: Levant, West &amp; Central Africa, Gulf</span></div>
+      <div class="stat rv"><b><i data-count="3">0</i></b><span>Delivery languages: Arabic, French, English</span></div>
+      <div class="stat rv"><b>~<i data-count="50">0</i>%</b><span>Typical saving vs. established integrators</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="clarity">
+  <div class="wrap">
+    <div class="chead">
+      <span class="eb rv" style="display:block;font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:var(--soft)">The platform</span>
+      <h2 class="rv">Clarity and control for <span class="serif" style="color:#54713a">every part</span> of your operation.</h2>
+    </div>
+    <div class="cl-grid">
+      <div class="clc glass rv">
+        <div class="ct">Branch snapshot</div>
+        <div class="mini"><i style="--h:45%"></i><i class="hot" style="--h:80%"></i><i style="--h:58%"></i><i style="--h:38%"></i><i class="hot" style="--h:92%"></i><i style="--h:64%"></i></div>
+        <div class="crow"><span>Stock</span><b>$528,000</b></div>
+        <div class="crow"><span>Cash</span><b>$161,300</b></div>
+        <div class="crow"><span>Receivables</span><b>$69,800</b></div>
+      </div>
+      <div class="clc darkc rv">
+        <div class="ct">Precision insights</div>
+        <div class="kln"><span>Sales growth</span><b>+12%</b></div>
+        <div class="kln"><span>Stock-outs</span><b>−8%</b></div>
+        <div class="kln"><span>Margin</span><b>+4.2%</b></div>
+        <div class="note">Live across 7 branches: USD · XOF · KWD.</div>
+      </div>
+      <div class="clc mapc rv">
+        <div class="ct">Three regions, one core</div>
+        <svg viewBox="0 0 300 150" fill="none" aria-hidden="true">
+          <g fill="rgba(16,21,12,.14)">
+            <circle cx="30" cy="40" r="2.5"/><circle cx="55" cy="28" r="2.5"/><circle cx="90" cy="45" r="2.5"/><circle cx="120" cy="30" r="2.5"/><circle cx="160" cy="22" r="2.5"/><circle cx="145" cy="60" r="2.5"/><circle cx="40" cy="80" r="2.5"/><circle cx="110" cy="90" r="2.5"/><circle cx="180" cy="95" r="2.5"/><circle cx="230" cy="30" r="2.5"/><circle cx="268" cy="48" r="2.5"/><circle cx="240" cy="115" r="2.5"/><circle cx="130" cy="128" r="2.5"/><circle cx="60" cy="135" r="2.5"/><circle cx="280" cy="100" r="2.5"/>
+          </g>
+          <path d="M75 118 Q130 30 205 52" stroke="rgba(16,21,12,.4)" stroke-width="1.4" stroke-dasharray="4 6"/>
+          <path d="M205 52 Q232 58 252 78" stroke="rgba(16,21,12,.4)" stroke-width="1.4" stroke-dasharray="4 6"/>
+          <circle cx="75" cy="118" r="6" fill="#D7F05A" stroke="#1B2415" stroke-width="2.5"/>
+          <circle cx="205" cy="52" r="6" fill="#D7F05A" stroke="#1B2415" stroke-width="2.5"/>
+          <circle cx="252" cy="78" r="6" fill="#D7F05A" stroke="#1B2415" stroke-width="2.5"/>
+          <text x="98" y="132" font-size="10" font-weight="600" fill="#10150C" font-family="Inter Tight">Africa</text>
+          <text x="178" y="40" font-size="10" font-weight="600" fill="#10150C" font-family="Inter Tight">Levant</text>
+          <text x="230" y="98" font-size="10" font-weight="600" fill="#10150C" font-family="Inter Tight">Gulf</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="sig-zone">
+      <div class="sig sigemerge" id="sig">
+        <div class="tipa rv"><b>+$8,120</b><span>Recovered margin</span><span class="vi">View insight</span></div>
+        <div class="tipb rv"><b>Stock alert</b><span>Fast movers running low in 2 branches</span></div>
+        <div class="st"><i></i>Operation signal strength</div>
+        <svg viewBox="0 0 380 96" aria-hidden="true">
+          <defs><pattern id="hch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="rgba(215,240,90,.45)" stroke-width="2"/></pattern></defs>
+          <path d="M0 66 L48 56 L96 62 L150 42 L204 50 L258 30 L312 40 L380 20 L380 96 L0 96 Z" fill="url(#hch)" opacity=".55"/>
+          <polyline points="0,66 48,56 96,62 150,42 204,50 258,30 312,40 380,20" fill="none" stroke="#D7F05A" stroke-width="2.2"/>
+          <circle cx="204" cy="50" r="11" fill="#F1F0EB"/>
+          <text x="204" y="54" text-anchor="middle" font-size="10" font-weight="600" fill="#10150C" font-family="Inter Tight">87</text>
+        </svg>
+        <div class="task"><i>✓</i>Shrinkage pattern detected at Marcory</div>
+        <div class="task"><i>✓</i>Rebalance stock toward Plateau</div>
+        <div class="task"><i>✓</i>Recovered margin captured</div>
+        <div class="task"><i>✓</i>Auto-reorder set for top 20 SKUs</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div class="lcv-ticker" aria-hidden="true">
+  <div class="ti">
+    <span>ODOO</span><span class="sep">✦</span><span>OHADA</span><span class="sep">✦</span><span>FNE</span><span class="sep">✦</span><span>POWER BI</span><span class="sep">✦</span><span>ARCGIS</span><span class="sep">✦</span><span>AI</span><span class="sep">✦</span><span>MULTI-CURRENCY</span><span class="sep">✦</span><span>MOBILE MONEY</span><span class="sep">✦</span><span>FR · EN · AR</span><span class="sep">✦</span><span>ODOO</span><span class="sep">✦</span><span>OHADA</span><span class="sep">✦</span><span>FNE</span><span class="sep">✦</span><span>POWER BI</span><span class="sep">✦</span><span>ARCGIS</span><span class="sep">✦</span><span>AI</span><span class="sep">✦</span><span>MULTI-CURRENCY</span><span class="sep">✦</span><span>MOBILE MONEY</span><span class="sep">✦</span><span>FR · EN · AR</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="eb rv">What we do</div>
+    <h2><span class="rv" style="display:block">Six capabilities.</span><span class="dim rv" style="display:block">One accountable partner.</span></h2>
+    <div class="svc-list">
+      <div class="svc rv open">
+        <div class="svc-head"><span class="num">01</span><h3>ERP, CRM &amp; Business Applications</h3><span class="plus">+</span></div>
+        <div class="svc-body"><div class="svc-inner"><span></span><div class="svc-cols"><div class="svc-txt">
+          <p>Full implementation of a complete business platform: sales, CRM, inventory, point of sale, purchasing, manufacturing, accounting, HR and payroll, configured for how your business actually runs across every store, warehouse and currency.</p>
+          <div class="tags"><span class="tag">Accounting</span><span class="tag">CRM</span><span class="tag">Point of Sale</span><span class="tag">Inventory</span><span class="tag">Purchasing</span><span class="tag">Manufacturing</span><span class="tag">Sales</span><span class="tag">HR &amp; Payroll</span><span class="tag">Project &amp; Timesheets</span><span class="tag">Field Service</span><span class="tag">Planning</span><span class="tag">Helpdesk</span><span class="tag">eCommerce &amp; Website</span><span class="tag">Email Marketing</span><span class="tag">Documents &amp; e-Sign</span><span class="tag">Knowledge Base</span><span class="tag">Subscriptions</span><span class="tag">AI Assistant</span><span class="tag">Team Chat</span><span class="tag">Executive Dashboards</span><span class="tag">Multi-branch</span><span class="tag">Mobile money</span></div>
+        </div>
+        <div class="lcv lcv-erp" aria-hidden="true">
+          <div class="lcvw">
+            <div class="lcv-tbar"><i></i><i></i><i class="g"></i><span>leCedar ERP · all branches</span></div>
+            <div class="lcv-app">
+              <div class="lcv-side"><b class="on">Sales</b><b>Inventory</b><b>POS</b><b>Accounting</b><b>HR</b></div>
+              <div>
+                <div class="lcv-kpis">
+                  <div class="k"><em>Sales</em><b>2.4M</b></div>
+                  <div class="k"><em>Stock</em><b>98%</b></div>
+                  <div class="k hot"><em>Cash</em><b>+12%</b></div>
+                </div>
+                <div class="lcv-rows"><i></i><i></i><i></i></div>
+              </div>
+              <span class="lcv-cursor"></span>
+            </div>
+          </div>
+        </div>
+        </div></div></div>
+      </div>
+      <div class="svc rv">
+        <div class="svc-head"><span class="num">02</span><h3>Regulatory Compliance</h3><span class="plus">+</span></div>
+        <div class="svc-body"><div class="svc-inner"><span></span><div class="svc-cols"><div class="svc-txt">
+          <p>FNE electronic invoicing for Côte d'Ivoire, with every invoice and POS receipt certified by the DGI from day one. OHADA/SYSCOHADA accounting across 17 francophone African countries, Lebanese accounting standards for Levant operations, and GDPR-grade data protection frameworks.</p>
+          <div class="tags"><span class="tag">FNE / RNE</span><span class="tag">OHADA</span><span class="tag">Lebanese Accounting</span><span class="tag">GDPR</span><span class="tag">Data protection</span></div>
+        </div>
+        <div class="lcv lcv-fne" aria-hidden="true">
+          <div class="lcv-inv">
+            <div class="ih"><b>FACTURE N° 2026-0147</b><span>Abidjan · CIV</span></div>
+            <i class="l w70"></i><i class="l w50"></i><i class="l w62"></i>
+            <div class="tot"><span>Total TTC</span><b>1 486 000 FCFA</b></div>
+            <div class="lcv-qr"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="lcv-stamp">DGI CERTIFIÉ ✓</div>
+          </div>
+          <div class="lcv-chips"><span>FNE ✓</span><span>OHADA ✓</span><span>GDPR ✓</span></div>
+        </div>
+        </div></div></div>
+      </div>
+      <div class="svc rv">
+        <div class="svc-head"><span class="num">03</span><h3>Business Intelligence</h3><span class="plus">+</span></div>
+        <div class="svc-body"><div class="svc-inner"><span></span><div class="svc-cols"><div class="svc-txt">
+          <p>Executive dashboards in Power BI that turn scattered records into decisions: revenue by branch, cash position, stock movement and project cost against budget, refreshed automatically and readable in one glance.</p>
+          <div class="tags"><span class="tag">Power BI</span><span class="tag">Data Collection</span><span class="tag">Data Analysis</span><span class="tag">Reporting</span><span class="tag">Executive dashboards</span><span class="tag">KPI Tracking</span></div>
+        </div>
+        <div class="lcv lcv-bi" aria-hidden="true">
+          <div class="lcvw">
+            <div class="bh"><span>Executive view · all branches</span><span class="live"><i></i>refreshed 2 min ago</span></div>
+            <div class="bk">
+              <div class="k"><em>Revenue M</em><b data-lcv-count="847">847</b></div>
+              <div class="k"><em>Margin %</em><b data-lcv-count="31">31</b></div>
+              <div class="k"><em>Branches</em><b data-lcv-count="12">12</b></div>
+            </div>
+            <div class="bviz">
+              <div class="bbars"><i style="--h:44%"></i><i class="hot" style="--h:82%"></i><i style="--h:58%"></i><i style="--h:36%"></i><i class="hot" style="--h:94%"></i></div>
+              <div class="blinep"><svg viewBox="0 0 100 44" preserveAspectRatio="none"><polyline class="dim" points="0,38 20,34 40,36 60,29 80,31 100,24"/><polyline points="0,33 20,27 40,30 60,15 80,19 100,5"/></svg></div>
+            </div>
+          </div>
+        </div>
+        </div></div></div>
+      </div>
+      <div class="svc rv">
+        <div class="svc-head"><span class="num">04</span><h3>GIS &amp; Geospatial Intelligence</h3><span class="plus">+</span></div>
+        <div class="svc-body"><div class="svc-inner"><span></span><div class="svc-cols"><div class="svc-txt">
+          <p>Where is your network strongest? Where is demand moving? We bring enterprise mapping (ArcGIS, spatial analytics, field data collection) to distribution networks, branch planning and operations.</p>
+          <div class="tags"><span class="tag">ArcGIS</span><span class="tag">Spatial analytics</span><span class="tag">Field data</span></div>
+        </div>
+        <div class="lcv lcv-gis" aria-hidden="true">
+          <div class="lcv-map">
+            <svg viewBox="0 0 420 224" preserveAspectRatio="none"><path class="coast" d="M-10,150 C60,120 110,168 170,158 C230,148 260,190 330,180 C380,173 410,196 430,190"/></svg>
+            <svg viewBox="0 0 420 224" preserveAspectRatio="none"><polyline class="route" points="110,76 190,52 275,96 328,140"/></svg>
+            <div class="pin" style="left:26%;top:30%"><i></i></div>
+            <div class="pin" style="left:45%;top:19%"><i></i></div>
+            <div class="pin" style="left:65%;top:39%"><i></i></div>
+            <div class="pin" style="left:78%;top:58%"><i></i></div>
+            <div class="mlg"><b>12 branches · 3 warehouses</b><span>network coverage 94%</span></div>
+          </div>
+        </div>
+        </div></div></div>
+      </div>
+      <div class="svc rv">
+        <div class="svc-head"><span class="num">05</span><h3>AI &amp; Automation</h3><span class="plus">+</span></div>
+        <div class="svc-body"><div class="svc-inner"><span></span><div class="svc-cols"><div class="svc-txt">
+          <p>Practical AI, not demos: supplier invoices read automatically into your books, purchase orders drafted, documents summarized, knowledge bases your team can actually query, all with a hard monthly cost cap.</p>
+          <div class="tags"><span class="tag">Document AI</span><span class="tag">Workflow automation</span><span class="tag">Knowledge bases</span></div>
+        </div>
+        <div class="lcv lcv-ai" aria-hidden="true">
+          <div class="lcvw">
+            <div class="lcv-tbar"><i></i><i></i><i class="g"></i><span>lecedar · automation log</span></div>
+            <div class="tb">
+              <p><span class="a">→</span>supplier_invoice_0392.pdf received</p>
+              <p><span class="a">→</span>AI read: vendor, amount, VAT <b>✓</b></p>
+              <p><span class="a">→</span>journal entry drafted &amp; matched to PO</p>
+              <p class="cur"><span class="a">→</span>validated &amp; posted — <b>0 manual entry</b></p>
+            </div>
+            <div class="tf"><i></i>processed in 4.2s · monthly AI cost cap: respected ✓</div>
+          </div>
+        </div>
+        </div></div></div>
+      </div>
+      <div class="svc rv">
+        <div class="svc-head"><span class="num">06</span><h3>Digital Presence</h3><span class="plus">+</span></div>
+        <div class="svc-body"><div class="svc-inner"><span></span><div class="svc-cols"><div class="svc-txt">
+          <p>Bilingual websites that match the caliber of your work: portfolio, services and contact, built fast and discoverable. The front door to everything else we build for you.</p>
+          <div class="tags"><span class="tag">EN / AR / FR</span><span class="tag">SEO basics</span><span class="tag">Fast delivery</span></div>
+        </div>
+        <div class="lcv lcv-web" aria-hidden="true">
+          <div class="wb">
+            <div class="bh2"><i></i><i></i><i></i><span class="url">yourcompany.com</span><span class="lang"><b class="fr">FR</b><b class="en">EN</b></span></div>
+            <div class="pg"><i class="pnav"></i><i class="ph1"></i><i class="ph2"></i><i class="pbtn"></i><i class="pimg"></i></div>
+          </div>
+          <div class="phn"><i class="nn"></i><i class="nh"></i><i class="nim"></i><i class="nl"></i><i class="nb"></i></div>
+        </div>
+        </div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="layers">
+  <div class="glow2"></div>
+  <div class="wrap">
+    <h2>
+      <span class="gh rv">One platform.</span>
+      <span class="sd rv">Multiple intelligence <span class="serif" style="color:#54713a">layers.</span></span>
+    </h2>
+    <div class="net rv" id="net">
+      <svg class="links" viewBox="0 0 900 390" preserveAspectRatio="none" aria-hidden="true">
+        <line x1="450" y1="195" x2="450" y2="42"/>
+        <line x1="450" y1="195" x2="160" y2="90"/>
+        <line x1="450" y1="195" x2="740" y2="86"/>
+        <line x1="450" y1="195" x2="105" y2="240"/>
+        <line x1="450" y1="195" x2="795" y2="242"/>
+        <line x1="450" y1="195" x2="265" y2="330"/>
+        <line x1="450" y1="195" x2="640" y2="332"/>
+      </svg>
+      <div class="node core" style="left:50%;top:50%">LECEDAR CORE</div>
+      <div class="node rv" style="left:50%;top:11%"><i></i>Document AI</div>
+      <div class="node rv" style="left:18%;top:23%"><i></i>ERP &amp; CRM</div>
+      <div class="node rv" style="left:82%;top:22%"><i></i>Power BI</div>
+      <div class="node rv" style="left:12%;top:62%"><i></i>ArcGIS</div>
+      <div class="node rv" style="left:88%;top:62%"><i></i>Accounting</div>
+      <div class="node rv" style="left:29%;top:85%"><i></i>CinetPay</div>
+      <div class="node rv" style="left:71%;top:85%"><i></i>WhatsApp Business</div>
+    </div>
+    <div class="net-tag">
+      <b class="rv">One integrated core. Real-time sync. Zero fragmentation.</b>
+      <p class="rv">Your sales, stock, accounting, maps and messages stop living in separate tools; every layer reads from the same live data, so every answer agrees.</p>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <div class="eb rv">How we work</div>
+        <h2 class="rv">No surprises. <span class="serif" style="color:#54713a">By design.</span></h2>
+      </div>
+      <a class="pill dark rv" href="#contact">Book a discovery call</a>
+    </div>
+    <div class="steps">
+      <div class="step rv"><span class="n">STEP 01</span><h4>Discover</h4><p>We map how your business actually runs, every branch, flow and pain point, and define a fixed scope with a fixed price.</p></div>
+      <div class="step rv"><span class="n">STEP 02</span><h4>Configure</h4><p>Weekly build cycles with your single point of contact: configuration, data migration and key-user training, validated as we go.</p></div>
+      <div class="step rv"><span class="n">STEP 03</span><h4>Go live</h4><p>Phased rollout: pilot first, then branch by branch, so your operation never stops while the system takes over.</p>
+        <div class="golive" aria-hidden="true">
+          <div class="glr"><i></i><i></i><i></i><span class="gld"></span><em>LIVE</em></div>
+          <div class="glrows">
+            <p><span>status</span><b class="g">deployed ✓</b></p>
+            <p><span>branches migrated</span><b>4/4</b></p>
+            <p><span>training</span><b>complete</b></p>
+          </div>
+        </div>
+      </div>
+      <div class="step rv"><span class="n">STEP 04</span><h4>Support</h4><p>An annual contract with guaranteed response, continuous improvements and someone who answers on WhatsApp.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="markets" id="markets">
+  <div class="wrap">
+    <div class="eb rv">Where we work</div>
+    <h2 class="rv">Three regions. <span class="serif" style="color:#54713a">One standard.</span></h2>
+    <div class="mk-grid">
+      <div class="mk lime rv">
+        <span class="mt">West &amp; Central Africa</span>
+        <h3>Built for OHADA. Ready for FNE.</h3>
+        <p>Multi-branch retail, distribution and logistics across Côte d'Ivoire, Cameroun and beyond, with the compliance stack most integrators don't carry, delivered in French.</p>
+        <ul><li>FNE e-invoicing (CIV)</li><li>OHADA accounting</li><li>Mobile money integration</li></ul>
+      </div>
+      <div class="mk dark rv">
+        <span class="mt">The Gulf</span>
+        <h3>Systems for family-built groups.</h3>
+        <p>Contracting, trading and retail groups in Kuwait and the wider Gulf: project costing, procurement and executive dashboards, delivered in Arabic and English.</p>
+        <ul><li>ERP for contracting &amp; trading</li><li>Executive dashboards</li><li>Digital presence</li></ul>
+      </div>
+      <div class="mk sand rv">
+        <span class="mt">Lebanon &amp; Levant</span>
+        <h3>Home base. Full stack.</h3>
+        <p>From Beirut, we serve Lebanese businesses modernizing their operations, and the diaspora enterprises they're connected to on three continents.</p>
+        <ul><li>SME digitalization</li><li>Data governance</li><li>BI &amp; automation</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="founder" id="founder">
+  <div class="wrap inner">
+    <div class="portrait rv">
+      <span class="ring"></span><span class="ring"></span><span class="ring"></span>
+      <svg viewBox="0 0 48 48" aria-hidden="true"><line x1="24" y1="24" x2="24" y2="14" stroke="#D7F05A" stroke-width="2.5"/><circle cx="24" cy="10" r="8" fill="#D7F05A"/><line x1="24" y1="24" x2="14" y2="30" stroke="#D7F05A" stroke-width="2"/><line x1="14" y1="30" x2="8" y2="38" stroke="#D7F05A" stroke-width="2"/><line x1="14" y1="30" x2="16" y2="40" stroke="#D7F05A" stroke-width="2"/><line x1="24" y1="24" x2="34" y2="30" stroke="#D7F05A" stroke-width="2"/><line x1="34" y1="30" x2="28" y2="40" stroke="#D7F05A" stroke-width="2"/><line x1="34" y1="30" x2="40" y2="38" stroke="#D7F05A" stroke-width="2"/><circle cx="8" cy="38" r="2.2" fill="#D7F05A"/><circle cx="16" cy="40" r="2.2" fill="#D7F05A"/><circle cx="28" cy="40" r="2.2" fill="#D7F05A"/><circle cx="40" cy="38" r="2.2" fill="#D7F05A"/></svg>
+    </div>
+    <div>
+      <div class="eb rv">Leadership</div>
+      <blockquote class="rv" style="margin-top:22px">"Every business we serve gets the same thing: <span class="serif">total visibility</span>, so nothing is hidden, nothing leaks, and every decision is made on real numbers."</blockquote>
+      <div class="who rv">
+        <b>Ibrahim Ali Ahmad, Founder</b>
+        10+ years leading information management and data systems for international organizations across the Middle East and Africa. Trilingual delivery: Arabic, French, English, from Beirut to Abidjan to Kuwait City.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div class="eb rv">Start here</div>
+    <h2><span class="rv" style="display:block">What can't you <span class="serif">see</span></span><span class="rv" style="display:block">in your business today?</span></h2>
+    <p class="rv">Tell us in one WhatsApp message. We'll reply with a straight answer, and if we're not the right fit, we'll say so.</p>
+    <div class="ctas rv">
+      <a class="pill lime" href="https://wa.me/96170023313">WhatsApp +961 70 023 313</a>
+      <a class="pill line" href="mailto:contact@lecedarglobal.com">contact@lecedarglobal.com</a>
+    </div>
+  </div>
+</section>
+
+<section class="finder" id="finder">
+  <div class="wrap">
+    <span class="eb rv">Find your system</span>
+    <h2 class="rv">Type what you need. <span class="serif" style="color:#54713a">Watch it appear.</span></h2>
+    <p class="fsub rv">Start typing and the systems, industries and apps filter live. Tap one and it opens straight in WhatsApp.</p>
+    <div class="fbox rv">
+      <div class="fcard">
+        <input type="text" id="fq" autocomplete="off" aria-label="Describe what you need">
+        <div class="ftools">
+          <div class="fchips" id="fchips">
+            <button class="fchip on" data-c="all">All</button>
+            <button class="fchip" data-c="erp">ERP</button>
+            <button class="fchip" data-c="bi">Dashboards</button>
+            <button class="fchip" data-c="gis">GIS</button>
+            <button class="fchip" data-c="compliance">Compliance</button>
+            <button class="fchip" data-c="ai">AI</button>
+            <button class="fchip" data-c="web">Web</button>
+            <button class="fchip" data-c="industry">Industries</button>
+            <button class="fchip" data-c="app">Apps</button>
+          </div>
+          <button class="fsend" id="fsend" aria-label="Send your request on WhatsApp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D7F05A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="fmeta"><span id="fcount"></span><span>Every card opens a WhatsApp chat with Ibrahim</span></div>
+    <div class="fgrid" id="fgrid"></div>
+    <div class="fempty" id="fempty">Nothing matches that exactly. <a href="#" id="femptywa">Tell us anyway on WhatsApp</a> and we build custom.</div>
+  </div>
+</section>
+
+<section class="contact2">
+  <div class="wrap">
+    <div class="rule"></div>
+    <div class="cgrid">
+      <div>
+        <h2 class="rv">We'd love to <span class="serif" style="color:#54713a">hear</span> from you</h2>
+        <p class="csub rv">We're always open to new projects, partnerships and ideas, from a single dashboard to a full ERP.</p>
+      </div>
+      <div class="cbox rv">
+        <h4>WhatsApp us</h4>
+        <p>The fastest way to reach us. Describe your business in one message and we reply with a straight answer, usually the same day.</p>
+        <a href="https://wa.me/96170023313">+961 70 023 313 <span class="ar">→</span></a>
+      </div>
+      <div class="cbox rv">
+        <h4>Mail us</h4>
+        <p>Prefer email? Send us a line about your operation and where it hurts and we'll come back with how we'd approach it.</p>
+        <a href="mailto:contact@lecedarglobal.com">contact@lecedarglobal.com <span class="ar">→</span></a>
+      </div>
+    </div>
+    <div class="copyr rv">© 2026 leCedar Global · Beirut · Abidjan · Kuwait City</div>
+  </div>
+</section>
+
+<footer class="rocksfoot">
+  <img src="assets/footer-rocks.jpg" alt="Mossy rocks reflected in still water">
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+function lcvCount(scope){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  scope.querySelectorAll('[data-lcv-count]').forEach(function(el){
+    var end=+el.dataset.lcvCount;
+    if(reduce||typeof gsap==='undefined'){el.textContent=end;return}
+    gsap.fromTo(el,{innerText:0},{innerText:end,duration:1.2,delay:.55,ease:'power2.out',snap:{innerText:1},overwrite:true});
+  });
+}
+document.querySelectorAll('.svc').forEach(function(s){
+  var body=s.querySelector('.svc-body');
+  if(s.classList.contains('open')) body.style.maxHeight=body.scrollHeight+'px';
+  s.querySelector('.svc-head').addEventListener('click',function(){
+    var open=s.classList.contains('open');
+    document.querySelectorAll('.svc.open').forEach(function(o){o.classList.remove('open');o.querySelector('.svc-body').style.maxHeight=0;});
+    if(!open){s.classList.add('open');body.style.maxHeight=body.scrollHeight+'px';lcvCount(s);}
+  });
+});
+
+document.querySelectorAll('[data-words]').forEach(function(el){
+  var words=el.textContent.trim().split(/\s+/);
+  el.textContent='';
+  words.forEach(function(w,i){
+    var outer=document.createElement('span');outer.className='wln';
+    var inner=document.createElement('span');inner.textContent=w;
+    outer.appendChild(inner);el.appendChild(outer);
+    if(i<words.length-1)el.appendChild(document.createTextNode(' '));
+  });
+});
+
+var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var WA='https://wa.me/96170023313';
+function waOpen(msg){window.open(WA+'?text='+encodeURIComponent(msg),'_blank')}
+
+var PRODUCTS=[
+{t:"Executive sales dashboard",c:"bi",cl:"Business intelligence",d:"Revenue, margins and branch performance in one live Power BI view.",k:"dashboard dashboards power bi powerbi sales revenue kpi report reports reporting ventes tableau bord visibility",v:"bars",pri:1},
+{t:"Multi-branch inventory control",c:"erp",cl:"ERP & CRM",d:"Live stock across every store and warehouse, with transfers and reorder rules.",k:"stock inventory warehouse warehouses branch branches stores erp crm inventaire entrepot magasin transfer",v:"sq",pri:7},
+{t:"FNE e-invoicing compliance",c:"compliance",cl:"Compliance · CIV",d:"Every invoice and POS receipt certified by the DGI, mandatory in Côte d'Ivoire.",k:"fne invoice invoices facture e-invoicing einvoicing dgi receipt rne compliance certified legal ivoire civ tax",v:"receipt",pri:4},
+{t:"Point of sale for retail",c:"erp",cl:"ERP & CRM",d:"Offline-capable POS for every store: installments, mobile money, barcode.",k:"pos point of sale caisse retail store shop till checkout installment mobile money cinetpay",v:"pos"},
+{t:"OHADA accounting setup",c:"compliance",cl:"Compliance · Accounting",d:"SYSCOHADA-compliant books across 17 francophone African countries.",k:"accounting ohada syscohada comptabilite books finance ledger audit accountant africa",v:"table"},
+{t:"Cash & treasury dashboard",c:"bi",cl:"Business intelligence",d:"Bank positions, cash flow and liquidity, refreshed automatically.",k:"cash treasury tresorerie bank liquidity money flow finance position",v:"line"},
+{t:"Branch network map",c:"gis",cl:"GIS & geospatial",d:"Your stores, warehouses and demand on an interactive ArcGIS map.",k:"gis map maps carte spatial arcgis location network geography branches territory distribution",v:"map"},
+{t:"Field data collection",c:"gis",cl:"GIS & geospatial",d:"Surveys and field operations captured on mobile, synced to your systems.",k:"field survey surveys kobo collection data terrain forms mobile capture",v:"dots"},
+{t:"HR & payroll",c:"erp",cl:"ERP & CRM",d:"Contracts, attendance and payroll for your whole team, every branch.",k:"hr payroll paie employees staff attendance salary human resources team",v:"people"},
+{t:"Document AI, invoice OCR",c:"ai",cl:"AI & automation",d:"Supplier invoices photographed and read straight into your books.",k:"ai ocr document documents scan automation invoice reading artificial intelligence auto",v:"doc"},
+{t:"Data governance & GDPR",c:"compliance",cl:"Compliance · Data",d:"Access control, retention and protection frameworks for your data.",k:"gdpr data governance privacy protection security donnees access framework",v:"shield"},
+{t:"Bilingual company website",c:"web",cl:"Digital presence",d:"A site that matches the caliber of your business: EN, FR or AR.",k:"website web site presence online seo digital internet page landing bilingual",v:"web",pri:10}
+];
+
+var INDUSTRIES=[
+{t:"Accounting Firm",c:"industry",cl:"Industry · Business Services",d:"For accountants, fiduciaires, auditors & financial advisors.",k:"accounting firm fiduciaire auditor audit financial advisor business services",v:"table",pri:8},
+{t:"Billboard Rental",c:"industry",cl:"Industry · Business Services",d:"For advertising companies, media agencies & outdoor space owners.",k:"billboard rental advertising media outdoor business services"},
+{t:"Audit & Certification",c:"industry",cl:"Industry · Business Services",d:"For auditors, certification bodies & compliance specialists.",k:"audit certification compliance business services"},
+{t:"Environmental Agency",c:"industry",cl:"Industry · Business Services",d:"For consultants, sustainability firms & inspection services.",k:"environmental agency sustainability consultant inspection business services"},
+{t:"Talent Acquisition",c:"industry",cl:"Industry · Business Services",d:"For recruiters, staffing agencies & HR consultancies.",k:"talent acquisition recruiter staffing agency hr business services"},
+{t:"Law Firm",c:"industry",cl:"Industry · Business Services",d:"For lawyers, legal advisors & notaries.",k:"law firm lawyer legal advisor notary business services"},
+{t:"IT Hardware & Support",c:"industry",cl:"Industry · Business Services",d:"For IT resellers, support providers & hardware suppliers.",k:"it hardware support reseller supplier business services"},
+{t:"Marketing Agency",c:"industry",cl:"Industry · Business Services",d:"For agencies, consultants & branding professionals.",k:"marketing agency branding consultant business services"},
+{t:"Software Reseller",c:"industry",cl:"Industry · Business Services",d:"For software distributors, integrators & resellers.",k:"software reseller distributor integrator business services"},
+{t:"Driving School",c:"industry",cl:"Industry · Education & Training",d:"For driving academies, instructors & vehicle training centers.",k:"driving school academy instructor education training"},
+{t:"eLearning Platform",c:"industry",cl:"Industry · Education & Training",d:"For online courses, coaches & digital academies.",k:"elearning platform online course coach academy education training"},
+{t:"Student Organization",c:"industry",cl:"Industry · Education & Training",d:"For associations, clubs & student unions.",k:"student organization association club union education training"},
+{t:"Coworking",c:"industry",cl:"Industry · Events, Community & Nonprofits",d:"For coworking hubs, shared offices & flexible workspace providers.",k:"coworking hub shared office workspace community"},
+{t:"Event Management",c:"industry",cl:"Industry · Events, Community & Nonprofits",d:"For event planners, agencies & professional organizers.",k:"event management planner organizer community"},
+{t:"Nonprofit Organisation",c:"industry",cl:"Industry · Events, Community & Nonprofits",d:"For charities, NGOs & associations.",k:"nonprofit ngo charity association community humanitarian"},
+{t:"Sports Club",c:"industry",cl:"Industry · Events, Community & Nonprofits",d:"For local clubs, federations & training centers.",k:"sports club federation training center community"},
+{t:"Team Sports Club",c:"industry",cl:"Industry · Events, Community & Nonprofits",d:"For football, basketball & other sports teams.",k:"team sports club football basketball community"},
+{t:"Bakery",c:"industry",cl:"Industry · Food & Beverage",d:"For artisan bakers, pastry shops & bakery chains.",k:"bakery baker pastry shop chain food beverage"},
+{t:"Bar & Pub",c:"industry",cl:"Industry · Food & Beverage",d:"For bars, pubs & cocktail lounges.",k:"bar pub lounge cocktail food beverage"},
+{t:"Beverages Distributor",c:"industry",cl:"Industry · Food & Beverage",d:"For beverage wholesalers, drink logistics & distribution companies.",k:"beverages distributor wholesaler drink logistics food beverage"},
+{t:"Candy Shop",c:"industry",cl:"Industry · Food & Beverage",d:"For confectionery stores, online sweet shops & chocolatiers.",k:"candy shop confectionery chocolatier food beverage"},
+{t:"Catering",c:"industry",cl:"Industry · Food & Beverage",d:"For event caterers, banquet organizers & private food service providers.",k:"catering caterer banquet food beverage"},
+{t:"Fast Food",c:"industry",cl:"Industry · Food & Beverage",d:"For quick-service restaurants, takeaways & franchise chains.",k:"fast food quick service restaurant takeaway franchise",v:"pos"},
+{t:"Food Trucks",c:"industry",cl:"Industry · Food & Beverage",d:"For mobile kitchens, street food vendors & catering trucks.",k:"food truck mobile kitchen street food catering"},
+{t:"Restaurant",c:"industry",cl:"Industry · Food & Beverage",d:"For restaurants & culinary houses.",k:"restaurant culinary house food beverage"},
+{t:"Takeaway Restaurant",c:"industry",cl:"Industry · Food & Beverage",d:"For restaurants, fast food & online delivery providers.",k:"takeaway restaurant delivery food beverage"},
+{t:"Beauty Parlor",c:"industry",cl:"Industry · Health, Wellness & Personal Care",d:"For the beauty service sector, from nail bars to luxury institutes.",k:"beauty parlor nail salon institute wellness personal care"},
+{t:"Climbing Gym",c:"industry",cl:"Industry · Health, Wellness & Personal Care",d:"For climbing halls, bouldering centers & training facilities.",k:"climbing gym bouldering training wellness"},
+{t:"Eyewear Store",c:"industry",cl:"Industry · Health, Wellness & Personal Care",d:"For opticians, eyewear retailers & optical clinics.",k:"eyewear store optician optical clinic wellness"},
+{t:"Fitness Center",c:"industry",cl:"Industry · Health, Wellness & Personal Care",d:"For gyms, wellness clubs & personal training studios.",k:"fitness center gym wellness club personal training",v:"dots",pri:5},
+{t:"Hair Salon",c:"industry",cl:"Industry · Health, Wellness & Personal Care",d:"For salons, barbershops & hairstyling studios.",k:"hair salon barbershop hairstyling wellness personal care"},
+{t:"Mental Therapy",c:"industry",cl:"Industry · Health, Wellness & Personal Care",d:"For mental health & wellbeing professionals, psychologists & therapists.",k:"mental therapy health psychologist therapist wellness"},
+{t:"Personal Trainer",c:"industry",cl:"Industry · Health, Wellness & Personal Care",d:"For fitness coaches, health consultants & wellness instructors.",k:"personal trainer fitness coach wellness instructor"},
+{t:"Pet Groomer",c:"industry",cl:"Industry · Health, Wellness & Personal Care",d:"For dog groomers, pet salons & animal grooming professionals.",k:"pet groomer dog salon animal grooming wellness"},
+{t:"Pharmacy",c:"industry",cl:"Industry · Health, Wellness & Personal Care",d:"For pharmacies, drugstores & health retailers.",k:"pharmacy drugstore health retailer wellness"},
+{t:"Physical Therapy",c:"industry",cl:"Industry · Health, Wellness & Personal Care",d:"For physical therapy & rehabilitation practices.",k:"physical therapy rehabilitation kinesiotherapy osteopath wellness"},
+{t:"Veterinary Clinic",c:"industry",cl:"Industry · Health, Wellness & Personal Care",d:"For vets, animal hospitals & pet care providers.",k:"veterinary clinic vet animal hospital pet care wellness"},
+{t:"Yoga & Pilates Studio",c:"industry",cl:"Industry · Health, Wellness & Personal Care",d:"For yoga studios, pilates trainers & wellness centers.",k:"yoga pilates studio wellness center"},
+{t:"Guest House",c:"industry",cl:"Industry · Hospitality, Tourism & Leisure",d:"For B&Bs, homestays & family-run lodgings.",k:"guest house bnb homestay lodging hospitality tourism"},
+{t:"Hotel",c:"industry",cl:"Industry · Hospitality, Tourism & Leisure",d:"For hotels, resorts & hospitality chains.",k:"hotel resort hospitality chain tourism"},
+{t:"Spa Resort",c:"industry",cl:"Industry · Hospitality, Tourism & Leisure",d:"For wellness resorts, spa hotels & luxury retreats.",k:"spa resort wellness retreat hospitality tourism"},
+{t:"Third-party Logistics",c:"industry",cl:"Industry · Manufacturing & Supply Chain",d:"For freight forwarders, couriers & distribution networks.",k:"third party logistics 3pl freight forwarder courier distribution supply chain"},
+{t:"Agri-Equipment Rental",c:"industry",cl:"Industry · Manufacturing & Supply Chain",d:"For tractor hire, harvester rentals & agricultural machinery specialists.",k:"agri equipment rental tractor harvester machinery supply chain"},
+{t:"Carpenter",c:"industry",cl:"Industry · Manufacturing & Supply Chain",d:"For woodworking shops, custom furniture makers & craftsmen.",k:"carpenter woodworking furniture maker craftsman supply chain"},
+{t:"Corporate Gifts",c:"industry",cl:"Industry · Manufacturing & Supply Chain",d:"For gift suppliers, promotional products & merchandising producers.",k:"corporate gifts promotional products merchandising supply chain"},
+{t:"Custom Furniture Production",c:"industry",cl:"Industry · Manufacturing & Supply Chain",d:"For bespoke furniture makers, carpentry workshops & design studios.",k:"custom furniture production bespoke carpentry design supply chain"},
+{t:"Custom Industrial Equipment",c:"industry",cl:"Industry · Manufacturing & Supply Chain",d:"For EPC projects, engineering-to-order & turnkey solutions.",k:"custom industrial equipment epc engineering to order turnkey supply chain"},
+{t:"Food Distribution",c:"industry",cl:"Industry · Manufacturing & Supply Chain",d:"For food factories, artisanal producers & distribution businesses.",k:"food distribution factory producer supply chain",v:"line"},
+{t:"Metal Fabricator",c:"industry",cl:"Industry · Manufacturing & Supply Chain",d:"For workshops, industrial fabricators & metalworking firms.",k:"metal fabricator workshop industrial metalworking supply chain"},
+{t:"Textile Manufacturing",c:"industry",cl:"Industry · Manufacturing & Supply Chain",d:"For textile producers, carpet makers & leather goods producers.",k:"textile manufacturing carpet leather goods supply chain"},
+{t:"Vineyard",c:"industry",cl:"Industry · Manufacturing & Supply Chain",d:"For wineries, vineyards & wine producers.",k:"vineyard winery wine producer supply chain"},
+{t:"Architecture Firm",c:"industry",cl:"Industry · Real Estate, Construction & Maintenance",d:"For architects, design studios & construction planners.",k:"architecture firm architect design studio construction real estate"},
+{t:"Property Owner Association",c:"industry",cl:"Industry · Real Estate, Construction & Maintenance",d:"For homeowner associations, property managers & condominiums.",k:"property owner association homeowner condominium real estate"},
+{t:"Construction Builder",c:"industry",cl:"Industry · Real Estate, Construction & Maintenance",d:"For independent builders, renovation specialists & trade contractors.",k:"construction builder renovation contractor real estate"},
+{t:"Construction Developer",c:"industry",cl:"Industry · Real Estate, Construction & Maintenance",d:"For large-scale developers, general contractors & complex infrastructure projects.",k:"construction developer epc contractor infrastructure real estate",v:"table",pri:5},
+{t:"HVAC Services",c:"industry",cl:"Industry · Real Estate, Construction & Maintenance",d:"For heating, ventilation & air conditioning contractors.",k:"hvac heating ventilation air conditioning contractor real estate"},
+{t:"Property Management",c:"industry",cl:"Industry · Real Estate, Construction & Maintenance",d:"For property managers, rental agencies & building administrators.",k:"property management rental agency building real estate"},
+{t:"Machine & Tools Rental",c:"industry",cl:"Industry · Real Estate, Construction & Maintenance",d:"For heavy machinery rentals, construction equipment & agricultural tool suppliers.",k:"machine tools rental heavy machinery construction equipment real estate"},
+{t:"Real Estate Agency",c:"industry",cl:"Industry · Real Estate, Construction & Maintenance",d:"For agents, brokers & estate professionals.",k:"real estate agency agent broker"},
+{t:"Solar Energy Systems",c:"industry",cl:"Industry · Real Estate, Construction & Maintenance",d:"For solar installers, energy consultants & green providers.",k:"solar energy systems installer green real estate"},
+{t:"Agricultural Store",c:"industry",cl:"Industry · Retail & eCommerce",d:"For farming suppliers, gardening shops & agricultural distributors.",k:"agricultural store farming supplier gardening retail"},
+{t:"Automobile Spare Parts",c:"industry",cl:"Industry · Retail & eCommerce",d:"For spare parts retailers, car accessories shops & auto components suppliers.",k:"automobile spare parts car accessories auto retail",v:"sq"},
+{t:"Bookstore",c:"industry",cl:"Industry · Retail & eCommerce",d:"For book retailers, comic shops & independent bookstores.",k:"bookstore book comic retail"},
+{t:"Clothing Store",c:"industry",cl:"Industry · Retail & eCommerce",d:"For fashion retailers, boutiques & apparel shops.",k:"clothing store fashion boutique apparel retail"},
+{t:"Cosmetics Store",c:"industry",cl:"Industry · Retail & eCommerce",d:"For beauty shops, skincare retailers & perfume boutiques.",k:"cosmetics store beauty skincare perfume retail"},
+{t:"Dropshipping",c:"industry",cl:"Industry · Retail & eCommerce",d:"For online sellers, ecommerce operators & fulfillment businesses.",k:"dropshipping online seller ecommerce fulfillment retail"},
+{t:"Electronic Store",c:"industry",cl:"Industry · Retail & eCommerce",d:"For electronics retailers, gadget shops & home appliance sellers.",k:"electronic store electronics gadget appliance phone retail",v:"receipt",pri:11},
+{t:"Florist",c:"industry",cl:"Industry · Retail & eCommerce",d:"For flower shops, event florists & online floral retailers.",k:"florist flower shop retail"},
+{t:"Grocery Store",c:"industry",cl:"Industry · Retail & eCommerce",d:"For supermarkets, local shops & small retailers.",k:"grocery store supermarket shop retail",v:"pos",pri:2},
+{t:"Furniture Store",c:"industry",cl:"Industry · Retail & eCommerce",d:"For furniture retailers, showrooms & interior shops.",k:"furniture store showroom interior retail"},
+{t:"Hardware Store",c:"industry",cl:"Industry · Retail & eCommerce",d:"For DIY shops, tool retailers & construction suppliers.",k:"hardware store diy tool retail"},
+{t:"Thrift Store",c:"industry",cl:"Industry · Retail & eCommerce",d:"For thrift stores, second-hand shops & resale stores.",k:"thrift store second hand resale retail"},
+{t:"Toy Store",c:"industry",cl:"Industry · Retail & eCommerce",d:"For toy shops, board game retailers & children's stores.",k:"toy store board game children retail"},
+{t:"Cleaning Services",c:"industry",cl:"Industry · Trades & Home Services",d:"For cleaning companies & janitorial services.",k:"cleaning services janitorial trades home"},
+{t:"Electrician",c:"industry",cl:"Industry · Trades & Home Services",d:"For electricians, wiring contractors & technical service providers.",k:"electrician wiring contractor trades home"},
+{t:"Gardening",c:"industry",cl:"Industry · Trades & Home Services",d:"For landscaping, groundskeeping & outdoor service providers.",k:"gardening landscaping groundskeeping trades home"},
+{t:"Handyman Services",c:"industry",cl:"Industry · Trades & Home Services",d:"For repair services, maintenance workers & general contractors.",k:"handyman services repair maintenance contractor trades home"},
+{t:"Shoemaker Services",c:"industry",cl:"Industry · Trades & Home Services",d:"For cobblers, shoemakers & footwear repair shops.",k:"shoemaker cobbler footwear repair trades home"},
+{t:"Surveying & Mapping",c:"industry",cl:"Industry · Trades & Home Services",d:"For surveyors, mapping firms & engineering services.",k:"surveying mapping surveyor engineering trades home gis"}
+];
+
+var APPS=[
+{t:"Accounting",c:"app",cl:"App · Finance",d:"Full financial and analytic accounting — OHADA, Lebanese and international standards.",k:"accounting finance app ohada",v:"table",pri:6},
+{t:"Invoicing",c:"app",cl:"App · Finance",d:"Send invoices and get paid faster, with FNE e-invoicing where required.",k:"invoicing finance app fne"},
+{t:"Expenses",c:"app",cl:"App · Finance",d:"Employee expense claims, submitted and approved in a few clicks.",k:"expenses finance app"},
+{t:"Spreadsheets (BI)",c:"app",cl:"App · Finance",d:"Live spreadsheet dashboards pulling straight from your operational data.",k:"spreadsheets bi finance app dashboard"},
+{t:"Documents",c:"app",cl:"App · Finance",d:"Secure, organized document storage for contracts, filings and records.",k:"documents finance app storage"},
+{t:"Sign",c:"app",cl:"App · Finance",d:"Legally binding e-signatures — no printing, no meetings.",k:"sign esignature finance app"},
+{t:"CRM",c:"app",cl:"App · Sales",d:"Track leads and close opportunities, from first contact to signed deal.",k:"crm sales app leads opportunities",v:"people",pri:3},
+{t:"Sales",c:"app",cl:"App · Sales",d:"Quotations, sales orders and invoices, without re-entering data twice.",k:"sales app quotations orders"},
+{t:"Point of Sale",c:"app",cl:"App · Sales",d:"Offline-capable checkout for shops, restaurants and service counters.",k:"point of sale pos app checkout",v:"pos",pri:12},
+{t:"Subscriptions",c:"app",cl:"App · Sales",d:"Recurring billing for memberships, contracts and service plans.",k:"subscriptions sales app recurring billing membership"},
+{t:"Rental",c:"app",cl:"App · Sales",d:"Manage rental contracts, deliveries and returns for equipment or property.",k:"rental sales app contracts"},
+{t:"Website Builder",c:"app",cl:"App · Websites",d:"A professional company website, live in days, not months.",k:"website builder app"},
+{t:"eCommerce",c:"app",cl:"App · Websites",d:"Sell products online with the same catalog and stock as your physical store.",k:"ecommerce website app online store"},
+{t:"Blog",c:"app",cl:"App · Websites",d:"Publish articles, announcements and company news.",k:"blog website app"},
+{t:"Forum",c:"app",cl:"App · Websites",d:"A community Q&A space for customers or members.",k:"forum website app community"},
+{t:"Live Chat",c:"app",cl:"App · Websites",d:"Talk to website visitors in real time, right from your dashboard.",k:"live chat website app"},
+{t:"eLearning",c:"app",cl:"App · Websites",d:"Publish and sell online courses to customers or staff.",k:"elearning website app courses"},
+{t:"Inventory",c:"app",cl:"App · Supply Chain",d:"Real-time stock across every branch and warehouse.",k:"inventory supply chain app stock warehouse",v:"sq",pri:9},
+{t:"Manufacturing",c:"app",cl:"App · Supply Chain",d:"Production orders and bills of materials for anything you make.",k:"manufacturing supply chain app production bom"},
+{t:"PLM",c:"app",cl:"App · Supply Chain",d:"Manage product versions and engineering changes over time.",k:"plm supply chain app product lifecycle"},
+{t:"Purchase",c:"app",cl:"App · Supply Chain",d:"Purchase orders, supplier agreements and automated reordering.",k:"purchase supply chain app supplier orders"},
+{t:"Maintenance",c:"app",cl:"App · Supply Chain",d:"Track equipment and schedule preventive maintenance.",k:"maintenance supply chain app equipment"},
+{t:"Quality",c:"app",cl:"App · Supply Chain",d:"Quality checks and alerts built into your production or receiving flow.",k:"quality supply chain app checks"},
+{t:"Employees",c:"app",cl:"App · Human Resources",d:"One record per employee — contracts, documents and org structure.",k:"employees hr app record"},
+{t:"Recruitment",c:"app",cl:"App · Human Resources",d:"Track candidates through your hiring pipeline.",k:"recruitment hr app candidates hiring"},
+{t:"Time Off",c:"app",cl:"App · Human Resources",d:"Leave requests and approvals, with balances tracked automatically.",k:"time off hr app leave"},
+{t:"Appraisals",c:"app",cl:"App · Human Resources",d:"Structured performance reviews on a schedule you set.",k:"appraisals hr app performance review"},
+{t:"Referrals",c:"app",cl:"App · Human Resources",d:"Let staff refer candidates for open roles.",k:"referrals hr app"},
+{t:"Fleet",c:"app",cl:"App · Human Resources",d:"Track company vehicles, costs and assignments.",k:"fleet hr app vehicles"},
+{t:"Social Marketing",c:"app",cl:"App · Marketing",d:"Plan and publish across your social channels from one place.",k:"social marketing app channels"},
+{t:"Email Marketing",c:"app",cl:"App · Marketing",d:"Design, send and track email campaigns.",k:"email marketing app campaigns"},
+{t:"SMS Marketing",c:"app",cl:"App · Marketing",d:"Reach customers directly with tracked SMS campaigns.",k:"sms marketing app campaigns"},
+{t:"Events",c:"app",cl:"App · Marketing",d:"Publish events and sell tickets online.",k:"events marketing app tickets"},
+{t:"Marketing Automation",c:"app",cl:"App · Marketing",d:"Automated follow-up sequences triggered by customer behavior.",k:"marketing automation app sequences"},
+{t:"Surveys",c:"app",cl:"App · Marketing",d:"Send surveys and collect structured feedback.",k:"surveys marketing app feedback"},
+{t:"Project",c:"app",cl:"App · Services",d:"Plan and track projects, tasks and deadlines.",k:"project services app tasks deadlines"},
+{t:"Timesheets",c:"app",cl:"App · Services",d:"Time tracked against tasks and projects, ready for billing.",k:"timesheets services app time billing"},
+{t:"Field Service",c:"app",cl:"App · Services",d:"Schedule and track on-site jobs, materials and technician time.",k:"field service app on-site technician"},
+{t:"Helpdesk",c:"app",cl:"App · Services",d:"Track, prioritize and resolve customer support tickets.",k:"helpdesk services app tickets support"},
+{t:"Planning",c:"app",cl:"App · Services",d:"Staff schedules and shifts, built and shared in minutes.",k:"planning services app shifts schedule"},
+{t:"Appointments",c:"app",cl:"App · Services",d:"Let customers book meetings or slots directly into your calendar.",k:"appointments services app booking calendar"},
+{t:"Discuss",c:"app",cl:"App · Productivity",d:"Internal chat and channels, so nothing lives in scattered WhatsApp threads.",k:"discuss productivity app chat channels"},
+{t:"Artificial Intelligence",c:"app",cl:"App · Productivity",d:"Practical AI: document reading, drafting and automation, with a cost cap.",k:"artificial intelligence ai productivity app automation"},
+{t:"IoT",c:"app",cl:"App · Productivity",d:"Connect scales, printers, scanners and other devices to your system.",k:"iot productivity app devices"},
+{t:"VoIP",c:"app",cl:"App · Productivity",d:"Make and receive calls straight from your business system.",k:"voip productivity app calls"},
+{t:"Knowledge",c:"app",cl:"App · Productivity",d:"A searchable knowledge base your team can actually use.",k:"knowledge productivity app base"},
+{t:"WhatsApp",c:"app",cl:"App · Productivity",d:"Customer conversations synced with your CRM and support tickets.",k:"whatsapp productivity app crm"}
+];
+
+var ALL_ITEMS=PRODUCTS.concat(INDUSTRIES,APPS);
+
+function viz(v){
+  if(v==='bars')return'<span class="vb" style="height:40%"></span><span class="vb hot" style="height:85%"></span><span class="vb" style="height:55%"></span><span class="vb" style="height:30%"></span><span class="vb hot" style="height:70%"></span><span class="vb" style="height:48%"></span>';
+  if(v==='map')return'<span class="ln" style="left:12%;top:30%;width:76%;opacity:.35"></span><span class="ln" style="left:12%;top:55%;width:76%;opacity:.35"></span><span class="dot" style="left:22%;top:24%"></span><span class="dot" style="left:58%;top:46%"></span><span class="dot" style="left:76%;top:66%"></span><span class="dot" style="left:38%;top:64%"></span>';
+  if(v==='receipt')return'<span class="sq" style="left:14%;top:16%;width:20px;height:20px;background:var(--lime)"></span><span class="ln" style="left:46%;top:22%;width:40%"></span><span class="ln" style="left:46%;top:40%;width:30%"></span><span class="ln" style="left:14%;top:62%;width:72%"></span><span class="ln" style="left:14%;top:78%;width:50%"></span>';
+  if(v==='pos')return'<span class="sq" style="left:12%;top:18%;width:18%;height:26%;background:var(--sand)"></span><span class="sq" style="left:34%;top:18%;width:18%;height:26%;background:var(--lime)"></span><span class="sq" style="left:56%;top:18%;width:18%;height:26%;background:var(--sand)"></span><span class="sq" style="left:12%;top:52%;width:18%;height:26%;background:var(--sand)"></span><span class="sq" style="left:34%;top:52%;width:18%;height:26%;background:var(--sand)"></span><span class="sq" style="left:56%;top:52%;width:18%;height:26%;background:var(--cedar)"></span>';
+  if(v==='table')return'<span class="ln" style="left:12%;top:20%;width:76%"></span><span class="ln" style="left:12%;top:40%;width:76%;opacity:.5"></span><span class="ln" style="left:12%;top:60%;width:76%;opacity:.5"></span><span class="ln" style="left:12%;top:80%;width:40%;background:var(--lime);opacity:1"></span>';
+  if(v==='line')return'<svg viewBox="0 0 100 40" style="position:absolute;inset:8px" preserveAspectRatio="none"><polyline points="0,32 18,26 36,30 54,16 72,20 100,6" fill="none" stroke="#D7F05A" stroke-width="3"/><polyline points="0,36 18,33 36,35 54,28 72,30 100,22" fill="none" stroke="rgba(16,21,12,.18)" stroke-width="2"/></svg>';
+  if(v==='dots')return'<span class="dot" style="left:18%;top:30%"></span><span class="dot" style="left:40%;top:58%"></span><span class="dot" style="left:62%;top:28%"></span><span class="dot" style="left:80%;top:56%"></span><span class="ln" style="left:14%;top:82%;width:72%;opacity:.3"></span>';
+  if(v==='people')return'<span class="sq" style="left:16%;top:24%;width:16px;height:16px;border-radius:50%"></span><span class="sq" style="left:42%;top:24%;width:16px;height:16px;border-radius:50%;background:var(--lime)"></span><span class="sq" style="left:68%;top:24%;width:16px;height:16px;border-radius:50%"></span><span class="ln" style="left:16%;top:62%;width:66%"></span><span class="ln" style="left:16%;top:78%;width:44%;opacity:.5"></span>';
+  if(v==='doc')return'<span class="sq" style="left:16%;top:16%;width:26%;height:66%;background:#fff;border:1.5px solid rgba(16,21,12,.2)"></span><span class="ln" style="left:52%;top:26%;width:32%"></span><span class="ln" style="left:52%;top:44%;width:24%;opacity:.5"></span><span class="ln" style="left:52%;top:62%;width:30%;background:var(--lime);opacity:1"></span>';
+  if(v==='shield')return'<span class="sq" style="left:40%;top:18%;width:20%;height:50%;border-radius:6px 6px 12px 12px;background:var(--cedar)"></span><span class="dot" style="left:47%;top:34%"></span><span class="ln" style="left:20%;top:80%;width:60%;opacity:.35"></span>';
+  if(v==='web')return'<span class="ln" style="left:12%;top:18%;width:76%;height:8px;opacity:.25"></span><span class="ln" style="left:12%;top:42%;width:34%"></span><span class="ln" style="left:12%;top:58%;width:26%;opacity:.5"></span><span class="sq" style="left:54%;top:40%;width:34%;height:38%;background:var(--lime);opacity:.85"></span>';
+  return'<span class="vb hot" style="height:60%"></span><span class="vb" style="height:40%"></span>';
+}
+
+var fgrid=document.getElementById('fgrid');
+if(fgrid){
+  ALL_ITEMS.forEach(function(p,i){
+    var el=document.createElement('div');
+    el.className='fp';el.dataset.i=i;
+    el.innerHTML='<span class="cat">'+p.cl+'</span><div class="viz">'+viz(p.v)+'</div><h4>'+p.t+'</h4><p>'+p.d+'</p><div class="wa"><i></i>Discuss on WhatsApp →</div>';
+    el.addEventListener('click',function(){
+      waOpen("Hello Ibrahim, I'm on lecedarglobal.com and I'm interested in: "+p.t+". Can we discuss it for my business?");
+    });
+    fgrid.appendChild(el);
+  });
+
+  var activeCat='all';
+  var fq=document.getElementById('fq');
+  var fcount=document.getElementById('fcount');
+  var fempty=document.getElementById('fempty');
+
+  function capFor(){return matchMedia('(min-width:768px)').matches?12:6}
+
+  function filter(){
+    var q=fq.value.trim().toLowerCase();
+    var tokens=q.split(/\s+/).filter(Boolean);
+    var cap=capFor();
+    var matches=[];
+    document.querySelectorAll('.fp').forEach(function(el){
+      var p=ALL_ITEMS[+el.dataset.i];
+      var hay=(p.t+' '+p.k+' '+p.cl).toLowerCase();
+      var words=hay.split(/\s+/);
+      var okCat=activeCat==='all'||p.c===activeCat;
+      var okText=tokens.every(function(tk){
+        return words.some(function(w){return w.indexOf(tk)===0})||hay.indexOf(tk)>-1;
+      });
+      if(okCat&&okText)matches.push({el:el,p:p});
+    });
+    var curated=q==='';
+    if(curated){
+      matches.sort(function(a,b){
+        var pa=a.p.pri===undefined?999:a.p.pri, pb=b.p.pri===undefined?999:b.p.pri;
+        return pa-pb;
+      });
+      matches=matches.slice(0,cap);
+    }
+    var visible={};
+    matches.forEach(function(m){visible[m.el.dataset.i]=true});
+    var shown=0;
+    document.querySelectorAll('.fp').forEach(function(el){
+      var show=!!visible[el.dataset.i];
+      el.style.display=show?'':'none';
+      if(show)shown++;
+    });
+    fcount.textContent=shown+(shown===1?' match':' matches')+(q?' for "'+fq.value.trim()+'"':curated?' — our most-requested systems, industries & apps':'');
+    fempty.classList.toggle('show',shown===0);
+    if(shown&&typeof gsap!=='undefined'&&!reduced){
+      gsap.fromTo('.fp:not([style*="none"])',{opacity:.35,y:6},{opacity:1,y:0,duration:.3,stagger:.02,ease:'power2.out',overwrite:true});
+    }
+  }
+  fq.addEventListener('input',filter);
+  window.addEventListener('resize',function(){if(!fq.value.trim())filter()});
+  fq.addEventListener('keydown',function(e){
+    if(e.key==='Enter'&&fq.value.trim())waOpen("Hello Ibrahim, I'm on lecedarglobal.com and I'm looking for: "+fq.value.trim());
+  });
+  document.getElementById('fsend').addEventListener('click',function(){
+    waOpen(fq.value.trim()?"Hello Ibrahim, I'm on lecedarglobal.com and I'm looking for: "+fq.value.trim():"Hello Ibrahim, I'm on lecedarglobal.com and I'd like to discuss a system for my business.");
+  });
+  document.getElementById('femptywa').addEventListener('click',function(e){
+    e.preventDefault();
+    waOpen("Hello Ibrahim, I'm on lecedarglobal.com. I need something custom: "+fq.value.trim());
+  });
+  document.getElementById('fchips').addEventListener('click',function(e){
+    var b=e.target.closest('.fchip');if(!b)return;
+    document.querySelectorAll('.fchip').forEach(function(c){c.classList.remove('on')});
+    b.classList.add('on');activeCat=b.dataset.c;filter();
+  });
+
+  var PHRASES=["A dashboard showing all my stores…","FNE electronic invoicing for Abidjan…","Stock control across 7 warehouses…","A map of my distribution network…","Payroll for 40 employees…","A website for my company…"];
+  (function type(){
+    var pi=0,ci=0,del=false;
+    function tick(){
+      if(document.activeElement===fq||fq.value){setTimeout(tick,900);return}
+      var ph=PHRASES[pi];
+      if(!del){ci++;fq.placeholder=ph.slice(0,ci);
+        if(ci>=ph.length){del=true;setTimeout(tick,1500);return}
+        setTimeout(tick,26+Math.random()*30);
+      }else{ci--;fq.placeholder=ph.slice(0,ci);
+        if(ci<=0){del=false;pi=(pi+1)%PHRASES.length;setTimeout(tick,320);return}
+        setTimeout(tick,15);
+      }
+    }
+    tick();
+  })();
+  filter();
+}
+
+function showAll(){
+  document.querySelectorAll('.rv, .sigemerge').forEach(function(el){el.style.opacity=1;el.style.transform='none';el.style.filter='none'});
+  document.querySelectorAll('.wln>span').forEach(function(el){el.style.transform='none'});
+  document.querySelectorAll('.stone').forEach(function(el){el.style.opacity=1;el.style.transform='none'});
+}
+
+window.addEventListener('load',function(){
+  if(reduced||typeof gsap==='undefined'){showAll();return}
+  gsap.registerPlugin(ScrollTrigger);
+
+  window.addEventListener('scroll',ScrollTrigger.update,{passive:true});
+  if(typeof Lenis!=='undefined'){
+    var lenis=new Lenis({duration:1.1,smoothWheel:true});
+    window._lenis=lenis;
+    lenis.on('scroll',ScrollTrigger.update);
+    gsap.ticker.add(function(t){lenis.raf(t*1000)});
+    gsap.ticker.lagSmoothing(0);
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click',function(e){
+        var target=document.querySelector(a.getAttribute('href'));
+        if(target){e.preventDefault();lenis.scrollTo(target,{offset:-64})}
+      });
+    });
+  }
+
+  document.querySelectorAll('.hero .rv').forEach(function(el){
+    gsap.to(el,{opacity:1,y:0,filter:'blur(0px)',duration:1,delay:+(el.dataset.d||0)+0.15,ease:'power3.out'});
+  });
+  gsap.from('#bars .b i',{scaleY:0,transformOrigin:'bottom',duration:1,stagger:.07,delay:1.2,ease:'power3.out'});
+  gsap.to('#star',{rotation:360,duration:4,repeat:-1,ease:'power1.inOut',svgOrigin:'12 12'});
+  gsap.to('.scroll-ind',{y:-4,duration:1.25,yoyo:true,repeat:-1,ease:'sine.inOut',delay:1.6});
+
+  gsap.to('.sigemerge',{y:0,opacity:1,scale:1,duration:1.1,ease:'power3.out',
+    scrollTrigger:{trigger:'.sig-zone',start:'top 78%'}});
+  gsap.from('.net svg.links line',{opacity:0,duration:.7,stagger:.1,ease:'power2.out',
+    scrollTrigger:{trigger:'#net',start:'top 75%'}});
+
+  gsap.to('.stone',{opacity:1,x:0,duration:.9,delay:.5,ease:'power2.out'});
+  document.querySelectorAll('.stone').forEach(function(w){
+    var g=w.querySelector('.grass');
+    var st={r:0,x:0,y:0};
+    function apply(){
+      var m='radial-gradient(circle '+st.r.toFixed(1)+'px at '+st.x.toFixed(1)+'px '+st.y.toFixed(1)+'px, black 0%, black 40%, transparent 100%)';
+      g.style.webkitMaskImage=m;g.style.maskImage=m;
+    }
+    w.addEventListener('pointermove',function(e){
+      var b=w.getBoundingClientRect();st.x=e.clientX-b.left;st.y=e.clientY-b.top;apply();
+    });
+    w.addEventListener('pointerenter',function(){gsap.to(st,{r:120,duration:.5,ease:'power2.out',onUpdate:apply,overwrite:true})});
+    w.addEventListener('pointerleave',function(){gsap.to(st,{r:0,duration:.6,ease:'power2.inOut',onUpdate:apply,overwrite:true})});
+  });
+
+  document.querySelectorAll('section .rv').forEach(function(el){
+    gsap.to(el,{opacity:1,y:0,filter:'blur(0px)',duration:.95,ease:'power3.out',
+      scrollTrigger:{trigger:el,start:'top 88%'}});
+  });
+
+  document.querySelectorAll('[data-words]').forEach(function(el){
+    gsap.to(el.querySelectorAll('.wln>span'),{y:0,duration:.7,stagger:.028,ease:'power3.out',
+      scrollTrigger:{trigger:el,start:'top 85%'}});
+  });
+
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    var end=+el.dataset.count;
+    ScrollTrigger.create({trigger:el,start:'top 90%',once:true,onEnter:function(){
+      gsap.fromTo(el,{innerText:0},{innerText:end,duration:1.5,ease:'power2.out',snap:{innerText:1}});
+    }});
+  });
+});
+setTimeout(showAll,3500);
+</script>
+</body>
+</html>
