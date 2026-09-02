@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 420" fill="none" role="presentation">
+  <defs>
+    <!-- Coastal palm: leaning trunk with broad, drooping fronds. -->
+    <g id="palm">
+      <path d="M-4 0 C-2 -46 2 -74 10 -104 L18 -102 C10 -72 6 -44 4 0Z" />
+      <path d="M14 -104 C-14 -116 -44 -120 -74 -112 -48 -134 -16 -134 10 -116Z" />
+      <path d="M14 -104 C42 -118 72 -124 102 -118 76 -140 44 -136 12 -116Z" />
+      <path d="M14 -106 C0 -132 -12 -156 -34 -174 -14 -172 6 -150 16 -120Z" />
+      <path d="M14 -106 C30 -132 50 -152 76 -166 62 -142 38 -124 20 -114Z" />
+      <path d="M14 -108 C14 -136 20 -162 34 -184 34 -156 28 -130 20 -110Z" />
+    </g>
+    <linearGradient id="haze" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8FA79B" stop-opacity="0" />
+      <stop offset="1" stop-color="#8FA79B" stop-opacity=".35" />
+    </linearGradient>
+  </defs>
+
+  <g fill="#93AAA0" opacity=".2">
+    <use href="#palm" transform="translate(60 282) scale(.58)" />
+    <use href="#palm" transform="translate(168 274) scale(.5)" />
+    <use href="#palm" transform="translate(276 286) scale(.64)" />
+    <use href="#palm" transform="translate(384 276) scale(.54)" />
+    <use href="#palm" transform="translate(492 284) scale(.6)" />
+  </g>
+
+  <g fill="#7E978B" opacity=".3">
+    <use href="#palm" transform="translate(36 350) scale(.84)" />
+    <use href="#palm" transform="translate(176 358) scale(.96)" />
+    <use href="#palm" transform="translate(322 346) scale(.8)" />
+    <use href="#palm" transform="translate(462 360) scale(1)" />
+  </g>
+
+  <g fill="#68877A" opacity=".38">
+    <use href="#palm" transform="translate(14 420) scale(1.18)" />
+    <use href="#palm" transform="translate(180 422) scale(1.32)" />
+    <use href="#palm" transform="translate(368 418) scale(1.14)" />
+    <use href="#palm" transform="translate(530 422) scale(1.36)" />
+  </g>
+
+  <rect x="0" y="300" width="560" height="120" fill="url(#haze)" />
+</svg>

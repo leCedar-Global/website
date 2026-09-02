@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ayadati — Connected healthcare | leCedar Global</title>
+<meta name="description" content="Ayadati is leCedar Global's connected healthcare platform. Explore the Lebanon and Côte d'Ivoire experiences in English and French.">
+<link rel="icon" href="/ayadati/_next/static/media/favicon.svg" type="image/svg+xml">
+<style>
+  :root{
+    --ink:#0f2f2a; --ink-soft:#4a635e; --line:#dfe7e3;
+    --bg:#f6f4ef; --card:#ffffff; --accent:#12403a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;}
+  .wrap{max-width:860px;margin:0 auto;padding:72px 24px 96px}
+  .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 18px}
+  h1{font-size:clamp(34px,6vw,52px);line-height:1.05;letter-spacing:-.02em;margin:0 0 18px;font-weight:700}
+  .lede{font-size:18px;color:var(--ink-soft);max-width:56ch;margin:0 0 44px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);
+    font-weight:600;margin:0 0 14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:0 0 40px}
+  a.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:20px 22px;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
+  a.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .card .name{font-weight:650;font-size:18px;margin-bottom:4px}
+  .card .meta{font-size:14px;color:var(--ink-soft)}
+  .arrow{margin-top:14px;font-size:14px;color:var(--accent);font-weight:600}
+  footer{border-top:1px solid var(--line);padding-top:22px;font-size:14px;color:var(--ink-soft)}
+  footer a{color:var(--accent)}
+  @media (prefers-color-scheme:dark){
+    :root{--ink:#eef3f1;--ink-soft:#9fb3ae;--line:#26403b;--bg:#0c1a18;--card:#122421;--accent:#7fd0bf}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">leCedar Global · Product</p>
+    <h1>Ayadati</h1>
+    <p class="lede">Connected healthcare. Find your doctor, book your visit, and keep your
+      health record connected — adapted to each market we serve.</p>
+
+    <h2>Lebanon</h2>
+    <div class="grid">
+      <a class="card" href="/ayadati/lb/en/">
+        <div class="name">Lebanon — English</div>
+        <div class="meta">Healthcare, connected.</div>
+        <div class="arrow">View →</div>
+      </a>
+      <a class="card" href="/ayadati/lb/fr/">
+        <div class="name">Liban — Français</div>
+        <div class="meta">La santé, connectée.</div>
+        <div class="arrow">Voir →</div>
+      </a>
+    </div>
+
+    <h2>Côte d'Ivoire</h2>
+    <div class="grid">
+      <a class="card" href="/ayadati/ci/en/">
+        <div class="name">Côte d'Ivoire — English</div>
+        <div class="meta">Healthcare, connected.</div>
+        <div class="arrow">View →</div>
+      </a>
+      <a class="card" href="/ayadati/ci/fr/">
+        <div class="name">Côte d'Ivoire — Français</div>
+        <div class="meta">La santé, connectée.</div>
+        <div class="arrow">Voir →</div>
+      </a>
+    </div>
+
+    <footer>
+      A product of <a href="/">leCedar Global</a>.
+    </footer>
+  </div>
+</body>
+</html>

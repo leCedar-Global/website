@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 420" fill="none" role="presentation">
+  <defs>
+    <!-- Date palm: slim trunk with arching fronds and a fruit crown. -->
+    <g id="datepalm">
+      <path d="M-3 0 -4 -96 4 -96 3 0Z" />
+      <path d="M0 -96 C-26 -104 -50 -118 -68 -140 -44 -136 -20 -124 0 -108Z" />
+      <path d="M0 -96 C26 -104 50 -118 68 -140 44 -136 20 -124 0 -108Z" />
+      <path d="M0 -98 C-18 -116 -30 -140 -34 -166 -16 -150 -6 -126 0 -104Z" />
+      <path d="M0 -98 C18 -116 30 -140 34 -166 16 -150 6 -126 0 -104Z" />
+      <path d="M0 -100 C-8 -124 -6 -150 2 -174 10 -150 10 -124 2 -102Z" />
+      <path d="M0 -94 C-30 -92 -56 -84 -76 -70 -52 -70 -26 -78 0 -86Z" />
+      <path d="M0 -94 C30 -92 56 -84 76 -70 52 -70 26 -78 0 -86Z" />
+    </g>
+    <linearGradient id="haze" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8FA79B" stop-opacity="0" />
+      <stop offset="1" stop-color="#8FA79B" stop-opacity=".35" />
+    </linearGradient>
+  </defs>
+
+  <g fill="#93AAA0" opacity=".2">
+    <use href="#datepalm" transform="translate(52 280) scale(.6)" />
+    <use href="#datepalm" transform="translate(154 272) scale(.52)" />
+    <use href="#datepalm" transform="translate(252 284) scale(.66)" />
+    <use href="#datepalm" transform="translate(352 274) scale(.56)" />
+    <use href="#datepalm" transform="translate(452 282) scale(.62)" />
+    <use href="#datepalm" transform="translate(540 274) scale(.54)" />
+  </g>
+
+  <g fill="#7E978B" opacity=".3">
+    <use href="#datepalm" transform="translate(30 348) scale(.86)" />
+    <use href="#datepalm" transform="translate(160 356) scale(.98)" />
+    <use href="#datepalm" transform="translate(300 344) scale(.82)" />
+    <use href="#datepalm" transform="translate(430 358) scale(1.02)" />
+    <use href="#datepalm" transform="translate(548 346) scale(.88)" />
+  </g>
+
+  <g fill="#68877A" opacity=".38">
+    <use href="#datepalm" transform="translate(6 420) scale(1.2)" />
+    <use href="#datepalm" transform="translate(158 422) scale(1.34)" />
+    <use href="#datepalm" transform="translate(330 418) scale(1.16)" />
+    <use href="#datepalm" transform="translate(496 422) scale(1.38)" />
+  </g>
+
+  <rect x="0" y="300" width="560" height="120" fill="url(#haze)" />
+</svg>

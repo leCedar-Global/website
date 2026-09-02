@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 420" fill="none" role="presentation">
+  <defs>
+    <!-- Olive: broad, softly lobed canopy on a short trunk. -->
+    <path
+      id="olive"
+      d="M0 0 -6 -46 -30 -52 -46 -70 -38 -92 -18 -100 4 -112 28 -104 46 -88 52 -66 40 -48 14 -44 6 0Z"
+    />
+    <linearGradient id="haze" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8FA79B" stop-opacity="0" />
+      <stop offset="1" stop-color="#8FA79B" stop-opacity=".35" />
+    </linearGradient>
+  </defs>
+
+  <g fill="#93AAA0" opacity=".2">
+    <use href="#olive" transform="translate(48 274) scale(.72)" />
+    <use href="#olive" transform="translate(140 268) scale(.62)" />
+    <use href="#olive" transform="translate(228 278) scale(.78)" />
+    <use href="#olive" transform="translate(322 270) scale(.66)" />
+    <use href="#olive" transform="translate(412 276) scale(.74)" />
+    <use href="#olive" transform="translate(506 270) scale(.64)" />
+  </g>
+
+  <g fill="#7E978B" opacity=".3">
+    <use href="#olive" transform="translate(24 344) scale(1)" />
+    <use href="#olive" transform="translate(132 350) scale(1.14)" />
+    <use href="#olive" transform="translate(248 340) scale(.95)" />
+    <use href="#olive" transform="translate(360 352) scale(1.18)" />
+    <use href="#olive" transform="translate(474 342) scale(1)" />
+  </g>
+
+  <g fill="#68877A" opacity=".38">
+    <use href="#olive" transform="translate(-4 420) scale(1.4)" />
+    <use href="#olive" transform="translate(128 422) scale(1.55)" />
+    <use href="#olive" transform="translate(286 418) scale(1.35)" />
+    <use href="#olive" transform="translate(432 422) scale(1.6)" />
+    <use href="#olive" transform="translate(556 418) scale(1.4)" />
+  </g>
+
+  <rect x="0" y="300" width="560" height="120" fill="url(#haze)" />
+</svg>

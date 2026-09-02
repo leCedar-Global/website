@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 420" fill="none" role="presentation">
+  <defs>
+    <path
+      id="cedar"
+      d="M0 -140 14 -104 7 -104 22 -70 12 -70 30 -34 16 -34 38 0 -38 0 -16 -34 -30 -34 -12 -70 -22 -70 -7 -104 -14 -104Z"
+    />
+    <linearGradient id="haze" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8FA79B" stop-opacity="0" />
+      <stop offset="1" stop-color="#8FA79B" stop-opacity=".35" />
+    </linearGradient>
+  </defs>
+
+  <!-- far ridge -->
+  <g fill="#93AAA0" opacity=".2">
+    <use href="#cedar" transform="translate(56 268) scale(.52)" />
+    <use href="#cedar" transform="translate(122 262) scale(.46)" />
+    <use href="#cedar" transform="translate(186 272) scale(.58)" />
+    <use href="#cedar" transform="translate(258 264) scale(.5)" />
+    <use href="#cedar" transform="translate(326 270) scale(.55)" />
+    <use href="#cedar" transform="translate(398 262) scale(.47)" />
+    <use href="#cedar" transform="translate(462 272) scale(.56)" />
+    <use href="#cedar" transform="translate(524 266) scale(.5)" />
+  </g>
+
+  <!-- mid stand -->
+  <g fill="#7E978B" opacity=".3">
+    <use href="#cedar" transform="translate(30 336) scale(.74)" />
+    <use href="#cedar" transform="translate(108 344) scale(.86)" />
+    <use href="#cedar" transform="translate(196 332) scale(.7)" />
+    <use href="#cedar" transform="translate(272 346) scale(.9)" />
+    <use href="#cedar" transform="translate(356 334) scale(.72)" />
+    <use href="#cedar" transform="translate(438 344) scale(.84)" />
+    <use href="#cedar" transform="translate(520 336) scale(.76)" />
+  </g>
+
+  <!-- near stand -->
+  <g fill="#68877A" opacity=".38">
+    <use href="#cedar" transform="translate(-10 418) scale(1.05)" />
+    <use href="#cedar" transform="translate(84 420) scale(1.18)" />
+    <use href="#cedar" transform="translate(188 416) scale(1)" />
+    <use href="#cedar" transform="translate(300 420) scale(1.22)" />
+    <use href="#cedar" transform="translate(408 416) scale(1.02)" />
+    <use href="#cedar" transform="translate(512 420) scale(1.15)" />
+  </g>
+
+  <rect x="0" y="300" width="560" height="120" fill="url(#haze)" />
+</svg>

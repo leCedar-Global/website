@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100">
+<style>.pulse{stroke-dasharray:12 14;animation:move 9s linear infinite}@keyframes move{to{stroke-dashoffset:-260}}@media (prefers-reduced-motion:reduce){.pulse{animation:none}}</style>
+<g fill="none" stroke-linecap="round">
+<path d="M0 55C120 14 205 74 323 49s210-34 330 2 301 70 547-16" stroke="#0EA7A0" stroke-width="2.4"/>
+<path d="M0 66C130 29 222 89 343 61s219-29 334 7 293 70 523-20" stroke="#79D3C8" stroke-width="1.6" opacity=".7"/>
+<path d="M0 77C150 42 240 98 370 72s218-19 350 14 289 53 480-21" stroke="#F39B84" stroke-width="1.1" opacity=".35"/>
+<path class="pulse" d="M0 55C120 14 205 74 323 49s210-34 330 2 301 70 547-16" stroke="#EFFFFA" stroke-width="2" opacity=".85"/>
+</g>
+<circle cx="28" cy="48" r="4" fill="#0EA7A0"/>
+</svg>
