@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<title>Private</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; background: #0B0C0E; color: #F2F1EE;
+         font-family: "Instrument Sans", system-ui, sans-serif;
+         display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .wrap { width: 100%; max-width: 400px; }
+  .mark { width: 46px; height: 46px; border-radius: 12px; background: #E8A93B; color: #0B0C0E;
+          display: flex; align-items: center; justify-content: center;
+          font-family: "Archivo", sans-serif; font-weight: 800; font-size: 19px; margin-bottom: 26px; }
+  h1 { font-family: "Archivo", sans-serif; font-weight: 800; font-size: 30px; letter-spacing: -1px; margin: 0 0 10px; }
+  p.sub { color: #A0A5AD; font-size: 15px; line-height: 1.55; margin: 0 0 28px; }
+  label { display: block; font-size: 12.5px; color: #8D929A; margin-bottom: 8px; }
+  input { width: 100%; padding: 14px 16px; font-size: 16px; font-family: inherit;
+          background: #15171A; border: 1px solid #2A2F36; border-radius: 10px; color: #F2F1EE; }
+  input:focus { outline: 2px solid #E8A93B; outline-offset: 1px; border-color: #E8A93B; }
+  button { width: 100%; margin-top: 14px; padding: 15px; font-size: 16px; font-weight: 700;
+           font-family: "Archivo", sans-serif; background: #E8A93B; color: #0B0C0E;
+           border: 0; border-radius: 10px; cursor: pointer; }
+  button:hover { background: #F6C76B; }
+  button[disabled] { opacity: .6; cursor: default; }
+  .err { margin-top: 14px; font-size: 13.5px; color: #E0806A; min-height: 19px; }
+  .foot { margin-top: 30px; font-size: 12px; color: #5E636B; }
+
+  /* hub, injected after unlock */
+  .hub { width: 100%; max-width: 640px; }
+  .hub-head { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+  .hub-head .t { font-family: "Archivo", sans-serif; font-weight: 800; font-size: 23px; letter-spacing: -.6px; }
+  .hub-head .s { font-size: 13px; color: #8D929A; margin-top: 2px; }
+  .lede { color: #A0A5AD; font-size: 15.5px; line-height: 1.55; margin: 0 0 24px; }
+  .card { display: block; text-decoration: none; background: #15171A; border: 1px solid #23272D;
+          border-radius: 14px; padding: 22px 24px; margin-bottom: 12px; }
+  .card:hover { border-color: #E8A93B; background: #1A1D21; }
+  .card .n { display: block; font-family: "Archivo", sans-serif; font-weight: 800; font-size: 12px;
+             color: #E8A93B; letter-spacing: 1px; margin-bottom: 7px; }
+  .card .h { display: block; font-family: "Archivo", sans-serif; font-weight: 700; font-size: 19px;
+             color: #F2F1EE; margin-bottom: 6px; }
+  .card .d { display: block; font-size: 14px; color: #9DA2AA; line-height: 1.55; }
+  .foot, .hub .foot { font-size: 12.5px; color: #6E737B; margin-top: 22px; }
+</style>
+</head>
+<body>
+<div class="wrap" id="root">
+  <div class="mark">GZ</div>
+  <h1>GZ AI OS</h1>
+  <p class="sub">This page is private. Enter the password you were given.</p>
+  <form id="f" autocomplete="off">
+    <label for="pw">Password</label>
+    <input id="pw" type="password" autocomplete="current-password" autofocus>
+    <button id="go" type="submit">Open</button>
+    <div class="err" id="err" role="status" aria-live="polite"></div>
+  </form>
+  <div class="foot">leCedar Global</div>
+</div>
+
+<script src="./gz.js"></script>
+<script>
+(function () {
+  var f = document.getElementById('f'), pw = document.getElementById('pw'),
+      err = document.getElementById('err'), go = document.getElementById('go');
+
+  function openHub(html) {
+    document.getElementById('root').outerHTML = html;
+  }
+
+  // already unlocked this session?
+  var saved = sessionStorage.getItem('gzpw');
+  if (saved) {
+    GZ.load('./d/hub.json', saved).then(openHub).catch(function () { sessionStorage.removeItem('gzpw'); });
+  }
+
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    err.textContent = ''; go.disabled = true; go.textContent = 'Opening…';
+    GZ.load('./d/hub.json', pw.value).then(function (html) {
+      sessionStorage.setItem('gzpw', pw.value);
+      openHub(html);
+    }).catch(function () {
+      err.textContent = 'That password is not right.';
+      go.disabled = false; go.textContent = 'Open';
+      pw.select();
+    });
+  });
+})();
+</script>
+</body>
+</html>
