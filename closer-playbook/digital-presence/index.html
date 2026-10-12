@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Digital Presence — Closer Playbook | leCedar Global</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cedar:#1B2415; --cedar-2:#232E1C; --sage:#54713a; --lime:#D7F05A;
+    --paper:#F1F0EB; --sand:#E5E1D3; --ink:#10150C; --white:#fff;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:'Inter Tight',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  html[data-lang="ar"] body{font-family:'Cairo','Inter Tight',sans-serif;}
+  em.accent{font-family:'Instrument Serif',serif;font-style:italic;color:var(--sage);font-size:1.05em;}
+  a{color:var(--sage);}
+  bdi{unicode-bidi:isolate;}
+
+  /* ---- language toggling ---- */
+  html[data-lang="en"] .ar{display:none;}
+  html[data-lang="ar"] .en{display:none;}
+  .ar{direction:rtl;}
+
+  /* ---- lang switch buttons ---- */
+  .langsw{display:flex;gap:4px;}
+  .langsw button{
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);color:var(--paper);
+    font-family:inherit;font-size:.72rem;font-weight:600;padding:6px 10px;border-radius:999px;cursor:pointer;
+  }
+  .langsw button.active{background:var(--lime);color:var(--cedar);border-color:var(--lime);}
+  .gate-langsw{display:flex;gap:6px;justify-content:center;margin-bottom:16px;}
+  .gate-langsw button{
+    background:var(--sand);border:1px solid #d3cdb8;color:var(--ink);font-family:inherit;font-size:.75rem;font-weight:600;
+    padding:6px 12px;border-radius:999px;cursor:pointer;
+  }
+  .gate-langsw button.active{background:var(--cedar);color:var(--lime);border-color:var(--cedar);}
+
+  /* ---------- Password gate ---------- */
+  #gate{position:fixed;inset:0;z-index:999;background:radial-gradient(circle at 20% 20%, var(--cedar-2), var(--cedar) 70%);display:flex;align-items:center;justify-content:center;padding:24px;}
+  .gate-card{background:var(--paper);border-radius:18px;padding:40px 36px;max-width:380px;width:100%;text-align:center;box-shadow:0 30px 60px rgba(0,0,0,.35);}
+  .gate-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:18px;}
+  .gate-logo svg{width:34px;height:34px;flex:none;}
+  .gate-wordmark{font-weight:500;font-size:1.25rem;letter-spacing:-0.01em;color:var(--cedar);}
+  .gate-wordmark b{font-weight:700;}
+  .gate-wordmark span{color:var(--sage);font-weight:500;}
+  .gate-card h1{font-size:1.05rem;margin:0 0 6px;color:var(--cedar);}
+  .gate-card p{font-size:.88rem;color:#555;margin:0 0 20px;}
+  #gate input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--sand);font-family:inherit;font-size:1rem;margin-bottom:12px;background:var(--white);}
+  #gate input:focus{outline:2px solid var(--sage);}
+  #gate button#unlock{width:100%;padding:12px 14px;border-radius:10px;border:none;background:var(--lime);color:var(--cedar);font-weight:700;font-size:.95rem;cursor:pointer;transition:transform .15s ease;}
+  #gate button#unlock:hover{transform:translateY(-1px);}
+  #gate-error{color:#a23b3b;font-size:.82rem;margin-top:10px;min-height:1em;}
+  .gate-hint{margin-top:18px;font-size:.72rem;color:#888;}
+
+  /* ---------- Shell ---------- */
+  #app{display:none;}
+  .topbar{position:sticky;top:0;z-index:50;background:var(--cedar);color:var(--paper);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .topbar .brand{display:flex;align-items:center;gap:10px;}
+  .topbar .brand svg{width:26px;height:26px;}
+  .topbar .brand-text{font-size:1rem;font-weight:500;}
+  .topbar .brand-text b{font-weight:700;}
+  .topbar .brand-text span{color:var(--lime);}
+  .topbar .right{display:flex;align-items:center;gap:10px;}
+  .topbar .tag{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.08);padding:5px 10px;border-radius:999px;color:var(--sand);}
+  html[data-lang="ar"] .topbar .tag{text-transform:none;letter-spacing:0;}
+  .all-playbooks{font-size:.78rem;color:var(--sand);text-decoration:none;opacity:.8;}
+  .all-playbooks:hover{opacity:1;text-decoration:underline;}
+  .menu-toggle{display:none;background:none;border:1px solid rgba(255,255,255,.3);color:var(--paper);border-radius:8px;padding:8px 10px;font-size:.85rem;cursor:pointer;}
+
+  .layout{display:flex;max-width:1280px;margin:0 auto;}
+  nav.toc{width:260px;flex:none;position:sticky;top:57px;align-self:flex-start;height:calc(100vh - 57px);overflow-y:auto;padding:28px 18px 60px;border-right:1px solid var(--sand);}
+  html[dir="rtl"] nav.toc{border-right:none;border-left:1px solid var(--sand);}
+  nav.toc a{display:block;color:var(--ink);text-decoration:none;font-size:.86rem;padding:7px 10px;border-radius:8px;margin-bottom:2px;opacity:.75;}
+  nav.toc a:hover{background:var(--sand);opacity:1;}
+  nav.toc a.active{background:var(--cedar);color:var(--lime);opacity:1;font-weight:600;}
+  nav.toc .toc-title{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--sage);margin:18px 0 6px 10px;font-weight:600;}
+  html[dir="rtl"] nav.toc .toc-title{text-transform:none;letter-spacing:0;margin:18px 10px 6px 0;}
+  nav.toc .toc-title:first-child{margin-top:0;}
+
+  main{flex:1;min-width:0;padding:40px 44px 120px;}
+  .hero{background:linear-gradient(135deg,var(--cedar),var(--cedar-2));color:var(--paper);border-radius:20px;padding:40px 36px;margin-bottom:36px;}
+  .hero .eyebrow{text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;color:var(--lime);font-weight:700;margin-bottom:10px;}
+  html[dir="rtl"] .hero .eyebrow{text-transform:none;letter-spacing:0;}
+  .hero h1{font-size:2rem;margin:0 0 10px;font-weight:700;letter-spacing:-0.01em;}
+  .hero p{color:var(--sand);max-width:640px;margin:0;font-size:1rem;}
+  .hero .pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+  .pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:var(--sand);font-size:.75rem;padding:5px 11px;border-radius:999px;}
+
+  section{margin-bottom:52px;}
+  section h2{font-size:1.5rem;color:var(--cedar);margin:0 0 6px;display:flex;align-items:center;gap:10px;}
+  section h2 .num{background:var(--lime);color:var(--cedar);font-weight:700;font-size:.8rem;width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex:none;}
+  section > .lede{color:var(--sage);font-size:.95rem;margin:0 0 18px;max-width:720px;}
+  h3{font-size:1.05rem;color:var(--cedar-2);margin:22px 0 8px;}
+
+  .card{background:var(--white);border:1px solid var(--sand);border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .quote{border-left:3px solid var(--lime);background:var(--sand);padding:14px 18px;border-radius:0 10px 10px 0;font-style:italic;color:var(--cedar-2);margin:14px 0;}
+  html[dir="rtl"] .quote{border-left:none;border-right:3px solid var(--lime);border-radius:10px 0 0 10px;}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0 20px;font-size:.88rem;background:var(--white);border-radius:12px;overflow:hidden;}
+  thead th{background:var(--cedar);color:var(--sand);text-align:left;padding:10px 12px;font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.03em;}
+  html[dir="rtl"] thead th{text-align:right;text-transform:none;letter-spacing:0;}
+  tbody td{padding:11px 12px;border-bottom:1px solid var(--sand);vertical-align:top;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:nth-child(even){background:#fafaf7;}
+
+  .price-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  .price-tag{font-family:'Instrument Serif',serif;font-style:italic;font-size:1.3rem;color:var(--sage);white-space:nowrap;direction:ltr;}
+  .tier-card{border:1px solid var(--sand);border-radius:14px;padding:20px 22px;margin-bottom:12px;background:var(--white);}
+  .tier-card h4{margin:0 0 4px;color:var(--cedar);font-size:1.02rem;}
+  .tier-card .range{font-family:'Instrument Serif',serif;font-style:italic;color:var(--sage);font-size:1.4rem;display:block;margin:2px 0 8px;}
+  .tier-card p{margin:0;font-size:.88rem;color:#444;}
+
+  .callout{border-radius:12px;padding:16px 18px;margin:16px 0;font-size:.9rem;}
+  .callout.rule{background:#2d3a22;color:var(--sand);border:1px solid var(--sage);}
+  .callout.rule b{color:var(--lime);}
+  .callout.warn{background:#fbeaea;border:1px solid #e3b3b3;color:#6a2a2a;}
+  .callout.gap{background:var(--sand);border:1px solid #d3cdb8;color:#55503f;}
+
+  ol.steps{padding-left:0;list-style:none;counter-reset:step;margin:14px 0;}
+  ol.steps li{counter-increment:step;position:relative;padding:4px 0 10px 38px;font-size:.92rem;}
+  ol.steps li::before{content:counter(step);position:absolute;left:0;top:2px;background:var(--cedar);color:var(--lime);font-weight:700;font-size:.78rem;width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;}
+  html[dir="rtl"] ol.steps li{padding-left:0;padding-right:38px;}
+  html[dir="rtl"] ol.steps li::before{left:auto;right:0;}
+
+  .script-line{background:#fff;border:1px dashed var(--sage);border-radius:10px;padding:14px 16px;margin:10px 0;font-size:.92rem;color:var(--cedar-2);}
+  .script-line .who{font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--sage);font-weight:700;display:block;margin-bottom:4px;}
+  html[dir="rtl"] .script-line .who{text-transform:none;letter-spacing:0;}
+
+  footer{border-top:1px solid var(--sand);padding:26px 44px 60px;color:#777;font-size:.8rem;}
+
+  @media (max-width: 900px){
+    .menu-toggle{display:inline-block;}
+    .all-playbooks{display:none;}
+    nav.toc{position:fixed;top:57px;left:0;bottom:0;width:78%;max-width:300px;background:var(--paper);z-index:40;transform:translateX(-100%);transition:transform .22s ease;box-shadow:10px 0 30px rgba(0,0,0,.15);}
+    nav.toc.open{transform:translateX(0);}
+    html[dir="rtl"] nav.toc{left:auto;right:0;transform:translateX(100%);box-shadow:-10px 0 30px rgba(0,0,0,.15);}
+    html[dir="rtl"] nav.toc.open{transform:translateX(0);}
+    .grid-2,.grid-3{grid-template-columns:1fr;}
+    main{padding:28px 18px 100px;}
+    .hero{padding:28px 22px;}
+    .hero h1{font-size:1.5rem;}
+    footer{padding:20px 18px 50px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================= PASSWORD GATE ======================= -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-langsw">
+      <button data-setlang="en" class="active">EN</button>
+      <button data-setlang="ar">عربي</button>
+    </div>
+    <div class="gate-logo">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="14" r="9" fill="#D7F05A"/>
+        <rect x="22" y="20" width="4" height="14" rx="1.5" fill="#1B2415"/>
+        <path d="M24 30 L14 40 M24 30 L34 40 M14 40 L9 46 M14 40 L19 46 M34 40 L29 46 M34 40 L39 46" stroke="#1B2415" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      <div class="gate-wordmark">le<b>Cedar</b> <span>Global</span></div>
+    </div>
+    <h1><span class="en">Closer Playbook — Internal Access</span><span class="ar" dir="rtl">دليل المبيعات (Closer Playbook) — دخول داخلي</span></h1>
+    <p><span class="en">Digital Presence sales enablement. For leCedar Global closers only.</span><span class="ar" dir="rtl">دليل مبيعات Digital Presence. لموظفي المبيعات (Closers) بـ leCedar Global بس.</span></p>
+    <input type="password" id="pw" autocomplete="off">
+    <button id="unlock"><span class="en">Unlock Playbook</span><span class="ar" dir="rtl">فتح الدليل</span></button>
+    <div id="gate-error"></div>
+    <div class="gate-hint"><span class="en">Access code set by Ibrahim. Lost it? Ask in the team chat.</span><span class="ar" dir="rtl">الكود منحطّ من ابراهيم. ضيّعتو؟ اسأل بالـ team chat.</span></div>
+  </div>
+</div>
+
+<!-- ======================= APP ======================= -->
+<div id="app">
+  <div class="topbar">
+    <div class="brand">
+      <button class="menu-toggle" id="menuToggle">☰ <span class="en">Sections</span><span class="ar" dir="rtl">الأقسام</span></button>
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="14" r="9" fill="#D7F05A"/>
+        <rect x="22" y="20" width="4" height="14" rx="1.5" fill="#F1F0EB"/>
+        <path d="M24 30 L14 40 M24 30 L34 40" stroke="#F1F0EB" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      <div class="brand-text">le<b>Cedar</b> <span>Global</span></div>
+    </div>
+    <div class="right">
+      <a href="/closer-playbook/" class="all-playbooks"><span class="en">← All Playbooks</span><span class="ar" dir="rtl">كل الأدلة ←</span></a>
+      <div class="tag"><span class="en">Closer Playbook · Internal Only</span><span class="ar" dir="rtl">دليل المبيعات · داخلي فقط</span></div>
+      <div class="langsw">
+        <button data-setlang="en" class="active">EN</button>
+        <button data-setlang="ar">عربي</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <nav class="toc" id="toc">
+      <div class="toc-title"><span class="en">Start</span><span class="ar" dir="rtl">البداية</span></div>
+      <a href="#offer"><span class="en">1. The Offer</span><span class="ar" dir="rtl">1. العرض</span></a>
+      <a href="#story"><span class="en">2. Ibrahim's Story</span><span class="ar" dir="rtl">2. قصة ابراهيم</span></a>
+      <a href="#usp"><span class="en">3. Why Ibrahim — USPs</span><span class="ar" dir="rtl">3. ليش ابراهيم — USPs</span></a>
+      <div class="toc-title"><span class="en">Mindset</span><span class="ar" dir="rtl">العقلية</span></div>
+      <a href="#mindset"><span class="en">4. 10X Mindset for Closers</span><span class="ar" dir="rtl">4. عقلية الـ10X للـ Closers</span></a>
+      <div class="toc-title"><span class="en">Who &amp; What</span><span class="ar" dir="rtl">مين وشو</span></div>
+      <a href="#personas"><span class="en">5. Personas</span><span class="ar" dir="rtl">5. الفئات المستهدفة (Personas)</span></a>
+      <a href="#types"><span class="en">6. Types of Websites</span><span class="ar" dir="rtl">6. أنواع المواقع</span></a>
+      <a href="#pricing"><span class="en">7. Packages &amp; Pricing</span><span class="ar" dir="rtl">7. الباقات والأسعار</span></a>
+      <div class="toc-title"><span class="en">On the Call</span><span class="ar" dir="rtl">عالمكالمة</span></div>
+      <a href="#demo"><span class="en">8. Demo &amp; In-Call Support</span><span class="ar" dir="rtl">8. الـ Demo والدعم أثناء المكالمة</span></a>
+      <a href="#script"><span class="en">9. Sales Script</span><span class="ar" dir="rtl">9. سكربت المبيعات</span></a>
+      <a href="#qualify"><span class="en">10. Qualification Notes</span><span class="ar" dir="rtl">10. ملاحظات التأهيل</span></a>
+      <a href="#gaps"><span class="en">11. Honest Gaps</span><span class="ar" dir="rtl">11. نواقص بصراحة</span></a>
+    </nav>
+
+    <main>
+      <div class="hero">
+        <div class="eyebrow"><span class="en">Digital Presence · Closer Enablement</span><span class="ar" dir="rtl">Digital Presence · تجهيز الـ Closers</span></div>
+        <h1>
+          <span class="en">Bilingual websites that make someone trust you before they've even talked to you.</span>
+          <span class="ar" dir="rtl">مواقع ثنائية اللغة بتخلّي حدا يثق فيك قبل ما حتى يحكي معك.</span>
+        </h1>
+        <p>
+          <span class="en">Portfolio, services, contact — built fast, discoverable, and good enough to be the front door to everything else leCedar Global builds. This is the playbook: the story, the USPs, who buys it, what to say, and the exact numbers you can quote without checking with Ibrahim first.</span>
+          <span class="ar" dir="rtl">Portfolio، خدمات، تواصل — مبني بسرعة، سهل الوصول إله، ومنيح كفاية يكون الباب الأول لكل شي تاني بتبنيه leCedar Global. هيدا الدليل: القصة، الـ USPs، مين بيشتري، شو تحكي، والأرقام الدقيقة يلي فيك تحكيها بدون ما ترجع لابراهيم.</span>
+        </p>
+        <div class="pills">
+          <span class="pill">EN / AR / FR</span>
+          <span class="pill">SEO</span>
+          <span class="pill"><span class="en">Fast Delivery</span><span class="ar" dir="rtl">تسليم سريع</span></span>
+          <span class="pill"><span class="en">GoHighLevel CRM-ready</span><span class="ar" dir="rtl">جاهز لـ GoHighLevel CRM</span></span>
+          <span class="pill">Shopify / WooCommerce</span>
+        </div>
+      </div>
+
+      <section id="offer">
+        <h2><span class="num">1</span><span class="en">The Offer</span><span class="ar" dir="rtl">العرض</span></h2>
+        <p class="lede"><span class="en">What closers are actually selling, in one breath.</span><span class="ar" dir="rtl">شو عم يبيع الـ closers بالفعل، بجملة وحدة.</span></p>
+        <div class="card">
+          <p class="en">
+            <b>Digital Presence</b> — bilingual/trilingual websites (EN / AR / FR) that match the caliber of leCedar Global's own work: portfolio, services, contact. Built fast, discoverable, and good enough that the client can use it as a sales asset, not just a listing. SEO and fast delivery are table stakes, not the pitch.
+          </p>
+          <p class="ar" dir="rtl">
+            <b>Digital Presence</b> — مواقع بلغتين أو تلت لغات (EN / AR / FR) بمستوى شغل leCedar Global نفسها: portfolio، خدمات، تواصل. مبنية بسرعة، سهلة الوصول إلها، ومنيحة كفاية يستعملها الزبون كأداة بيع (sales asset)، مش بس كأنه listing. الـ SEO والتسليم السريع هني أساسيات، مش الـ pitch.
+          </p>
+        </div>
+        <div class="callout rule">
+          <p class="en" style="margin:0;">
+            <b>What "SEO" actually means — so you can explain it to a client (you don't need to be technical for this).</b> SEO stands for Search Engine Optimization. In plain terms: it's the basic setup that helps Google find, read, and list a website when someone searches something related to the business — the page titles, short descriptions, and a sitemap (a simple map of the site's pages) that Google uses to understand what's on it. <b>Every Digital Presence tier includes this setup.</b> It is NOT the same as "ranking #1 on Google" and it's not ongoing SEO marketing (that's a separate, recurring service, not included in any tier) — it's the foundation that makes a site discoverable at all, not a guarantee of traffic. If a client asks "will this get me to the top of Google," the honest answer is: this makes sure Google can find and understand your site properly; getting to the top of search results is a different, ongoing service.
+          </p>
+          <p class="ar" dir="rtl" style="margin:0;">
+            <b>شو يعني "SEO" بالفعل — تا تقدر تشرحها لزبون (مش لازم تكون تقني لهالموضوع).</b> SEO يعني Search Engine Optimization. بكلام بسيط: هيدا الإعداد الأساسي يلي بيساعد Google يلاقي، يقرا، ويدرج الموقع لما حدا يدوّر عن شي عم يمتّ لعمل الزبون — عناوين الصفحات، أوصاف قصيرة، وsitemap (خريطة بسيطة لصفحات الموقع) يلي Google بيستعملها تا يفهم شو في بالموقع. <b>كل باقة بالـ Digital Presence فيها هالإعداد.</b> هيدا مش نفس الشي متل "تكون أول نتيجة عالـ Google" ومش ولا SEO تسويقي مستمر (هيدا خدمة متل تانية، متكررة، مش داخلة بأي باقة) — هيدا بس الأساس يلي بيخلّي الموقع قابل للاكتشاف، مش ضمان لزوّار. اذا زبون سألك "هيدا رح يوصلني لأول الـ Google؟"، الجواب الصادق: هيدا بيتأكد إنو Google فاهم وقادر يوصل عالموقع تبعك منيح؛ الوصول لأول نتائج البحث خدمة تانية ومستمرة.
+          </p>
+        </div>
+        <div class="callout rule">
+          <p class="en" style="margin:0;">
+            <b>Bonus angle — this is also what gets you found by AI tools like ChatGPT, not just Google.</b> More and more people now ask an AI assistant for a recommendation ("best car dealership in Beirut," "where can I get X") instead of typing a Google search. When those tools search the live web, they're reading the same thing Google reads — clear page titles, real content, a working sitemap. The same SEO setup that makes a site discoverable on Google is also what makes it discoverable to AI tools. This isn't a separate service and it isn't a guarantee of appearing in an AI answer — it's one more honest reason "a site with proper SEO" matters today, and it's a line a closer can use with <b>any</b> persona, not just the ones that seem "techy."
+          </p>
+          <p class="en" style="margin:10px 0 0;"><b>Closer line:</b> <i>"Here's something most people haven't thought about yet — people aren't just Googling anymore, they're asking ChatGPT things like 'who's a good [whatever] near me.' If your site isn't built right, you're invisible there too, not just on Google."</i></p>
+          <p class="ar" dir="rtl" style="margin:0;">
+            <b>زاوية إضافية — هيدا كمان اللي بيخليك تنلاقى عبر أدوات AI متل ChatGPT، مش بس Google.</b> أكتر وأكتر ناس هلأ عم يسألوا AI assistant لتوصية ("أحسن معرض سيارات ببيروت"، "وين فيني لاقي كذا") بدل ما يدوّروا بـ Google. لما هالأدوات بتدوّر عالانترنت الحي، عم تقرا نفس الشي يلي Google بيقراه — عناوين صفحات واضحة، محتوى حقيقي، sitemap شغال. نفس إعداد الـ SEO يلي بيخلّي الموقع يتلاقى عـ Google هو نفسو يلي بيخلّيه يتلاقى من أدوات الـ AI. هيدا مش خدمة لحالها ومش ضمان ظهور بجواب AI — بس سبب صادق إضافي ليش "موقع فيه SEO منيح" مهم اليوم، وجملة فيك تستعملها مع <b>أي</b> persona، مش بس يلي شكلها "تقنية".
+          </p>
+          <p class="ar" dir="rtl" style="margin:10px 0 0;"><b>كلام الـ Closer:</b> <i>"في شي معظم الناس لسا ما فكروا فيه — الناس مش بس عم يدوّروا بـ Google، عم يسألوا ChatGPT كمان 'مين منيح لـ[أي شي] قريب مني'. اذا موقعك مش مبني منيح، رح تكون مش موجود هونيك كمان، مش بس عـ Google."</i></p>
+        </div>
+        <div class="card">
+          <p class="en"><b>Why it's the front door:</b> it's the lowest-risk, fastest-to-yes item in the whole leCedar Global catalogue. Every live deal that actually progressed opened through a website conversation, then upsold into CRM, e-commerce, or ERP. Price and scope every deal with that follow-on in mind — but never oversell it before the website itself has earned trust.</p>
+          <p class="ar" dir="rtl"><b>ليش هيدا الباب الأول:</b> هيدا أقل عنصر خطورة وأسرع شي بيوصل لـ"ايه" بكل كتالوج leCedar Global. كل صفقة عم تتقدّم فعليًا بلشت من حديث عن موقع، وبعدين تصعّدت لـ CRM، e-commerce، أو ERP. سعّر وحدد نطاق كل صفقة وبالك على هالمتابعة — بس ما تنفخ فيها قبل ما الموقع نفسه يكسب الثقة.</p>
+        </div>
+        <div class="quote">
+          <span class="en">"Your site should make someone trust you before they've even talked to you — right now, is that what yours is doing?"</span>
+          <span class="ar" dir="rtl">"موقعك المفروض يخلّي حدا يثق فيك قبل ما يحكي معك أصلاً — هلأ، هيدا شو عم يعمل موقعك؟"</span>
+        </div>
+      </section>
+
+      <section id="story">
+        <h2><span class="num">2</span><span class="en">Ibrahim's Story</span><span class="ar" dir="rtl">قصة ابراهيم</span></h2>
+        <p class="lede"><span class="en">Use this. Don't improvise a different one.</span><span class="ar" dir="rtl">استعمل هيدا. ما ترتجل قصة تانية.</span></p>
+        <div class="card">
+          <div class="en">
+            <p>In <b>2014</b>, while still in school, Ibrahim built the first real website of his life — a recipe-sharing site for his mother. It did two things: it organized and shared her recipes, and it quietly solved a family problem. His brother, living abroad, could open the site, pull a recipe, and build a meal plan and grocery list around their mother's cooking from thousands of miles away.</p>
+            <p>It wasn't a business plan. It was a teenager solving a real problem for people he loved with the only tool he had: a website. That instinct — <em class="accent">turn something personal, manual, and scattered into a system someone can actually use</em> — is the same instinct that runs leCedar Global today. He hasn't stopped building since.</p>
+            <p>In the years that followed, Ibrahim spent most of his twenties inside the information-systems engine room of a national-scale emergency-response organization and UN-linked agencies, across more than 30 countries. He became the <b>youngest director in that organization's history at 26</b> — responsible for the data governance and reporting systems a 1,000+ person operation runs on, under real pressure, with no room for a system that just "mostly works."</p>
+            <p><b>leCedar Global is that same discipline, pointed at business owners instead of a relief operation:</b> full visibility into what's actually happening — starting with the website that earns first trust, and opening the door to the backend that runs the business day to day.</p>
+          </div>
+          <div class="ar" dir="rtl">
+            <p>بال<b>2014</b>، وبعده بالمدرسة، ابراهيم بنى أول موقع حقيقي بحياته — موقع لمشاركة وصفات أمو. عمل شغلتين: نظّم وشارك وصفاتها، وبهدوء حلّ مشكلة عيلة. خيّو، يلي عايش برا لبنان، كان فيه يفتح الموقع، ياخد وصفة، ويعمل meal plan وليستة مشتريات حسب أكل أمو من آلاف الكيلومترات.</p>
+            <p>ما كانت خطة شغل. كان مراهق عم يحل مشكلة حقيقية لناس بيحبّن بالأداة الوحيدة يلي عندو: موقع. هيدا الإحساس — <em class="accent">إنك تحوّل شي شخصي، يدوي، ومبعثر لنظام حدا فيه يستعملو فعليًا</em> — هو نفس الإحساس يلي عم يشغّل leCedar Global اليوم. ما وقف يبني من هيداك الوقت.</p>
+            <p>بالسنين يلي جايين، ابراهيم قضّى معظم العشرينات تبعو جوا غرفة محركات أنظمة المعلومات لمؤسسة استجابة طوارئ على مستوى وطني ووكالات مرتبطة بالأمم المتحدة، بأكتر من 30 بلد. صار <b>أصغر مدير بتاريخ هالمؤسسة بعمر 26 سنة</b> — مسؤول عن أنظمة حوكمة البيانات والتقارير يلي عملية فيها أكتر من 1000 شخص عم تشتغل عليها، تحت ضغط حقيقي، بدون مجال لنظام "عم يشتغل نص نص".</p>
+            <p><b>leCedar Global هو نفس هالانضباط، بس موجّه لأصحاب الأعمال بدل عملية إغاثة:</b> شفافية كاملة على شو عم يصير فعليًا — بلّش بالموقع يلي بيكسب أول ثقة، ووصولاً لفتح الباب على الـ backend يلي بيشغّل العمل يوم بيوم.</p>
+          </div>
+        </div>
+        <h3><span class="en">How to say it on a call (this is the closer talking about Ibrahim, not Ibrahim talking)</span><span class="ar" dir="rtl">كيف تحكيها بالمكالمة (هيدا الـ closer عم يحكي عن ابراهيم، مش ابراهيم عم يحكي)</span></h3>
+        <div class="script-line">
+          <span class="who en">Closer line</span><span class="who ar" dir="rtl">كلام الـ Closer</span>
+          <span class="en">"Quick bit of context on our founder, Ibrahim — back in 2014, while he was still in school, he built his first real website, for his mom. It let his brother, who was living abroad, cook her recipes and plan meals from a different continent. He's been building systems that solve real problems ever since — he actually spent most of his twenties running data and reporting systems for a national-scale emergency-response organization. leCedar Global is that same discipline, just pointed at businesses now instead of a relief operation — which is why we build it this way for you too."</span>
+          <span class="ar" dir="rtl">"بس تحكي بالسريع عن مؤسسنا، ابراهيم — بال2014، وبعده بالمدرسة، بنى أول موقع حقيقي، لأمو. خلّى خيّو، يلي كان عايش برا، يطبخ وصفاتها ويحضّر الأكل من قارة تانية. وهو عم يبني أنظمة بتحل مشاكل حقيقية من هيداك الوقت — بالفعل قضّى معظم العشرينات تبعو عم يدير أنظمة بيانات وتقارير لمؤسسة استجابة طوارئ وطنية. leCedar Global هو نفس الانضباط، بس هلأ موجّه عالشركات بدل عملية إغاثة — وهيدا ليش عم نبنيلك ياها بهالطريقة."</span>
+        </div>
+        <div class="callout warn">
+          <p class="en" style="margin:0;"><b>Guardrail:</b> never name the specific organizations on a call or in writing. "A national emergency-response organization and UN-linked agencies" is the ceiling of specificity. Don't invent a polished "always dreamed of being an entrepreneur" story — the real one is more credible, and it's true.</p>
+          <p class="ar" dir="rtl" style="margin:0;"><b>قاعدة مهمة:</b> ما تسمّي المؤسسات بالاسم، لا بالمكالمة ولا كتابة. "مؤسسة استجابة طوارئ وطنية ووكالات مرتبطة بالأمم المتحدة" هو أقصى حد للتفاصيل. وما تختلق قصة مزوّقة متل "كان حلمي من زمان أصير رائد أعمال" — القصة الحقيقية أكتر مصداقية، وهي صحيحة.</p>
+        </div>
+      </section>
+
+      <section id="usp">
+        <h2><span class="num">3</span><span class="en">Why Ibrahim — Unique Selling Propositions</span><span class="ar" dir="rtl">ليش ابراهيم — نقاط البيع الفريدة (USPs)</span></h2>
+        <p class="lede">
+          <span class="en">Use situationally: founder USP to build trust early, business USP in the proposal, technical USP when a prospect pushes on capability or price.</span>
+          <span class="ar" dir="rtl">استعملها حسب الموقف: الـ founder USP لبناء الثقة بالأول، الـ business USP بالعرض (proposal)، والـ technical USP لما الزبون يشكك بالقدرة أو السعر.</span>
+        </p>
+        <table>
+          <thead class="en"><tr><th>Layer</th><th>Line</th><th>When to use</th></tr></thead>
+          <thead class="ar" dir="rtl"><tr><th>العنصر</th><th>الجملة</th><th>متى تستعملها</th></tr></thead>
+          <tbody class="en">
+            <tr><td><b>Business</b></td><td>"One vendor for your whole digital operation — the storefront and the backend — so nothing falls through the cracks between two contractors pointing fingers at each other."</td><td>Proposal document, or a prospect burned by a previous freelancer/agency split.</td></tr>
+            <tr><td><b>Founder</b></td><td>"The same systems discipline that runs a national emergency-response organization's data — reporting under pressure, governance, multi-stakeholder coordination — applied to your business, not a freelancer's first client."</td><td>First call, to establish credibility fast.</td></tr>
+            <tr><td><b>Technical</b></td><td>"We build the same tier of animated, orchestrated web experience as top-bracket design studios. The difference is something you see in the first ten seconds, not something we argue you into believing."</td><td>When a prospect questions whether a small/independent vendor can deliver agency-grade work. Always back this with a live demo.</td></tr>
+          </tbody>
+          <tbody class="ar" dir="rtl">
+            <tr><td><b>Business</b></td><td>"مزوّد واحد لكل عمليتك الرقمية — الـ storefront والـ backend — تا ما يضيع شي بين شركتين عم يرموا اللوم على بعض."</td><td>بمستند العرض، أو مع زبون اتحرق من تجربة قبل مع freelancer أو وكالة.</td></tr>
+            <tr><td><b>Founder</b></td><td>"نفس انضباط الأنظمة يلي بيدير بيانات مؤسسة استجابة طوارئ وطنية — تقارير تحت ضغط، حوكمة، تنسيق بين أطراف متعددة — مطبّق على عملك، مش أول زبون لـ freelancer."</td><td>أول مكالمة، تا تبني مصداقية بسرعة.</td></tr>
+            <tr><td><b>Technical</b></td><td>"منبني نفس مستوى التجربة المتحركة والمنسّقة متل أهم استوديوهات التصميم. الفرق بتشوفو بأول عشر ثواني، مش شي لازم نقنعك فيه بالحكي."</td><td>لما الزبون يشكك إذا مزوّد صغير/مستقل فيه يسلّم شغل بمستوى وكالة. دايمًا ادعم هيدا بـ demo حيّ.</td></tr>
+          </tbody>
+        </table>
+        <div class="quote">
+          <span class="en">"leCedar Global gives business owners total visibility and control over their operations and their public image — from the website that earns first trust, to the systems that run the business day to day — without hiring a faceless overseas agency or overpaying for the privilege."</span>
+          <span class="ar" dir="rtl">"leCedar Global بيعطي أصحاب الأعمال شفافية وتحكّم كامل على عملياتهم وصورتهم العامة — من الموقع يلي بيكسب أول ثقة، لحتى الأنظمة يلي بتشغّل العمل يوم بيوم — بدون ما يوظفوا وكالة أجنبية بلا وجه أو يدفعوا زيادة عن حقها."</span>
+        </div>
+      </section>
+
+      <section id="mindset">
+        <h2><span class="num">4</span><span class="en">The 10X Mindset — Operating Rules</span><span class="ar" dir="rtl">عقلية الـ10X — قواعد العمل</span></h2>
+        <p class="lede">
+          <span class="en">Paraphrased from the Grant Cardone sales system, adapted to Lebanese and diaspora trust norms. These are operating rules, not slogans.</span>
+          <span class="ar" dir="rtl">مأخوذة بتصرّف من نظام مبيعات Grant Cardone، ومكيّفة لمعايير الثقة اللبنانية ومعايير المغتربين. هيدي قواعد عمل، مش شعارات.</span>
+        </p>
+        <div class="callout rule">
+          <p class="en" style="margin:0;"><b>1. Advance now.</b> A quiet market or a hesitant prospect is an opening, not a reason to wait. <b>The weekly minimum, per closer: at least 3 build-first demos sent and at least 5 booked discovery calls, every week, regardless of source.</b> "Full volume" means hitting that floor, not a vibe — if a week comes in under it, that's the thing to fix before anything else.</p>
+          <p class="ar" dir="rtl" style="margin:0;"><b>1. تقدّم هلأ.</b> سوق هادئ أو زبون متردد هو فرصة، مش سبب تستنى. <b>الحد الأدنى الأسبوعي، لكل closer: عالأقل 3 build-first demos مبعوتين، وعالأقل 5 discovery calls محجوزة، كل أسبوع، مهما كان المصدر.</b> "full volume" يعني توصل لهالحد، مش حسب مزاجك — اذا أسبوع نزل تحت هالرقم، هيدا أول شي لازم يتصلّح.</p>
+        </div>
+        <div class="callout rule">
+          <p class="en" style="margin:0;"><b>2. Price is a diagnosis, never the final answer.</b> "Too expensive" means check value, trust, authority, and timing first. Never discount the same scope — move the prospect to a lower tier, or extend the payment plan. That's it.</p>
+          <p class="ar" dir="rtl" style="margin:0;"><b>2. السعر تشخيص، مش جواب نهائي.</b> "غالي" يعني لازم تتأكد أول من القيمة، الثقة، الصلاحية، والتوقيت. ما تخفّض سعر لنفس الـ scope — نقّل الزبون لـ tier أقل، أو مدّد خطة الدفع. بس هيك.</p>
+        </div>
+        <div class="callout rule">
+          <p class="en" style="margin:0;"><b>3. Put it in writing.</b> No verbal deal is a deal. Every serious conversation gets a written proposal with a decision date, itemizing what's already included for free (revisions, support windows, SEO setup).</p>
+          <p class="ar" dir="rtl" style="margin:0;"><b>3. حطّها مكتوبة.</b> ما في اتفاق شفهي بيعتبر اتفاق. كل محادثة جدّية لازم تاخد proposal مكتوب فيه تاريخ قرار، ومفصّل فيه شو داخل مجانًا (التعديلات، فترات الدعم، إعداد الـ SEO).</p>
+        </div>
+        <div class="callout rule">
+          <p class="en" style="margin:0;"><b>4. Know who signs.</b> Ask "who else needs to be comfortable with this before it moves forward?" early, every time. Deals have been lost specifically because the real signer was never identified in time.</p>
+          <p class="ar" dir="rtl" style="margin:0;"><b>4. اعرف مين بيوقّع.</b> اسأل "مين كمان لازم يكون مرتاح لهالقرار تا نكمّل؟" بدري، بكل مرة. ضاعت صفقات تحديدًا لأنو ما تعرّفنا على الشخص يلي فعليًا بيوقّع بالوقت المناسب.</p>
+        </div>
+        <div class="callout rule">
+          <p class="en" style="margin:0;"><b>5. Have the pen ready.</b> Before asking for the decision, know exactly how they sign and exactly how they pay.</p>
+          <p class="ar" dir="rtl" style="margin:0;"><b>5. جهّز "القلم".</b> قبل ما تطلب القرار، اعرف بالضبط كيف رح يوقّعوا وكيف رح يدفعوا.</p>
+        </div>
+        <div class="callout rule">
+          <p class="en" style="margin:0;"><b>6. Ask one more time — but there is a ceiling.</b> Persistence is expected. But leCedar Global's leads come almost entirely through personal and diaspora trust networks — burning a referred contact by over-chasing can cost the relationship that produces future deals, not just one sale. <b>Rule of thumb until Ibrahim sets a firm number:</b> space follow-ups out in days not hours, never escalate channel, and flag warm/referred contacts to Ibrahim before pushing past a second unanswered follow-up.</p>
+          <p class="ar" dir="rtl" style="margin:0;"><b>6. اسأل مرة كمان — بس في سقف.</b> المثابرة متوقّعة. بس leads تبع leCedar Global جايي تقريبًا بالكامل من علاقات شخصية وشبكات ثقة بين المغتربين — إنك "تحرق" جهة اتحوّلتلك (referral) بالمتابعة الزايدة فيها يكلفك العلاقة يلي بتجيب صفقات بالمستقبل، مش بس صفقة وحدة. <b>قاعدة عامة لحد ما ابراهيم يحدد رقم ثابت:</b> باعد المتابعات بالأيام مش بالساعات، ما تصعّد القناة (channel)، وبلّغ ابراهيم عن أي جهة دافئة أو محوّلة قبل ما تتخطى متابعة ثانية بلا رد.</p>
+        </div>
+      </section>
+
+      <section id="personas">
+        <h2><span class="num">5</span><span class="en">Who Buys This — Personas</span><span class="ar" dir="rtl">مين بيشتري هيدا — الفئات المستهدفة</span></h2>
+        <p class="lede">
+          <span class="en">The qualifying question that works across every persona: <i>"If someone searched your business right now, what would they actually find — and is that doing you any favors?"</i></span>
+          <span class="ar" dir="rtl">السؤال التأهيلي يلي بيشتغل مع كل persona: <i>"اذا حدا دوّر عن شركتك هلأ، شو رح يلاقي فعليًا — وهل هيدا عم يفيدك؟"</i></span>
+        </p>
+        <table>
+          <thead class="en"><tr><th>Persona</th><th>Pain signal</th><th>Fits</th><th>Likely tier</th><th>Bundle into the quote (never priced separately to the client)</th></tr></thead>
+          <thead class="ar" dir="rtl"><tr><th>الفئة</th><th>إشارة الألم</th><th>يناسب</th><th>الـ Tier المتوقّع</th><th>يُدمج بالسعر (ما يُسعّر لحاله)</th></tr></thead>
+          <tbody class="en">
+            <tr><td><b>E-commerce</b><br>(Shopify preferred)</td><td>Selling through Instagram DMs/WhatsApp only, can't scale past manual order-taking</td><td>E-commerce storefront</td><td>Shopify A/B</td><td>Payment gateway, reviews app, WhatsApp ordering</td></tr>
+            <tr><td><b>Travel agencies</b></td><td>Site looks dated; multi-stakeholder business where it embarrasses the newer generation</td><td>Premium animated brochure</td><td>Website 2/3</td><td>Booking/inquiry widget, WhatsApp</td></tr>
+            <tr><td><b>Cosmetics / beauty</b></td><td>Instagram-first brand, no site for paid traffic, bookings off DMs</td><td>Brochure + light e-commerce</td><td>Website 2 / Shopify A</td><td>Appointment booking, CRM nurture (named leCedar niche)</td></tr>
+            <tr><td><b>Restaurants / cafés</b></td><td>No digital menu, QR missing or just a PDF, delivery by phone</td><td>Digital menu site</td><td>Website 1/2</td><td>WhatsApp ordering, delivery-zone calculator</td></tr>
+            <tr><td><b>Real estate / construction</b></td><td>Portfolio exists as a PDF; site must function as a sales tool for a 7-figure decision</td><td>Premium site + project finder</td><td>Website 3</td><td>Project finder with WhatsApp lead capture</td></tr>
+            <tr><td><b>Jewelry</b></td><td>High-value catalog, no presence matching the in-store experience</td><td>Premium e-commerce</td><td>Shopify B</td><td>Multi-currency, premium photography</td></tr>
+            <tr><td><b>Car dealerships</b></td><td>Inventory on a spreadsheet or Facebook/Instagram, a long list hard to search or compare. More buyers now research a car online — sometimes asking an AI assistant like ChatGPT — before ever visiting</td><td>Catalog/inventory site</td><td>Website 2/3</td><td>Inventory filter, WhatsApp lead capture</td></tr>
+            <tr><td><b>Others</b><br>(clinics, trades, education, nonprofits)</td><td>Varies — see the full pricing doc's per-industry notes</td><td>Brochure or booking site</td><td>Website 1/2</td><td>Booking widget, click-to-WhatsApp</td></tr>
+          </tbody>
+          <tbody class="ar" dir="rtl">
+            <tr><td><b>E-commerce</b><br>(مفضّل Shopify)</td><td>عم يبيع بس عبر Instagram DMs/WhatsApp، ما فيه يكبّر أكتر من الطلبات اليدوية</td><td>متجر إلكتروني</td><td>Shopify A/B</td><td>بوابة دفع، تطبيق تقييمات، طلب عبر WhatsApp</td></tr>
+            <tr><td><b>وكالات سفر</b></td><td>الموقع شكلو قديم؛ عمل فيه أكتر من طرف قرار ووين الجيل الجديد عم ينحرج منّو</td><td>موقع تعريفي متحرك وراقي</td><td>Website 2/3</td><td>أداة حجز/استفسار، WhatsApp</td></tr>
+            <tr><td><b>مستحضرات تجميل / beauty</b></td><td>براند شغال أساسًا عبر Instagram، ما عندو موقع يستقبل إعلانات مدفوعة، الحجوزات عبر DMs</td><td>موقع تعريفي + متجر إلكتروني بسيط</td><td>Website 2 / Shopify A</td><td>حجز مواعيد، متابعة عبر CRM (هيدا الـ niche الأساسي لـ leCedar)</td></tr>
+            <tr><td><b>مطاعم / كافيهات</b></td><td>ما في منيو رقمية، إما ناقص QR أو بس PDF، التوصيل عبر تلفون يدوي</td><td>موقع منيو رقمية</td><td>Website 1/2</td><td>طلب عبر WhatsApp، حاسبة مناطق التوصيل</td></tr>
+            <tr><td><b>عقارات / بناء</b></td><td>الـ portfolio موجود بس كـ PDF؛ الموقع لازم يشتغل كأداة بيع لقرار بقيمة ملايين</td><td>موقع راقي + أداة بحث مشاريع</td><td>Website 3</td><td>أداة بحث مشاريع مع جمع leads عبر WhatsApp</td></tr>
+            <tr><td><b>مجوهرات</b></td><td>كتالوج بقيمة عالية، بدون حضور أونلاين بمستوى تجربة المحل</td><td>متجر إلكتروني راقي</td><td>Shopify B</td><td>عملات متعددة، تصوير احترافي</td></tr>
+            <tr><td><b>معارض سيارات</b></td><td>المخزون على spreadsheet أو Facebook/Instagram، ليستة طويلة صعب تدوّر فيها أو تقارن. أكتر زباين هلأ عم يدرسوا السيارة أونلاين — وبعضهن عم يسأل AI assistant متل ChatGPT — قبل ما يزوروا المعرض</td><td>موقع كتالوج/مخزون</td><td>Website 2/3</td><td>أداة فلترة المخزون، جمع leads عبر WhatsApp</td></tr>
+            <tr><td><b>غيرهن</b><br>(عيادات، حرف، تعليم، جمعيات)</td><td>بيختلف — شوف ملاحظات التسعير حسب القطاع بالمستند الكامل</td><td>موقع تعريفي أو موقع حجز مواعيد</td><td>Website 1/2</td><td>أداة حجز، زر click-to-WhatsApp</td></tr>
+          </tbody>
+        </table>
+        <div class="callout gap">
+          <p class="en" style="margin:0;"><b>Lead-priority signal</b> — the single best Digital Presence lead, across any persona above, is <b>strong Google reviews, weak or outdated website.</b> They've already proven the business works — the site is the only thing not pulling its weight. If a closer is prospecting rather than waiting on inbound, prioritize this exact combination over a cold list with no signal either way.</p>
+          <p class="ar" dir="rtl" style="margin:0;"><b>إشارة أولوية الـ lead</b> — أفضل lead لـ Digital Presence، بأي persona فوق، هو <b>تقييمات Google قوية بس موقع ضعيف أو قديم.</b> العمل أثبت حالو بالفعل — الموقع بس يلي مش عم يعمل قدّو. اذا الـ closer عم يدوّر بنفسو مش مستني inbound، رجّح هالتركيبة بالضبط فوق أي ليستة باردة بلا أي إشارة.</p>
+        </div>
+        <div class="callout gap">
+          <p class="en" style="margin:0;"><b>Recent example (Oct 2026) — China Gate Automotive.</b> Contacted this week. Strong Instagram presence with a large inventory of cars, but no real catalogue — customers can't search, filter, or compare what's listed. This is exactly the car-dealership persona above: turn one long, unclear Instagram feed into a searchable catalogue site.</p>
+          <p class="ar" dir="rtl" style="margin:0;"><b>مثال حديث (تشرين الأول 2026) — China Gate Automotive.</b> تواصلنا معهن هالأسبوع. حضور قوي عـ Instagram بليستة كبيرة سيارات، بس بلا كتالوج حقيقي: الزبون ما فيه يدوّر، يفلتر، أو يقارن يلي معروض. هيدا بالظبط الـ persona تبع معارض السيارات فوق — حوّل feed واحد طويل وغير واضح عـ Instagram لموقع كتالوج قابل للبحث.</p>
+        </div>
+        <div class="callout rule">
+          <p class="en" style="margin:0;"><b>How to present the "bundle" column:</b> don't quote these one by one. The near-mandatory integration for a persona gets absorbed into the tier price already being quoted and shown in the written proposal as an <i>included</i> line, not a priced extra. A menu of priced add-ons shown to a prospect who hasn't committed yet creates decision paralysis and makes the package look assembled from parts instead of delivered as one confident thing.</p>
+          <p class="ar" dir="rtl" style="margin:0;"><b>كيف تعرض عمود الـ "bundle":</b> ما تسعّرهن وحدة وحدة. الإضافة شبه الإلزامية لكل persona منحطّة جوا سعر الـ tier يلي عم تسعّره أصلاً، وبتنعرض بالـ proposal المكتوب كبند "داخل بالسعر"، مش إضافة مسعّرة لحالها. لائحة إضافات مسعّرة قدّام زبون لسا ما التزم بتخلق تردد بالقرار وبتخلّي الباقة تبان ملزّقة من أجزاء، مش شي كامل وواثق من حالو.</p>
+        </div>
+      </section>
+
+      <section id="types">
+        <h2><span class="num">6</span><span class="en">Types of Websites We Sell</span><span class="ar" dir="rtl">أنواع المواقع يلي منبيعها</span></h2>
+        <ol class="steps en">
+          <li><b>Brochure / portfolio site</b> — the Digital Presence core: home, about, services/products, gallery, contact.</li>
+          <li><b>E-commerce storefront</b> — Shopify (preferred — "good for everyone") or WooCommerce: catalog, payments, shipping, tax.</li>
+          <li><b>Digital menu site</b> — QR-code menu for restaurants/cafés, often paired with WhatsApp ordering.</li>
+          <li><b>CRM-linked website</b> — forms and bookings feed straight into a GoHighLevel sub-account: pipeline, nurture automations, appointment calendar. The upsell path into the GHL service line, not a bundled line item.</li>
+          <li><b>WhatsApp-integrated website</b> — click-to-WhatsApp, cart-to-WhatsApp checkout, inquiry routing. Add-on on any tier.</li>
+        </ol>
+        <ol class="steps ar" dir="rtl">
+          <li><b>موقع تعريفي / Portfolio</b> — جوهر الـ Digital Presence: الصفحة الرئيسية، من نحن، خدمات/منتجات، معرض صور، تواصل.</li>
+          <li><b>متجر إلكتروني</b> — Shopify (مفضّل — "منيح للكل") أو WooCommerce: كتالوج، دفع، شحن، ضريبة.</li>
+          <li><b>موقع منيو رقمية</b> — منيو عبر QR-code للمطاعم/الكافيهات، غالبًا مع طلب عبر WhatsApp.</li>
+          <li><b>موقع مربوط بـ CRM</b> — الفورمز والحجوزات بتروح مباشرة عـ sub-account بـ GoHighLevel: pipeline، أتمتة متابعة، تقويم مواعيد. هيدا طريق الـ upsell لخط خدمة GHL، مش بند داخل بالسعر.</li>
+          <li><b>موقع مربوط بـ WhatsApp</b> — زر click-to-WhatsApp، إتمام الطلب عبر WhatsApp، توجيه الاستفسارات. إضافة على أي tier.</li>
+        </ol>
+      </section>
+
+      <section id="pricing">
+        <h2><span class="num">7</span><span class="en">Packages &amp; Pricing — Min / Max You Can Quote</span><span class="ar" dir="rtl">الباقات والأسعار — الحد الأدنى والأقصى يلي فيك تسعّره</span></h2>
+        <p class="lede">
+          <span class="en">These are the floor and ceiling you can quote without checking with Ibrahim. Anything outside this (Shopify Tier C, custom CRM builds, multi-market e-commerce) needs his sign-off before a number goes to the client.</span>
+          <span class="ar" dir="rtl">هيدول الحد الأدنى والأقصى يلي فيك تسعّرهن بلا ما ترجع لابراهيم. أي شي برا هيدا (Shopify Tier C، بناء CRM مخصّص، e-commerce لأكتر من سوق) لازم موافقة ابراهيم قبل ما تعطي رقم للزبون.</span>
+        </p>
+
+        <h3><span class="en">Website tiers — the Digital Presence core</span><span class="ar" dir="rtl">باقات المواقع — جوهر الـ Digital Presence</span></h3>
+        <div class="tier-card">
+          <div class="price-row"><h4><span class="en">Tier 1 — Standard</span><span class="ar" dir="rtl">Tier 1 — Standard</span></h4><span class="price-tag"><bdi>$800 – $1,500</bdi></span></div>
+          <p class="en">Up to 5 pages, fully responsive, fade-in transitions only, contact form, SEO available (see the "What SEO means" explainer above), 1 revision round. 1–2 weeks. The floor every business should have.</p>
+          <p class="ar" dir="rtl">لغاية 5 صفحات، متجاوب بالكامل (responsive)، حركات fade-in بس، فورم تواصل، SEO متوفر (شوف الشرح فوق)، جولة تعديل وحدة. 1-2 أسبوع. الحد الأدنى يلي لازم يكون عند أي عمل.</p>
+        </div>
+        <div class="tier-card">
+          <div class="price-row"><h4><span class="en">Tier 2 — Animated</span><span class="ar" dir="rtl">Tier 2 — Animated</span></h4><span class="price-tag"><bdi>$1,800 – $3,000</bdi></span></div>
+          <p class="en">Up to 8 pages, scroll-triggered reveals, 1 signature interaction, 2 revision rounds. 2–3 weeks. "Looks more premium than a competitor's static site."</p>
+          <p class="ar" dir="rtl">لغاية 8 صفحات، حركات بتظهر مع الـ scroll، تفاعل مميّز واحد، جولتين تعديل. 2-3 أسابيع. "شكلو أرقى من موقع ثابت لمنافس."</p>
+        </div>
+        <div class="tier-card">
+          <div class="price-row"><h4><span class="en">Tier 3 — Fully Animated Premium</span><span class="ar" dir="rtl">Tier 3 — Fully Animated Premium</span></h4><span class="price-tag"><bdi>$3,500 – $6,500</bdi></span></div>
+          <p class="en">Up to 12 pages, full cinematic build, bilingual with RTL if Arabic, 3 revision rounds, 60-day support. 3–5 weeks. The "designed by an agency" tier.</p>
+          <p class="ar" dir="rtl">لغاية 12 صفحة، بناء سينمائي كامل، بلغتين مع RTL اذا عربي، 3 جولات تعديل، دعم لمدة 60 يوم. 3-5 أسابيع. tier "مصمّم متل شركة تصميم محترفة."</p>
+        </div>
+        <p style="font-size:.85rem;color:#555;" class="en"><b>Every tier includes a self-edit CMS</b> — the client can update their own content without coming back to leCedar for every small change. Not an upsell; it's standard on every package.</p>
+        <p style="font-size:.85rem;color:#555;" class="ar" dir="rtl"><b>كل tier فيه CMS للتعديل الذاتي</b> — الزبون فيه يعدّل المحتوى تبعو بحالو بلا ما يرجع لـ leCedar على كل تغيير صغير. مش upsell؛ هيدا أساسي بكل باقة.</p>
+
+        <h3><span class="en">E-commerce (Shopify)</span><span class="ar" dir="rtl">متجر إلكتروني (Shopify)</span></h3>
+        <div class="tier-card">
+          <div class="price-row"><h4><span class="en">Tier A — Shopify Setup</span><span class="ar" dir="rtl">Tier A — Shopify Setup</span></h4><span class="price-tag"><bdi>$1,200 – $2,000</bdi></span></div>
+          <p class="en">Store config, up to 30 SKUs, payment gateway, shipping/tax, 1 training session. 1–2 weeks.</p>
+          <p class="ar" dir="rtl">إعداد المتجر، لغاية 30 SKU، بوابة دفع، شحن/ضريبة، جلسة تدريب وحدة. 1-2 أسبوع.</p>
+        </div>
+        <div class="tier-card">
+          <div class="price-row"><h4><span class="en">Tier B — Shopify Custom Build</span><span class="ar" dir="rtl">Tier B — Shopify Custom Build</span></h4><span class="price-tag"><bdi>$2,500 – $5,000</bdi></span></div>
+          <p class="en">Custom theme matching Tier 2/3 motion language, up to 100 SKUs, up to 2 app integrations. 3–4 weeks.</p>
+          <p class="ar" dir="rtl">theme مخصّص بمستوى حركة Tier 2/3، لغاية 100 SKU، لغاية 2 تكامل مع تطبيقات. 3-4 أسابيع.</p>
+        </div>
+        <div class="tier-card">
+          <div class="price-row"><h4><span class="en">Tier C — Full Custom Commerce</span><span class="ar" dir="rtl">Tier C — Full Custom Commerce</span></h4><span class="price-tag"><bdi>$6,000+</bdi></span></div>
+          <p class="en">200+ SKUs, multi-currency, B2B/wholesale portals. <b>Discovery call required — do not quote before Ibrahim scopes it.</b></p>
+          <p class="ar" dir="rtl">أكتر من 200 SKU، عملات متعددة، بوابات B2B/جملة. <b>لازم discovery call — ما تسعّر قبل ما ابراهيم يحدد الـ scope.</b></p>
+        </div>
+
+        <div class="callout rule">
+          <p class="en" style="margin:0;"><b>Bundle, don't itemize.</b> Showing a prospect a raw add-on menu before trust is established makes the package look assembled from parts, not delivered as one confident thing. For a persona's near-mandatory integration, absorb it into the tier price you're already quoting, and list it as an <i>included</i> line in the written proposal — not a separate price. If a client asks for several extras beyond what a persona's tier already bundles, that's a signal to move them up a tier, not to start itemizing a cart.</p>
+          <p class="ar" dir="rtl" style="margin:0;"><b>ادمج، ما تفصّل.</b> إنك تعرض على زبون لائحة إضافات خام قبل ما تبنى الثقة بيخلّي الباقة تبان ملزّقة من أجزاء، مش شي كامل وواثق. للإضافة شبه الإلزامية لأي persona، ادمجها بسعر الـ tier يلي عم تسعّره أصلاً، وعدّها كبند <i>"داخل"</i> بالـ proposal المكتوب — مش سعر لحالو. اذا الزبون طلب كم إضافة زيادة عن يلي الـ tier تبعو عم يغطّيه أصلاً، هيدي إشارة تنقّلو لـ tier أعلى، مش تبلّش تفصّل سلة مشتريات.</p>
+        </div>
+
+        <h3><span class="en">CRM-linked upsell (GoHighLevel)</span><span class="ar" dir="rtl">upsell مربوط بـ CRM (GoHighLevel)</span></h3>
+        <div class="card">
+          <p class="en">This is leCedar Global's own GHL service line, scoped per client, sold as the natural next step after a website earns trust — not bundled into the website price. <b>Setup: <bdi>$1,000 – $2,000</bdi></b>, depending on the client and the size of automation needed. <b>Then <bdi>$89</bdi>/month if paid as one 12-month upfront payment, or <bdi>$100</bdi>/month otherwise.</b> Always confirm the exact number with Ibrahim before quoting.</p>
+          <p class="ar" dir="rtl">هيدا خط خدمة GHL تبع leCedar Global نفسها، محدد الـ scope حسب كل زبون، بيتباع كخطوة طبيعية بعد ما الموقع يكسب الثقة — مش داخل بسعر الموقع. <b>الإعداد: <bdi>$1,000 – $2,000</bdi></b>، حسب الزبون وحجم الأتمتة المطلوبة. <b>وبعدين <bdi>$89</bdi> بالشهر اذا دفع دفعة وحدة لـ12 شهر مسبقًا، أو <bdi>$100</bdi> بالشهر بغير هيك.</b> دايمًا تأكد من الرقم الدقيق مع ابراهيم قبل ما تسعّر.</p>
+        </div>
+
+        <h3><span class="en">What's NOT included</span><span class="ar" dir="rtl">شو مش داخل بالسعر</span></h3>
+        <ul class="en">
+          <li>Domain registration and hosting (billed separately or passed through at cost — the exact number comes from checking domain availability and hosting cost the moment a meeting is booked, before the sales call, not a guess — see the "Demo &amp; In-Call Support" section below)</li>
+          <li>Ongoing maintenance past the post-launch support window (no fixed retainer number yet — flag to Ibrahim. The planned hook, once it's priced: connect free Umami visitor tracking at launch and send a monthly "here's how many people visited your site" report as the reason to bill a small recurring fee — not priced yet, just know it's coming)</li>
+          <li>Professional photography/copywriting beyond what's scoped into the tier (quoted separately, case by case)</li>
+          <li>Paid ads, ongoing SEO campaigns (ranking/traffic work, distinct from the SEO setup included in every tier), content marketing — this is a build-and-launch price list</li>
+        </ul>
+        <ul class="ar" dir="rtl">
+          <li>تسجيل الدومين والـ hosting (بتحاسب لحالها أو بسعر التكلفة — الرقم الدقيق بيجي من التأكد من توفر الدومين وسعر الـ hosting لحظة ما ينحجز الاجتماع، قبل مكالمة البيع، مش تخمين — شوف قسم "الـ Demo والدعم أثناء المكالمة" تحت)</li>
+          <li>الصيانة المستمرة بعد فترة الدعم بعد الإطلاق (ما في رقم ثابت لسا — بلّغ ابراهيم. الخطة المستقبلية، لما تتسعّر: ربط Umami مجاني لتتبع الزوار عند الإطلاق وبعت تقرير شهري "هيدا عدد اللي زاروا موقعك" كسبب لفرض رسم شهري بسيط — مش مسعّر لسا، بس اعرف إنو جايي)</li>
+          <li>تصوير احترافي/كتابة محتوى أكتر من يلي داخل بالـ tier (بتسعّر لحالها، كل حالة لحالها)</li>
+          <li>إعلانات مدفوعة، حملات SEO مستمرة (شغل على الترتيب/الزوار، مختلف عن إعداد الـ SEO الداخل بكل tier)، تسويق محتوى — هيدي لائحة أسعار بناء وإطلاق بس</li>
+        </ul>
+
+        <div class="callout warn">
+          <p class="en" style="margin:0;"><b>No-discount policy — non-negotiable.</b> If budget doesn't match the quote: move to a lower tier, or extend the payment plan. Never quote a reduced number for the same scope.</p>
+          <p class="ar" dir="rtl" style="margin:0;"><b>سياسة بدون تخفيض — مش قابلة للتفاوض.</b> اذا الميزانية ما بتماشي السعر: انقل لـ tier أقل، أو مدّد خطة الدفع. أبدًا ما تعطي رقم مخفّض لنفس الـ scope.</p>
+        </div>
+
+        <h3><span class="en">Payment terms</span><span class="ar" dir="rtl">شروط الدفع</span></h3>
+        <p class="en"><b>50% upfront at signing, 20% on first draft, 30% at delivery/launch before domain handover</b> — this is the standard split for every tier. <b>Feedback auto-approval clock:</b> once a deliverable is submitted for review, the client has 7 calendar days to respond — no response means it's deemed approved and the project moves forward. State this before kickoff.</p>
+        <p class="ar" dir="rtl"><b>50% عند التوقيع، 20% عند أول مسودة، 30% عند التسليم/الإطلاق قبل تسليم الدومين</b> — هيدا التقسيم الأساسي لكل tier. <b>ساعة الموافقة التلقائية:</b> لما ينبعت أي deliverable للمراجعة، عند الزبون 7 أيام تقويمية يرد — بلا رد يعتبر موافق عليه والمشروع كمّل. احكي هالشي قبل ما تبلّشوا.</p>
+        <div class="callout warn">
+          <p class="en" style="margin:0;"><b>How clients pay: Whish, to <bdi>+961 71 750 675</bdi>.</b> This is the only payment number to give out — don't improvise a different number or account. Confirm the payment has actually landed before marking a stage paid in GHL (see the GHL discipline note below).</p>
+          <p class="ar" dir="rtl" style="margin:0;"><b>كيف الزبون بيدفع: Whish، عـ <bdi>+961 71 750 675</bdi>.</b> هيدا الرقم الوحيد يلي تعطيه — ما ترتجل رقم أو حساب تاني. تأكد إنو الدفعة فعليًا وصلت قبل ما تعلّم المرحلة "مدفوعة" بالـ GHL (شوف ملاحظة انضباط الـ GHL تحت).</p>
+        </div>
+        <div class="callout gap">
+          <p class="en" style="margin:0;"><b>How clients "sign" today — read this before you tell a client there's a contract to sign.</b> There is no formal e-signature step yet — leCedar doesn't have one live. What actually counts as agreement today is <b>two things together</b>: (1) the client's explicit written confirmation of the scope and price — a WhatsApp or email message saying yes to what's in the proposal, kept on record, not a verbal "sounds good" on a call — and (2) the 50% deposit via Whish. Both need to exist before a deal counts as closed; neither alone is enough. <b>If a client specifically asks for a formal signed contract, don't invent one — flag it to Ibrahim.</b> Don't let this gap become a reason to end a call vaguely ("I'll send something over") — get the written yes in the chat before you hang up, while the deal is still warm.</p>
+          <p class="ar" dir="rtl" style="margin:0;"><b>كيف الزبون "بيوقّع" هلأ — اقرا هيدا قبل ما تقول لزبون في عقد يوقّعو.</b> ما في خطوة توقيع إلكتروني رسمي لسا — leCedar ما عندها هيك شي شغال. يلي فعليًا بيعتبر موافقة هلأ هو <b>شغلتين سوا</b>: (1) تأكيد مكتوب وصريح من الزبون على الـ scope والسعر — رسالة WhatsApp أو إيميل بتقول "ايه" على يلي بالـ proposal، محفوظة، مش "تمام" شفهي عمكالمة — و(2) دفعة الـ 50% عبر Whish. لازم الشغلتين موجودين قبل ما الصفقة تعتبر مقفولة؛ وحدة لحالها مش كافية. <b>اذا زبون طلب تحديدًا عقد موقّع رسمي، ما تختلق واحد — بلّغ ابراهيم.</b> ما خلّي هالنقص يصير سبب تنهي المكالمة بشكل غامض ("رح ابعتلك شي") — خد الموافقة المكتوبة بالـ chat قبل ما تسكّر، وقت ما الصفقة لسا دافية.</p>
+        </div>
+      </section>
+
+      <section id="demo">
+        <h2><span class="num">8</span><span class="en">Demo &amp; In-Call Support</span><span class="ar" dir="rtl">الـ Demo والدعم أثناء المكالمة</span></h2>
+
+        <div class="callout warn">
+          <div class="en">
+            <p><b>Mandatory — the moment a meeting is booked.</b> As soon as a Digital Presence meeting is booked — not after, not "I'll ask on the call" — get the prospect's <b>exact business name</b> (and a preferred domain, if they have one in mind) and send it to Ibrahim immediately. This is not optional.</p>
+            <p><b>Why:</b> Ibrahim needs it to check <b>domain availability and real hosting cost</b> before the call happens. That turns "domain and hosting are billed separately" from a vague disclaimer into a specific, confident number you can say out loud on the call — and if the obvious domain is already taken, there's time to find a workable alternative before it's an awkward surprise mid-pitch.</p>
+            <ul style="margin:10px 0 0;">
+              <li><b>How to ask:</b> the moment the meeting is confirmed — <i>"Great, you're booked for [day/time]. One quick thing before then — what's the exact name of the business, so I can have the domain and hosting check ready for our call?"</i></li>
+              <li><b>Where it goes:</b> straight to Ibrahim (WhatsApp or the team channel), same day as booking — not saved for the pre-call brief.</li>
+            </ul>
+          </div>
+          <div class="ar" dir="rtl">
+            <p><b>إلزامي — لحظة ما ينحجز الاجتماع.</b> فور ما ينحجز اجتماع Digital Presence — مش بعدين، مش "رح اسأل بالمكالمة" — خد <b>اسم الشركة بالضبط</b> (ودومين مفضّل، اذا عندهن بخاطرهن واحد) وابعتو لابراهيم فورًا. هيدا مش اختياري.</p>
+            <p><b>ليش:</b> ابراهيم محتاجو تا يتأكد من <b>توفر الدومين وسعر الـ hosting الحقيقي</b> قبل المكالمة. هيك "الدومين والـ hosting بتحاسب لحالها" بتتحوّل من جملة غامضة لرقم دقيق وواثق فيك تقولو بصوت عالي بالمكالمة — واذا الدومين الواضح محجوز، في وقت تلاقي بديل مناسب قبل ما يصير مفاجأة محرجة نص الـ pitch.</p>
+            <ul style="margin:10px 0 0;">
+              <li><b>كيف تسأل:</b> لحظة ما الاجتماع ينأكد — <i>"تمام، محجوزلك [يوم/وقت]. شي سريع قبل هيك — شو اسم الشركة بالضبط، تا يكون التأكد من الدومين والـ hosting جاهز لمكالمتنا؟"</i></li>
+              <li><b>لوين بيروح:</b> مباشرة لابراهيم (WhatsApp أو قروب الفريق)، بنفس يوم الحجز — مش محفوظ لحتى الـ pre-call brief.</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="lede"><span class="en">The default move: show, don't describe.</span><span class="ar" dir="rtl">التحرك الافتراضي: وريّ، ما تشرح.</span></p>
+        <div class="card">
+          <p class="en">For Tier 2/3 and e-commerce pitches, always prefer pulling up a live reference build over describing one — leCedar Global's own site and existing client demos exist specifically so this pitch is never hypothetical.</p>
+          <p class="ar" dir="rtl">لباقات Tier 2/3 وعروض الـ e-commerce، دايمًا فضّل تفتح شغل حقيقي سابق بدل ما تشرحو — موقع leCedar Global نفسو والـ demos الموجودة لعملاء سابقين موجودين تحديدًا تا هالـ pitch ما يضل افتراضي أبدًا.</p>
+        </div>
+
+        <h3><span class="en">Build-first outreach — for a prospect who hasn't booked a meeting yet</span><span class="ar" dir="rtl">تواصل بالـ build-first — لزبون محتمل لسا ما حجز اجتماع</span></h3>
+        <p class="en">For a prospect matching the lead-priority signal from the Personas section — strong Google reviews, weak or outdated website — that a closer is prospecting cold or warm (not an inbound lead who's already booked), skip the "book a call, then pitch" sequence entirely. Build the Tier 1 demo first, on a free preview link, before any outreach happens.</p>
+        <p class="ar" dir="rtl">لزبون محتمل بيطابق إشارة أولوية الـ lead من قسم الـ Personas — تقييمات Google قوية، موقع ضعيف أو قديم — يلي الـ closer عم يدوّر عليه بارد أو دافئ (مش lead inbound حاجز أصلاً)، تخطّى بالكامل خطوات "احجز مكالمة، وبعدين اعمل pitch". ابني أول demo من Tier 1، على رابط preview مجاني، قبل أي تواصل.</p>
+        <p class="en"><b>The demo preview is locked, not a public link.</b> Password-protect the preview and give the password out only when sending the opening message — the prospect gets access from the closer, not from a link anyone could find or forward around.</p>
+        <p class="ar" dir="rtl"><b>معاينة الـ demo مقفلة، مش رابط عام.</b> حطّلها password واعطي الـ password بس لما تبعت الرسالة الأولى — الزبون المحتمل ياخد الوصول من الـ closer، مش من رابط أي حدا فيه يلاقيه أو يبعتو.</p>
+        <p><span class="en">The opening message is then just:</span><span class="ar" dir="rtl">الرسالة الأولى بتكون بس:</span></p>
+        <div class="script-line">
+          <span class="who en">Closer line</span><span class="who ar" dir="rtl">كلام الـ Closer</span>
+          <span class="en">"Hi [Name] — I rebuilt your website. Here's the live link: [link] (password: [code]). If you like it, we can have it on your domain this week — [Tier 1 price, $800–$1,500]."</span>
+          <span class="ar" dir="rtl">"مرحبا [الاسم] — عملتلك موقعك من جديد. هيدا الرابط الحي: [link] (password: [code]). اذا عجبك، فينا نحطّو عالدومين تبعك هالأسبوع — [سعر Tier 1، $800–$1,500]."</span>
+        </div>
+        <p class="en">No deck, no discovery call first — the live link does the selling. One follow-up two days later if there's no reply, then move to the next prospect. This is a cold/warm-list motion, not a referred-contact one, so the usual caution about not over-chasing a warm, referred, or diaspora-network contact applies less strictly here — moving on after one follow-up is the point, not a risk to manage.</p>
+        <p class="ar" dir="rtl">بلا عرض (deck)، بلا discovery call الأول — الرابط الحي هو يلي بيبيع. متابعة وحدة بعد يومين اذا ما في رد، وبعدين انتقل لزبون محتمل تاني. هيدي حركة لائحة باردة/دافئة، مش جهة محوّلة، فالحذر المعتاد من عدم "حرق" جهة دافئة أو محوّلة أو من شبكة مغتربين بيطبّق هون بشكل أخف — الانتقال بعد متابعة وحدة هو بالضبط الهدف، مش خطر لازم تديرو.</p>
+        <p class="en"><b>Take it down if it doesn't convert.</b> If there's no reply within <b>2 weeks</b> of the first outreach, take the demo preview offline. If the prospect replies and says no, take it down immediately — don't leave it live on the off chance they change their mind. A demo that sits live indefinitely for a prospect who never bought is free, unbilled hosting with no path to a deal.</p>
+        <p class="ar" dir="rtl"><b>شيلو اذا ما نجح.</b> اذا ما في رد خلال <b>أسبوعين</b> من أول تواصل، شيل معاينة الـ demo. اذا الزبون رد وقال لأ، شيلو فورًا — ما تخلّيه شغال على أمل إنو يغيّر رأيو. demo شغال بلا نهاية لزبون ما اشترى هو hosting مجاني وبلا فاتورة وبلا أي طريق لصفقة.</p>
+
+        <h3><span class="en">Before the meeting</span><span class="ar" dir="rtl">قبل الاجتماع</span></h3>
+        <p class="en">If you sense a prospect will need deep technical reassurance — a skeptical technical stakeholder, a competing quote with specific claims to counter, a multi-stakeholder call where Ibrahim's personal credibility is the deciding factor — <b>flag it to Ibrahim before the call</b>, not during it. He'd rather be asked to join than find out afterward that a deal was lost to a question no one could answer confidently.</p>
+        <p class="ar" dir="rtl">اذا حسّيت الزبون المحتمل محتاج طمأنة تقنية عميقة — شخص تقني متشكك، عرض منافس فيه ادعاءات محددة لازم تردّ عليها، مكالمة فيها أكتر من طرف قرار ومصداقية ابراهيم الشخصية هي العامل الحاسم — <b>بلّغ ابراهيم قبل المكالمة</b>، مش خلالها. هو بيفضّل يُسأل ينضم عالمكالمة من إنو يعرف بعدين إنو صفقة ضاعت بسبب سؤال محدا قدر يجاوب عليه بثقة.</p>
+
+        <h3><span class="en">During the call, if you get a question you can't answer confidently</span><span class="ar" dir="rtl">خلال المكالمة، اذا جالك سؤال ما فيك تجاوب عليه بثقة</span></h3>
+        <ol class="steps en">
+          <li>Don't guess, and don't improvise a commitment on price, timeline, or scope.</li>
+          <li>If leCedar's in-call AI support (the Suggeri-based sales copilot, currently in build-out) is live and available, use it for a quick, source-backed answer.</li>
+          <li>If it isn't available, or the question is high-stakes, say plainly: <i>"That's a great question — let me get you the exact answer rather than guess. Can I follow up today, or would it help to have our founder join for five minutes?"</i> Then loop Ibrahim in.</li>
+        </ol>
+        <ol class="steps ar" dir="rtl">
+          <li>ما تخمّن، وما ترتجل التزام على السعر، الوقت، أو الـ scope.</li>
+          <li>اذا دعم الـ AI أثناء المكالمة تبع leCedar (الـ sales copilot المبني على Suggeri، عم ينبنى هلأ) شغال ومتوفر، استعملو لجواب سريع ومبني على مصدر.</li>
+          <li>اذا مش متوفر، أو السؤال مصيري، قول بصراحة: <i>"سؤال ممتاز — خليني آخدلك الجواب الدقيق بدل ما خمّن. فيني ارجعلك اليوم، أو بيساعد إنو مؤسسنا ينضم لخمس دقايق؟"</i> وبعدين أشرك ابراهيم.</li>
+        </ol>
+
+        <h3><span class="en">How to actually reach Ibrahim, live</span><span class="ar" dir="rtl">كيف توصل فعليًا لابراهيم، بوقتها</span></h3>
+        <ul class="en">
+          <li><b>Default:</b> message the designated WhatsApp group — this is the first move for anything during a call, urgent or not.</li>
+          <li><b>If it's important and time-sensitive:</b> call him directly rather than waiting on a text reply.</li>
+          <li><b>If he hasn't answered within 5 minutes</b> — especially on the WhatsApp group — call him. Don't sit on a live call waiting indefinitely for a WhatsApp reply when the prospect is still on the line.</li>
+        </ul>
+        <ul class="ar" dir="rtl">
+          <li><b>الافتراضي:</b> ابعت رسالة على قروب الـ WhatsApp المخصص — هيدي أول خطوة لأي شي خلال المكالمة، مستعجل أو لأ.</li>
+          <li><b>اذا مهم ومستعجل:</b> اتصل فيه مباشرة بدل ما تستنى رد مكتوب.</li>
+          <li><b>اذا ما ردّ خلال 5 دقايق</b> — خصوصًا عالقروب — اتصل فيه. ما تضل عمكالمة حية مستني رد WhatsApp بلا نهاية والزبون لسا عالخط.</li>
+        </ul>
+        <div class="callout warn">
+          <p class="en" style="margin:0;"><b>Never oversell the AI support.</b> As of now it's a pre-call brief and manual "ask" tool in active development, not an autonomous meeting participant — a research aid for you, not a thing to describe to the prospect.</p>
+          <p class="ar" dir="rtl" style="margin:0;"><b>أبدًا ما "تنفخ" بدعم الـ AI.</b> هلأ هو بس أداة ملخّص قبل المكالمة وأداة "اسأل" يدوية عم تنبنى، مش مشارك مستقل بالاجتماع — أداة بحث إلك، مش شي تشرحو للزبون.</p>
+        </div>
+
+        <div class="callout rule">
+          <div class="en">
+            <p><b>Mandatory — run every deal through GHL.</b> Every closer works out of the GoHighLevel (GHL) access Ibrahim provides. This isn't optional and it isn't a "log it later" step.</p>
+            <ul style="margin:10px 0 0;">
+              <li><b>Fill the full client profile</b> — name, business name, contact details, every field GHL asks for, not just the minimum to save the record.</li>
+              <li><b>Add notes on everything promised or agreed</b> — the tier quoted, any custom scope, revision counts, deadlines, payment terms, anything said on the call that the client will expect to be honored later. If it isn't in GHL, it didn't happen as far as delivery is concerned — Ibrahim and whoever builds the site need to see exactly what the client was told.</li>
+              <li><b>Update it the same day</b>, not at the end of the week. A stale GHL record is worse than no record — it tells everyone the deal is further along than it actually is.</li>
+              <li>This is also where the mandatory booking step (business name → domain/hosting check) and the Whish payment confirmation should be logged — one system of record, not scattered across WhatsApp and memory.</li>
+            </ul>
+          </div>
+          <div class="ar" dir="rtl">
+            <p><b>إلزامي — مرّر كل صفقة عبر GHL.</b> كل closer بيشتغل من خلال وصول GoHighLevel (GHL) يلي ابراهيم عم يعطيه. هيدا مش اختياري ومش خطوة "بسجّلها بعدين".</p>
+            <ul style="margin:10px 0 0;">
+              <li><b>عبّي كل بروفايل الزبون</b> — الاسم، اسم الشركة، تفاصيل التواصل، كل حقل بيطلبو GHL، مش بس الحد الأدنى تا تحفظ السجل.</li>
+              <li><b>ضيف ملاحظات عن كل شي اتوعدنا فيه أو اتفقنا عليه</b> — الـ tier المسعّر، أي scope مخصّص، عدد التعديلات، المواعيد النهائية، شروط الدفع، أي شي اتحكى بالمكالمة الزبون رح يتوقّع إنو ينحترم بعدين. اذا مش موجود بـ GHL، كأنو ما صار من ناحية التسليم — ابراهيم ومين ما بيبني الموقع لازم يشوفوا بالضبط شو انقال للزبون.</li>
+              <li><b>حدّثو بنفس اليوم</b>، مش آخر الأسبوع. سجل GHL قديم أسوأ من ولا سجل — بيوهم الكل إنو الصفقة متقدّمة أكتر من الواقع.</li>
+              <li>هون كمان لازم تتسجّل خطوة الحجز الإلزامية (اسم الشركة ← التأكد من الدومين/الـ hosting) وتأكيد دفعة الـ Whish — نظام سجل واحد، مش مبعثر بين WhatsApp والذاكرة.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="script">
+        <h2><span class="num">9</span><span class="en">Sales Script</span><span class="ar" dir="rtl">سكربت المبيعات</span></h2>
+        <h3><span class="en">Opening</span><span class="ar" dir="rtl">البداية</span></h3>
+        <div class="script-line">
+          <span class="who en">Closer line</span><span class="who ar" dir="rtl">كلام الـ Closer</span>
+          <span class="en">"Hi [Name] — quick question: if someone searched your business right now, what would they actually find? Is your current site helping you close business, or is it something you'd rather people not look at too closely?"</span>
+          <span class="ar" dir="rtl">"مرحبا [الاسم] — سؤال سريع: اذا حدا دوّر عن شركتك هلأ، شو رح يلاقي فعليًا؟ موقعك الحالي عم يساعدك تقفل صفقات، ولا هو شي بتفضّل الناس ما يدققوا فيه كتير؟"</span>
+        </div>
+
+        <h3><span class="en">Discovery questions</span><span class="ar" dir="rtl">أسئلة الاكتشاف (Discovery)</span></h3>
+        <ul class="en">
+          <li>"Walk me through what happens today when someone finds you online — what do they see, and what happens next?"</li>
+          <li>"Who else would need to be comfortable with a new website before it moves forward?" <i>(ask early, every time)</i></li>
+          <li>"Is there a specific moment coming up — a new branch, a new market, a pitch, a competitor comparison — that makes this matter now rather than later?"</li>
+          <li>"What have you already spent money on for your brand — a logo, a portfolio deck, an office refresh? That tells me what tier fits."</li>
+        </ul>
+        <ul class="ar" dir="rtl">
+          <li>"احكيلي شو بيصير اليوم لما حدا يلاقيك أونلاين — شو بيشوف، وشو بيصير بعدها؟"</li>
+          <li>"مين كمان لازم يكون مرتاح بموضوع الموقع الجديد تا نكمّل؟" <i>(اسأل بدري، بكل مرة)</i></li>
+          <li>"في شي محدد جايي — فرع جديد، سوق جديد، عرض لعميل، مقارنة مع منافس — بيخلّي هالموضوع مهم هلأ مش بعدين؟"</li>
+          <li>"شو صرفت عليه مصاري قبل لبراندك — لوغو، عرض portfolio، تجديد مكتب؟ هيدا بيفيدني أعرف أي tier بيناسبك."</li>
+        </ul>
+
+        <h3><span class="en">Pitch — by tier</span><span class="ar" dir="rtl">الـ Pitch — حسب الـ Tier</span></h3>
+        <div class="script-line">
+          <span class="who">Standard</span>
+          <span class="en">"Most businesses your size are either invisible online or embarrassed by what comes up when someone searches them. We build a fast, professional, credible site — the floor everyone should have — in about a week or two, starting around $800."</span>
+          <span class="ar" dir="rtl">"معظم الشركات بحجمك إما غير موجودة أونلاين أو منحرجة من يلي بيطلع لما حدا يدوّر عنها. منبني موقع سريع، محترف، وموثوق — الحد الأدنى يلي لازم يكون عند الكل — خلال أسبوع أو أسبوعين، يبلّش من حوالي <bdi>$800</bdi>."</span>
+        </div>
+        <div class="script-line">
+          <span class="who">Animated / Premium</span>
+          <span class="en">"There's a real, visible difference between a template site and one actually designed to earn trust in the first ten seconds. Want me to just show you one, live, right now, instead of describing it?"</span>
+          <span class="ar" dir="rtl">"في فرق حقيقي وواضح بين موقع template وموقع مصمم فعليًا يكسب الثقة بأول عشر ثواني. بدك وريّك وحدة، حيّة، هلأ، بدل ما اشرحلك ياها؟"</span>
+        </div>
+        <div class="script-line">
+          <span class="who">E-commerce (Shopify)</span>
+          <span class="en">"If you're still taking orders through DMs and WhatsApp, you're capping how much you can sell by how fast you can type. We set up a real storefront — Shopify, the platform that works for everyone — so people can buy without waiting on you to reply."</span>
+          <span class="ar" dir="rtl">"اذا لسا عم تاخد طلبات عبر DMs وWhatsApp، عم تحدد كم فيك تبيع بسرعة ما فيك تكتب. منركّب متجر حقيقي — Shopify، المنصة يلي بتناسب الكل — تا الناس تشتري بلا ما تستنى ردك."</span>
+        </div>
+        <div class="script-line">
+          <span class="who en">CRM upsell (after trust is built)</span><span class="who ar" dir="rtl">CRM upsell (بعد ما تنبني الثقة)</span>
+          <span class="en">"Now that people trust what they see on your site — do you trust what's actually happening with every lead that comes in? That's the next conversation, once this is live."</span>
+          <span class="ar" dir="rtl">"هلأ الناس عم تثق بيلي عم تشوفو عموقعك — انت عم تثق فعليًا بيلي عم يصير مع كل lead عم يجي؟ هيدي المحادثة الجاية، لما هيدا الموقع يصير شغال."</span>
+        </div>
+
+        <h3><span class="en">Objection handling</span><span class="ar" dir="rtl">التعامل مع الاعتراضات</span></h3>
+        <table>
+          <thead class="en"><tr><th>Objection</th><th>Label it back</th><th>Response</th></tr></thead>
+          <thead class="ar" dir="rtl"><tr><th>الاعتراض</th><th>سمّيه إلو</th><th>الرد</th></tr></thead>
+          <tbody class="en">
+            <tr><td>"That's too expensive"</td><td>"Sounds like the number's the concern, not whether this would help."</td><td>Reframe to cost of looking unprofessional / losing to a competitor. Lower tier or extended payment — never a discount.</td></tr>
+            <tr><td>"We have someone cheaper"</td><td>"Sounds like you've got a quote — what's actually in it?"</td><td>Cheap competitors sell page-count templates with no motion design, no strategy, no point of contact after launch. Ask what's excluded.</td></tr>
+            <tr><td>"Not the right time"</td><td>"Sounds like it's timing, not the idea."</td><td>Don't push the sale — push for a dated next meeting. Log it.</td></tr>
+            <tr><td>"We already have a site, it's fine"</td><td>"Sounds like it covers the basics — what's one thing it can't do that you wish it could?"</td><td>Discovery question, not a pitch. Only pitch once a real gap surfaces.</td></tr>
+            <tr><td>"How do I know you'll deliver / stick around"</td><td>"Fair — you're trusting us with something your customers will see."</td><td>Point to live reference builds and the post-launch support windows. Proof over promises.</td></tr>
+            <tr><td>"Who's actually signing this"</td><td>"Of course — who else needs to be comfortable with this?"</td><td>Ask directly, every time. Never let a proposal go out before the signer is identified.</td></tr>
+          </tbody>
+          <tbody class="ar" dir="rtl">
+            <tr><td>"غالي"</td><td>"حاسس إنو الرقم هو الهمّ، مش إذا هيدا رح يفيدك."</td><td>رجّع الموضوع لتكلفة إنو تبان غير محترف / تخسر لمنافس. tier أقل أو دفع ممدد — أبدًا تخفيض.</td></tr>
+            <tr><td>"في حدا أرخص"</td><td>"حاسس عندك عرض — شو فيه فعليًا؟"</td><td>المنافسين الأرخص بيبيعوا templates حسب عدد الصفحات بلا motion design، بلا استراتيجية، بلا نقطة تواصل بعد الإطلاق. اسأل شو مش داخل.</td></tr>
+            <tr><td>"مش الوقت المناسب"</td><td>"حاسس الموضوع توقيت، مش الفكرة."</td><td>ما تدفع عالبيع — ادفع لاجتماع جاي بتاريخ محدد. سجّلو.</td></tr>
+            <tr><td>"عندي موقع أصلاً، تمام"</td><td>"حاسس عم يغطّي الأساسيات — شو في شي ما فيه يعملو وبتتمنى يقدر؟"</td><td>سؤال discovery، مش pitch. اعمل pitch بس لما نقص حقيقي يطلع.</td></tr>
+            <tr><td>"كيف بعرف إنكن رح تسلّموا / تضلّوا موجودين"</td><td>"منطقي — عم تأمّننا على شي زباينك رح يشوفوه."</td><td>ورّي أعمال حقيقية سابقة وفترات الدعم بعد الإطلاق. دليل أحسن من وعود.</td></tr>
+            <tr><td>"مين فعليًا رح يوقّع هيدا"</td><td>"طبعًا — مين كمان لازم يكون مرتاح بهالموضوع؟"</td><td>اسأل مباشرة، بكل مرة. أبدًا ما تخلّي proposal يطلع قبل ما تعرف مين بيوقّع.</td></tr>
+          </tbody>
+        </table>
+
+        <h3><span class="en">Closing</span><span class="ar" dir="rtl">الإقفال</span></h3>
+        <div class="script-line">
+          <span class="who en">Closer line</span><span class="who ar" dir="rtl">كلام الـ Closer</span>
+          <span class="en">"Based on what you've told me, [Tier X] looks like the right fit — that's [$ range], and it includes [name the 2-3 biggest bundled items out loud — the near-mandatory integration, the CMS, the SEO setup]. If that works for you, send me a quick 'yes, let's go ahead with [Tier X] at [$ range]' right now in this chat, and I'll send the Whish details so we can get started today. Who else needs to see this before you're ready to move forward?"</span>
+          <span class="ar" dir="rtl">"حسب يلي حكيتلي ياه، [Tier X] بيبيّن الأنسب — هيدا [نطاق $]، وفيه [سمّي أكبر 2-3 بنود داخلة بصوت عالي — الإضافة شبه الإلزامية، الـ CMS، إعداد الـ SEO]. اذا هيدا مناسب إلك، ابعتلي بسرعة 'ايه، يلا نكمّل بـ [Tier X] بـ [نطاق $]' هلأ بهالـ chat، وبعتلّك تفاصيل الـ Whish تا نبلّش اليوم. مين كمان لازم يشوف هيدا قبل ما تكون جاهز تكمّل؟"</span>
+        </div>
+        <div class="callout rule">
+          <p class="en" style="margin:0;"><b>Don't end the call to "send something over."</b> The old version of this line promised a proposal "later" — that's the single most common way a warm call goes cold (see the "How clients sign today" note above). Get the written yes in the chat <b>while you're still talking to them</b>, not after. If they genuinely need to check with someone else first, that's fine — but get a specific day/time to follow up before you hang up, don't leave it open-ended.</p>
+          <p class="ar" dir="rtl" style="margin:0;"><b>ما تسكّر المكالمة بـ "رح ابعتلك شي".</b> النسخة القديمة من هالجملة كانت توعد بـ proposal "بعدين" — هيدا أكتر سبب شائع تبرد فيه مكالمة دافية (شوف ملاحظة "كيف الزبون بيوقّع هلأ" فوق). خد الموافقة المكتوبة بالـ chat وانت لسا عم تحكي معهن، مش بعدين. اذا فعليًا لازم يرجعوا لحدا تاني أول، ولا مشكلة — بس خد يوم/وقت محدد للمتابعة قبل ما تسكّر، ما تخلّيه مفتوح بلا تاريخ.</p>
+        </div>
+
+        <h3><span class="en">Reactivation — for a booked/warm prospect who's gone quiet after a proposal</span><span class="ar" dir="rtl">إعادة التنشيط (Reactivation) — لزبون حاجز/دافئ سكت بعد الـ proposal</span></h3>
+        <p class="en">This is different from the build-first cold-outreach follow-up above (one touch, two days, move on). A prospect who had a real discovery call and a proposal sent is a warmer relationship — don't let them go cold just because the first follow-up didn't land. Ask again. Holding the price and following up again are two separate things; you can do both.</p>
+        <p class="ar" dir="rtl">هيدا مختلف عن متابعة الـ build-first الباردة فوق (لمسة وحدة، يومين، وانتقل). زبون عملّو discovery call حقيقي وانبعتلو proposal هو علاقة أدفى — ما تخلّيه يبرد بس لأنو أول متابعة ما نجحت. اسأل مرة كمان. إنك تحافظ عالسعر وتتابع مرة كمان شغلتين منفصلتين؛ فيك تعمل الشغلتين سوا.</p>
+        <ul class="en">
+          <li><b>Reference the specific thing they said, not a generic check-in.</b> "Just checking in" reads as noise. What they actually told you doesn't.</li>
+          <li><b>Acknowledge where things were left before asking again</b> — if they went quiet after a number was discussed, don't pretend that didn't happen.</li>
+        </ul>
+        <ul class="ar" dir="rtl">
+          <li><b>ارجع لنفس الشي المحدد يلي قالوه، مش متابعة عامة.</b> "بس عم تشيّك" بتبان كإزعاج. يلي فعليًا قالولك ياه مش هيك.</li>
+          <li><b>اعترف وين وقفت الأمور قبل ما تسأل مرة كمان</b> — اذا سكتوا بعد ما اتحكى رقم، ما تتصرف وكأنو هيدا ما صار.</li>
+        </ul>
+        <div class="script-line">
+          <span class="who en">Closer line</span><span class="who ar" dir="rtl">كلام الـ Closer</span>
+          <span class="en">"Hi [Name], we spoke about [the specific thing they mentioned — the old site, the Oman branch, the competitor comparison]. I know the [$ range] was the last thing on the table — has anything changed on your end, or is it still not the right moment?"</span>
+          <span class="ar" dir="rtl">"مرحبا [الاسم]، حكينا عن [الشي المحدد يلي ذكروه — الموقع القديم، فرع عمان، مقارنة مع منافس]. بعرف إنو [نطاق $] كان آخر شي عالطاولة — في شي تغيّر عندك، ولا لسا مش الوقت المناسب؟"</span>
+        </div>
+        <p class="en">Log every touch in GHL (see the GHL discipline note above) — a reactivation attempt that isn't logged didn't happen as far as the next closer who picks up this lead is concerned.</p>
+        <p class="ar" dir="rtl">سجّل كل لمسة بـ GHL (شوف ملاحظة انضباط الـ GHL فوق) — محاولة reactivation مش مسجّلة كأنها ما صارت بالنسبة لأي closer تاني بياخد هالـ lead بعدين.</p>
+      </section>
+
+      <section id="qualify">
+        <h2><span class="num">10</span><span class="en">Qualification Notes</span><span class="ar" dir="rtl">ملاحظات التأهيل</span></h2>
+        <h3><span class="en">A good Digital Presence prospect has</span><span class="ar" dir="rtl">الزبون المحتمل الجيد لـ Digital Presence عندو</span></h3>
+        <ul class="en">
+          <li>A real, operating business — not a pre-revenue idea.</li>
+          <li>Visible pain already costing money or credibility — an outdated/absent site, a competitor comparison, an upcoming moment that makes the old site newly costly.</li>
+          <li>A named, reachable decision-maker. Never quote before this is known.</li>
+          <li>Warm/referral origin — a strong positive signal; prioritize it, but don't disqualify cold leads outright.</li>
+        </ul>
+        <ul class="ar" dir="rtl">
+          <li>عمل حقيقي وشغال — مش فكرة بعدها بلا إيرادات.</li>
+          <li>مشكلة واضحة عم تكلفو مصاري أو مصداقية — موقع قديم/غير موجود، مقارنة مع منافس، لحظة جايي بتخلّي الموقع القديم يصير مكلف أكتر.</li>
+          <li>صاحب قرار معروف الاسم وفيك توصلّو. أبدًا ما تسعّر قبل ما تعرف هيدا.</li>
+          <li>مصدر دافئ/محوّل (referral) — إشارة إيجابية قوية؛ رجّحو، بس ما تستبعد الـ leads الباردة رأسًا.</li>
+        </ul>
+        <h3><span class="en">Disqualifiers</span><span class="ar" dir="rtl">أسباب الاستبعاد</span></h3>
+        <ul class="en">
+          <li>No reachable decision-maker after reasonable effort.</li>
+          <li>A business in active cash-flow crisis (they buy urgency-driven cheap fixes, not a considered purchase).</li>
+          <li>Someone asking for free work "to see if it's good" — redirect to the live demo instead.</li>
+        </ul>
+        <ul class="ar" dir="rtl">
+          <li>ما في صاحب قرار فيك توصلّو بعد محاولة معقولة.</li>
+          <li>عمل بأزمة cash-flow فعلية (بيشتروا حلول رخيصة مستعجلة، مش قرار شراء مدروس).</li>
+          <li>حدا عم يطلب شغل مجاني "تا يشوف اذا منيح" — حوّلو عالـ demo الحي بدل هيك.</li>
+        </ul>
+        <h3><span class="en">Closing Room Check — run before any call where terms go on the table</span><span class="ar" dir="rtl">فحص قبل الإقفال — اعملو قبل أي مكالمة رح تنحط فيها الشروط عالطاولة</span></h3>
+        <table>
+          <thead class="en"><tr><th>Field</th><th>Fill in before the call</th></tr></thead>
+          <thead class="ar" dir="rtl"><tr><th>البند</th><th>عبّيه قبل المكالمة</th></tr></thead>
+          <tbody class="en">
+            <tr><td>Deal</td><td>Who, what tier, what amount</td></tr>
+            <tr><td>Written?</td><td>Path to the proposal doc — no doc, no close</td></tr>
+            <tr><td>Domain/hosting checked?</td><td>Business name sent to Ibrahim the moment the meeting was booked, domain availability and hosting cost confirmed — if this wasn't done at booking, flag it now, don't skip it</td></tr>
+            <tr><td>Included-but-unstated</td><td>Free inclusions not yet itemized (revisions, support window, SEO setup)</td></tr>
+            <tr><td>Pen</td><td>Written yes (WhatsApp/email, kept on record) + Whish deposit — both required. If the client wants a formal signed contract, that's not live yet — flag to Ibrahim before promising one</td></tr>
+            <tr><td>Signer</td><td>Named decision-maker — if unknown, this blocks the close</td></tr>
+            <tr><td>The ask</td><td>The exact sentence requesting the decision</td></tr>
+            <tr><td>If no</td><td>The next close, and the date of the next ask</td></tr>
+          </tbody>
+          <tbody class="ar" dir="rtl">
+            <tr><td>الصفقة</td><td>مين، أي tier، أي مبلغ</td></tr>
+            <tr><td>مكتوب؟</td><td>مسار مستند الـ proposal — بلا مستند، بلا إقفال</td></tr>
+            <tr><td>اتأكد الدومين/الـ hosting؟</td><td>اسم الشركة انبعت لابراهيم لحظة ما الاجتماع انحجز، وتوفر الدومين وسعر الـ hosting اتأكدوا — اذا هيدا ما صار وقت الحجز، بلّغ هلأ، ما تتخطاه</td></tr>
+            <tr><td>داخل بس ما انذكر</td><td>أشياء داخلة مجانًا بس لسا ما انذكرت (التعديلات، فترة الدعم، إعداد الـ SEO)</td></tr>
+            <tr><td>القلم</td><td>موافقة مكتوبة (WhatsApp/إيميل، محفوظة) + دفعة Whish — الشغلتين لازم. اذا الزبون بدو عقد موقّع رسمي، هيدا مش جاهز لسا — بلّغ ابراهيم قبل ما توعد فيه</td></tr>
+            <tr><td>الموقّع</td><td>صاحب قرار معروف الاسم — اذا مش معروف، هيدا بيوقف الإقفال</td></tr>
+            <tr><td>الطلب</td><td>الجملة بالضبط يلي بتطلب القرار</td></tr>
+            <tr><td>اذا لأ</td><td>محاولة الإقفال الجاية، وتاريخ السؤال الجاي</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="gaps">
+        <h2><span class="num">11</span><span class="en">Honest Gaps</span><span class="ar" dir="rtl">نواقص بصراحة</span></h2>
+        <p class="lede"><span class="en">Don't overclaim these to a client.</span><span class="ar" dir="rtl">ما تبالغ بهالنقاط قدام زبون.</span></p>
+        <div class="callout gap">
+          <p class="en" style="margin:0;">No fixed maintenance-retainer number exists past the post-launch support window — flag to Ibrahim if asked rather than inventing one. The Umami traffic-report upsell (see "Demo &amp; In-Call Support" above) is the planned mechanism, not yet priced.</p>
+          <p class="ar" dir="rtl" style="margin:0;">ما في رقم ثابت لصيانة مستمرة بعد فترة الدعم بعد الإطلاق — بلّغ ابراهيم اذا انسأل بدل ما تخترع رقم. الـ upsell تبع تقرير زوار Umami (شوف "الـ Demo والدعم أثناء المكالمة" فوق) هو الآلية المخطط إلها، بس لسا ما تسعّرت.</p>
+        </div>
+        <div class="callout gap">
+          <p class="en" style="margin:0;">The CRM-linked upsell price range is drawn from current deals, not a published rate card — confirm with Ibrahim before quoting.</p>
+          <p class="ar" dir="rtl" style="margin:0;">نطاق سعر الـ upsell المربوط بـ CRM مأخوذ من صفقات حالية، مش من لائحة أسعار رسمية — تأكد مع ابراهيم قبل ما تسعّر.</p>
+        </div>
+        <div class="callout gap">
+          <p class="en" style="margin:0;">Ibrahim's "Persistence Ceiling" has no firm number yet — use judgment and flag warm/referred contacts rather than treating this as settled policy.</p>
+          <p class="ar" dir="rtl" style="margin:0;">"سقف المثابرة (Persistence Ceiling)" تبع ابراهيم ما في رقم ثابت إلو لسا — استعمل حكمك وبلّغ عن الجهات الدافئة/المحوّلة بدل ما تعاملها كسياسة نهائية.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>
+    <span class="en">leCedar Global — Internal Closer Playbook. Last updated 2026-10-12. Not for external distribution.</span>
+    <span class="ar" dir="rtl">leCedar Global — دليل مبيعات داخلي. آخر تحديث 2026-10-12. ممنوع التوزيع خارج الشركة.</span>
+  </footer>
+</div>
+
+<script>
+  // ---- Language toggle ----
+  function setLang(l){
+    document.documentElement.setAttribute('data-lang', l);
+    document.documentElement.setAttribute('lang', l);
+    document.documentElement.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
+    try{ localStorage.setItem('dp_lang', l); }catch(e){}
+    document.querySelectorAll('.langsw button, .gate-langsw button').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-setlang') === l);
+    });
+  }
+  document.querySelectorAll('[data-setlang]').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-setlang')); });
+  });
+  var savedLang = 'en';
+  try{ savedLang = localStorage.getItem('dp_lang') || 'en'; }catch(e){}
+  setLang(savedLang);
+
+  // ---- Password gate ----
+  // Change ACCESS_CODE below to set the password. Case-sensitive.
+  var ACCESS_CODE = "Wndcw@b9pkq";
+  var gate = document.getElementById('gate');
+  var app = document.getElementById('app');
+  var pwInput = document.getElementById('pw');
+  var err = document.getElementById('gate-error');
+
+  function tryUnlock(){
+    if(pwInput.value === ACCESS_CODE){
+      try{ sessionStorage.setItem('dp_unlocked', '1'); }catch(e){}
+      gate.style.display = 'none';
+      app.style.display = 'block';
+    } else {
+      err.textContent = (document.documentElement.getAttribute('data-lang') === 'ar') ? 'الكود غلط. جرّب كمان مرة.' : 'Incorrect code. Try again.';
+      pwInput.value = '';
+      pwInput.focus();
+    }
+  }
+  document.getElementById('unlock').addEventListener('click', tryUnlock);
+  pwInput.addEventListener('keydown', function(e){ if(e.key === 'Enter') tryUnlock(); });
+
+  var alreadyUnlocked = false;
+  try{ alreadyUnlocked = sessionStorage.getItem('dp_unlocked') === '1'; }catch(e){}
+  if(alreadyUnlocked){
+    gate.style.display = 'none';
+    app.style.display = 'block';
+  } else {
+    pwInput.focus();
+  }
+
+  // ---- Mobile nav toggle ----
+  var toc = document.getElementById('toc');
+  var menuToggle = document.getElementById('menuToggle');
+  if(menuToggle){
+    menuToggle.addEventListener('click', function(){
+      toc.classList.toggle('open');
+    });
+    toc.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ toc.classList.remove('open'); });
+    });
+  }
+
+  // ---- Active section highlight ----
+  var sections = document.querySelectorAll('main section');
+  var links = document.querySelectorAll('nav.toc a');
+  function onScroll(){
+    var pos = window.scrollY + 120;
+    var current = null;
+    sections.forEach(function(s){
+      if(s.offsetTop <= pos) current = s.id;
+    });
+    links.forEach(function(l){
+      l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+</script>
+</body>
+</html>

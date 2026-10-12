@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Closer Playbooks | leCedar Global</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--cedar:#1B2415;--cedar-2:#232E1C;--sage:#54713a;--lime:#D7F05A;--paper:#F1F0EB;--sand:#E5E1D3;--ink:#10150C;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:'Inter Tight',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  html[data-lang="ar"] body{font-family:'Cairo','Inter Tight',sans-serif;}
+  html[data-lang="en"] .ar{display:none;}
+  html[data-lang="ar"] .en{display:none;}
+  #gate{position:fixed;inset:0;z-index:999;background:radial-gradient(circle at 20% 20%,var(--cedar-2),var(--cedar) 70%);display:flex;align-items:center;justify-content:center;padding:24px;}
+  .gate-card{background:var(--paper);border-radius:18px;padding:40px 36px;max-width:380px;width:100%;text-align:center;box-shadow:0 30px 60px rgba(0,0,0,.35);}
+  .gate-card h1{font-size:1.05rem;margin:0 0 6px;color:var(--cedar);}
+  .gate-card p{font-size:.88rem;color:#555;margin:0 0 20px;}
+  .wordmark{font-weight:500;font-size:1.25rem;color:var(--cedar);margin-bottom:16px;}
+  .wordmark b{font-weight:700;} .wordmark span{color:var(--sage);}
+  #pw{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--sand);font-family:inherit;font-size:1rem;margin-bottom:12px;background:#fff;}
+  #unlock{width:100%;padding:12px 14px;border-radius:10px;border:none;background:var(--lime);color:var(--cedar);font-weight:700;font-size:.95rem;cursor:pointer;}
+  #gate-error{color:#a23b3b;font-size:.82rem;margin-top:10px;min-height:1em;}
+  .langsw{display:flex;gap:6px;justify-content:center;margin-bottom:14px;}
+  .langsw button{background:var(--sand);border:1px solid #d3cdb8;color:var(--ink);font-family:inherit;font-size:.75rem;font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;}
+  .langsw button.active{background:var(--cedar);color:var(--lime);border-color:var(--cedar);}
+  #app{display:none;}
+  .topbar{background:var(--cedar);color:var(--paper);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .topbar .wordmark{color:var(--paper);margin:0;font-size:1rem;} .topbar .wordmark span{color:var(--lime);}
+  .topbar .langsw{margin:0;} .topbar .langsw button{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25);color:var(--paper);}
+  .topbar .langsw button.active{background:var(--lime);color:var(--cedar);border-color:var(--lime);}
+  main{max-width:860px;margin:0 auto;padding:48px 24px 100px;}
+  h2{font-size:1.7rem;color:var(--cedar);margin:0 0 6px;}
+  .lede{color:var(--sage);margin:0 0 28px;}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+  a.card{display:block;background:#fff;border:1px solid var(--sand);border-radius:14px;padding:22px;text-decoration:none;color:var(--ink);transition:transform .15s ease,border-color .15s ease;}
+  a.card:hover{transform:translateY(-2px);border-color:var(--sage);}
+  a.card .tag{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--sage);}
+  html[data-lang="ar"] a.card .tag{text-transform:none;letter-spacing:0;}
+  a.card h3{margin:6px 0 6px;font-size:1.1rem;color:var(--cedar);}
+  a.card p{margin:0;font-size:.88rem;color:#555;}
+  .soon{margin-top:22px;font-size:.85rem;color:#777;}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-card">
+    <div class="langsw"><button data-setlang="en" class="active">EN</button><button data-setlang="ar">عربي</button></div>
+    <div class="wordmark">le<b>Cedar</b> <span>Global</span></div>
+    <h1><span class="en">Closer Playbooks — Internal Access</span><span class="ar" dir="rtl">أدلة المبيعات — دخول داخلي</span></h1>
+    <p><span class="en">For leCedar Global closers only.</span><span class="ar" dir="rtl">لموظفي المبيعات بـ leCedar Global بس.</span></p>
+    <input type="password" id="pw" autocomplete="off">
+    <button id="unlock"><span class="en">Unlock</span><span class="ar" dir="rtl">فتح</span></button>
+    <div id="gate-error"></div>
+  </div>
+</div>
+
+<div id="app">
+  <div class="topbar">
+    <div class="wordmark">le<b>Cedar</b> <span>Global</span></div>
+    <div class="langsw"><button data-setlang="en" class="active">EN</button><button data-setlang="ar">عربي</button></div>
+  </div>
+  <main>
+    <h2><span class="en">Closer Playbooks</span><span class="ar" dir="rtl">أدلة المبيعات</span></h2>
+    <p class="lede"><span class="en">Pick the service you're selling. Each playbook is available in English and Lebanese Arabic.</span><span class="ar" dir="rtl">اختار الخدمة يلي عم تبيعها. كل دليل متوفر بالإنجليزي وبالعربي اللبناني.</span></p>
+    <div class="cards">
+      <!-- To add a new playbook: copy this <a class="card"> block, change href + text, and create closer-playbook/<slug>/index.html -->
+      <a class="card" href="digital-presence/">
+        <div class="tag">Digital Presence</div>
+        <h3><span class="en">Websites &amp; Online Presence</span><span class="ar" dir="rtl">المواقع والحضور الرقمي</span></h3>
+        <p><span class="en">Story, USPs, personas, pricing, scripts, objections, qualification.</span><span class="ar" dir="rtl">القصة، نقاط البيع، الفئات المستهدفة، الأسعار، السكربتات، الاعتراضات، التأهيل.</span></p>
+      </a>
+    </div>
+    <p class="soon"><span class="en">More service playbooks will appear here as they are added.</span><span class="ar" dir="rtl">رح تنضاف أدلة خدمات تانية هون كل ما تجهز.</span></p>
+  </main>
+</div>
+
+<script>
+  function setLang(l){
+    var d=document.documentElement;
+    d.setAttribute('data-lang',l); d.setAttribute('lang',l); d.setAttribute('dir',l==='ar'?'rtl':'ltr');
+    try{localStorage.setItem('dp_lang',l);}catch(e){}
+    document.querySelectorAll('[data-setlang]').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-setlang')===l);});
+  }
+  document.querySelectorAll('[data-setlang]').forEach(function(b){b.addEventListener('click',function(){setLang(b.getAttribute('data-setlang'));});});
+  var sl='en'; try{sl=localStorage.getItem('dp_lang')||'en';}catch(e){}
+  setLang(sl);
+
+  var ACCESS_CODE="Wndcw@b9pkq";
+  var gate=document.getElementById('gate'),app=document.getElementById('app'),pw=document.getElementById('pw'),err=document.getElementById('gate-error');
+  function unlock(){
+    if(pw.value===ACCESS_CODE){
+      try{sessionStorage.setItem('dp_unlocked','1');}catch(e){}
+      gate.style.display='none'; app.style.display='block';
+    } else {
+      err.textContent=(document.documentElement.getAttribute('data-lang')==='ar')?'الكود غلط. جرّب كمان مرة.':'Incorrect code. Try again.';
+      pw.value=''; pw.focus();
+    }
+  }
+  document.getElementById('unlock').addEventListener('click',unlock);
+  pw.addEventListener('keydown',function(e){if(e.key==='Enter')unlock();});
+  var ok=false; try{ok=sessionStorage.getItem('dp_unlocked')==='1';}catch(e){}
+  if(ok){gate.style.display='none';app.style.display='block';} else {pw.focus();}
+</script>
+</body>
+</html>
