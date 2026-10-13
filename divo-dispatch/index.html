@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +8,7 @@
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --paper:#F1F0EB; --ink:#10150C; --ghost:rgba(16,21,12,.18); --soft:rgba(16,21,12,.46);
@@ -18,74 +18,110 @@
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{font-family:'Inter Tight',sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+html[data-lang="ar"] body{font-family:'Cairo','Inter Tight',sans-serif}
 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:#54713a}
+html[data-lang="ar"] .serif{font-family:'Cairo',serif;font-style:normal;font-weight:700}
 a{color:inherit}
+bdi{unicode-bidi:isolate}
+
+/* ---------- language toggling ---------- */
+.fr,.en,.ar{display:none}
+html[data-lang="fr"] .fr{display:block}
+html[data-lang="en"] .en{display:block}
+html[data-lang="ar"] .ar{display:block}
+html[data-lang="fr"] span.fr,html[data-lang="fr"] button .fr{display:inline}
+html[data-lang="en"] span.en,html[data-lang="en"] button .en{display:inline}
+html[data-lang="ar"] span.ar,html[data-lang="ar"] button .ar{display:inline}
+.lang-block[dir="rtl"]{text-align:right}
 
 /* ---------- gate ---------- */
 #gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(ellipse 80% 60% at 50% 20%,rgba(215,240,90,.10) 0%,transparent 60%),var(--paper)}
 .gate-card{width:100%;max-width:380px;background:var(--white);border:1px solid var(--line);border-radius:18px;padding:36px 32px;box-shadow:0 30px 70px rgba(16,21,12,.12)}
-.gate-logo{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.gate-logo{display:flex;align-items:center;gap:10px;margin-bottom:18px}
 .gate-logo svg{width:28px;height:28px}
 .gate-logo b{font-size:17px;font-weight:500;letter-spacing:-.01em;color:var(--ink)}
 .gate-logo b i{font-style:normal;font-weight:700}
 .gate-logo b span{color:#54713a;font-weight:500}
+.gate-langsw{display:flex;gap:6px;margin-bottom:20px}
+.gate-langsw button{background:var(--paper);border:1px solid var(--line);color:var(--ink);font-family:inherit;font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer}
+.gate-langsw button.active{background:var(--cedar);color:var(--lime);border-color:var(--cedar)}
 .gate-card h1{font-size:19px;margin:0 0 8px;font-weight:600;color:var(--ink)}
 .gate-card p.sub{font-size:14px;color:var(--soft);margin:0 0 22px;line-height:1.5}
 .gate-card label{display:block;font-size:12px;font-weight:600;color:var(--soft);margin-bottom:7px}
 .gate-card input{width:100%;padding:13px 14px;font-size:15px;font-family:inherit;background:var(--paper);border:1px solid var(--line);border-radius:10px;color:var(--ink)}
 .gate-card input:focus{outline:2px solid var(--lime-ink);outline-offset:1px;border-color:var(--lime-ink)}
-.gate-card button{width:100%;margin-top:14px;padding:13px;font-size:15px;font-weight:600;font-family:inherit;background:var(--lime);color:var(--lime-ink);border:0;border-radius:10px;cursor:pointer;transition:background .2s}
-.gate-card button:hover{background:#e3f97a}
-.gate-card button[disabled]{opacity:.6;cursor:default}
+.gate-card button#go{width:100%;margin-top:14px;padding:13px;font-size:15px;font-weight:600;font-family:inherit;background:var(--lime);color:var(--lime-ink);border:0;border-radius:10px;cursor:pointer;transition:background .2s}
+.gate-card button#go:hover{background:#e3f97a}
+.gate-card button#go[disabled]{opacity:.6;cursor:default}
 .gate-err{margin-top:13px;font-size:13px;color:#a23b3b;min-height:18px}
 .gate-foot{margin-top:24px;font-size:12px;color:var(--ghost)}
+html[data-lang="ar"] #gate{direction:rtl}
+html[data-lang="ar"] .gate-logo{flex-direction:row-reverse}
 
 /* ---------- hub (unlocked content) ---------- */
 #hub{min-height:100vh}
 .wrap{max-width:900px;margin:0 auto;padding:0 24px}
 @media(min-width:768px){.wrap{padding:0 40px}}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 24px;background:var(--cedar)}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 24px;background:var(--cedar);flex-wrap:wrap}
 @media(min-width:768px){.topbar{padding:16px 40px}}
 .topbar .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
 .topbar .wordmark{font-size:16px;font-weight:500;color:var(--paper);letter-spacing:-.01em}
 .topbar .wordmark i{font-style:normal;font-weight:700}
 .topbar .wordmark span{color:var(--lime)}
-.top-right{display:flex;align-items:center;gap:10px}
+.top-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.langsw{display:flex;gap:4px}
+.langsw button{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);color:var(--paper);font-family:inherit;font-size:11px;font-weight:600;padding:5px 10px;border-radius:999px;cursor:pointer}
+.langsw button.active{background:var(--lime);color:var(--lime-ink);border-color:var(--lime)}
 .tag{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;background:rgba(255,255,255,.08);color:var(--sand);padding:5px 11px;border-radius:999px}
+html[data-lang="ar"] .tag{text-transform:none;letter-spacing:0}
 #lockBtn{font-size:12px;font-weight:600;background:transparent;border:1px solid rgba(255,255,255,.25);color:var(--sand);padding:6px 12px;border-radius:999px;cursor:pointer;font-family:inherit}
 #lockBtn:hover{background:rgba(255,255,255,.08)}
 
 main.wrap{padding-top:44px;padding-bottom:90px}
 .hero{padding-bottom:28px;border-bottom:1px solid var(--line);margin-bottom:34px}
 .eyebrow{display:block;font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#54713a;margin-bottom:12px}
+html[data-lang="ar"] .eyebrow{text-transform:none;letter-spacing:0}
 .hero h1{font-size:clamp(26px,4.4vw,38px);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin:0 0 16px}
+html[data-lang="ar"] .hero h1{font-weight:700;letter-spacing:0}
 .lede{font-size:16px;color:var(--soft);max-width:640px;margin:0 0 18px;line-height:1.6}
 .callout{background:var(--sand);border-left:3px solid var(--lime);border-radius:0 10px 10px 0;padding:14px 18px;font-size:14.5px;color:var(--cedar-2)}
+.lang-block[dir="rtl"] .callout{border-left:none;border-right:3px solid var(--lime);border-radius:10px 0 0 10px}
 
 section{margin-bottom:46px}
 section h2{display:flex;align-items:center;gap:12px;font-size:21px;font-weight:600;color:var(--ink);margin:0 0 8px;letter-spacing:-.01em}
+html[data-lang="ar"] section h2{font-weight:700;letter-spacing:0}
 .num{background:var(--lime);color:var(--lime-ink);font-weight:700;font-size:13px;width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex:none}
 p.sub{color:var(--soft);font-size:15px;margin:0 0 18px;max-width:680px}
 .note{color:var(--soft);font-size:13.5px;font-style:italic;margin:16px 0 0}
+html[data-lang="ar"] .note{font-style:normal}
 
 .grid-2{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:6px}
 @media(min-width:640px){.grid-2{grid-template-columns:1fr 1fr}}
 .card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
 .card.good{border-left:3px solid #54713a}
 .card.warn{border-left:3px solid #c98a2e}
+.lang-block[dir="rtl"] .card.good{border-left:none;border-right:3px solid #54713a}
+.lang-block[dir="rtl"] .card.warn{border-left:none;border-right:3px solid #c98a2e}
 .card h3{font-size:14.5px;margin:0 0 10px;color:var(--ink);font-weight:600}
+html[data-lang="ar"] .card h3{font-weight:700}
 .card ul{margin:0;padding-left:18px;font-size:14px;color:var(--soft);line-height:1.6}
+.lang-block[dir="rtl"] .card ul{padding-left:0;padding-right:18px}
 .card ul li{margin-bottom:8px}
 .card ul.check li{list-style:none;padding-left:22px;position:relative}
+.lang-block[dir="rtl"] .card ul.check li{padding-left:0;padding-right:22px}
 .card ul.check li::before{content:"";position:absolute;left:0;top:5px;width:13px;height:13px;border:1.5px solid var(--lime-ink);border-radius:3px}
+.lang-block[dir="rtl"] .card ul.check li::before{left:auto;right:0}
 
 ol.steps{margin:0;padding-left:0;list-style:none;counter-reset:step}
 ol.steps li{counter-increment:step;position:relative;padding:0 0 14px 38px;font-size:15px;color:var(--ink);line-height:1.55}
+.lang-block[dir="rtl"] ol.steps li{padding:0 38px 14px 0}
 ol.steps li::before{content:counter(step);position:absolute;left:0;top:0;width:26px;height:26px;background:var(--cedar);color:var(--lime);font-size:12.5px;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.lang-block[dir="rtl"] ol.steps li::before{left:auto;right:0}
 
 .table-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--line)}
 table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--white);min-width:520px}
 thead th{background:var(--cedar);color:var(--sand);text-align:left;padding:12px 14px;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+.lang-block[dir="rtl"] thead th{text-align:right;text-transform:none;letter-spacing:0}
 thead th span{display:block;font-size:10.5px;text-transform:none;letter-spacing:0;color:rgba(241,240,235,.6);font-weight:500;margin-top:2px}
 tbody td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink)}
 tbody td span{display:block;font-size:11.5px;color:var(--soft);margin-top:2px}
@@ -104,10 +140,15 @@ tbody tr.hl td{background:var(--sand);font-weight:600}
       <svg viewBox="0 0 48 48" aria-hidden="true"><line x1="24" y1="24" x2="24" y2="14" stroke="#1B2415" stroke-width="2.5"/><circle cx="24" cy="10" r="8" fill="#D7F05A"/><line x1="24" y1="24" x2="14" y2="30" stroke="#1B2415" stroke-width="2"/><line x1="14" y1="30" x2="8" y2="38" stroke="#1B2415" stroke-width="2"/><line x1="14" y1="30" x2="16" y2="40" stroke="#1B2415" stroke-width="2"/><line x1="24" y1="24" x2="34" y2="30" stroke="#1B2415" stroke-width="2"/><line x1="34" y1="30" x2="28" y2="40" stroke="#1B2415" stroke-width="2"/><line x1="34" y1="30" x2="40" y2="38" stroke="#1B2415" stroke-width="2"/><circle cx="8" cy="38" r="2.2" fill="#1B2415"/><circle cx="16" cy="40" r="2.2" fill="#1B2415"/><circle cx="28" cy="40" r="2.2" fill="#1B2415"/><circle cx="40" cy="38" r="2.2" fill="#1B2415"/></svg>
       <b>le<i>Cedar</i> <span>Global</span></b>
     </div>
-    <h1>Cette page est privée</h1>
-    <p class="sub">Entrez le mot de passe qui vous a été donné.</p>
+    <div class="gate-langsw" role="group" aria-label="Language">
+      <button type="button" data-gatelang="fr" class="active">FR</button>
+      <button type="button" data-gatelang="en">EN</button>
+      <button type="button" data-gatelang="ar">AR</button>
+    </div>
+    <h1 id="gateTitle">Cette page est privée</h1>
+    <p class="sub" id="gateSub">Entrez le mot de passe qui vous a été donné.</p>
     <form id="f" autocomplete="off">
-      <label for="pw">Mot de passe</label>
+      <label for="pw" id="gateLabel">Mot de passe</label>
       <input id="pw" type="password" autocomplete="current-password" autofocus>
       <button id="go" type="submit">Ouvrir</button>
       <div class="gate-err" id="err" role="status" aria-live="polite"></div>
@@ -120,15 +161,61 @@ tbody tr.hl td{background:var(--sand);font-weight:600}
 <script>
 (function () {
   var f = document.getElementById('f'), pw = document.getElementById('pw'),
-      err = document.getElementById('err'), go = document.getElementById('go');
+      err = document.getElementById('err'), go = document.getElementById('go'),
+      gateTitle = document.getElementById('gateTitle'), gateSub = document.getElementById('gateSub'),
+      gateLabel = document.getElementById('gateLabel');
 
-  function openHub(html) {
-    document.getElementById('gate').outerHTML = html;
+  var T = {
+    fr: { title: 'Cette page est privée', sub: 'Entrez le mot de passe qui vous a été donné.', label: 'Mot de passe', go: 'Ouvrir', opening: 'Ouverture…', bad: 'Ce mot de passe est incorrect.' },
+    en: { title: 'This page is private', sub: 'Enter the password you were given.', label: 'Password', go: 'Open', opening: 'Opening…', bad: 'That password is not correct.' },
+    ar: { title: 'هذه الصفحة خاصة', sub: 'أدخل كلمة المرور التي أُعطيت لك.', label: 'كلمة المرور', go: 'فتح', opening: 'جارٍ الفتح…', bad: 'كلمة المرور هذه غير صحيحة.' }
+  };
+
+  function setLang(lang) {
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+    document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    var t = T[lang];
+    gateTitle.textContent = t.title; gateSub.textContent = t.sub; gateLabel.textContent = t.label;
+    go.textContent = t.go; err.textContent = '';
+    document.querySelectorAll('[data-gatelang]').forEach(function (b) {
+      b.classList.toggle('active', b.getAttribute('data-gatelang') === lang);
+    });
+    document.querySelectorAll('[data-setlang]').forEach(function (b) {
+      b.classList.toggle('active', b.getAttribute('data-setlang') === lang);
+    });
+  }
+
+  document.querySelectorAll('[data-gatelang]').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.getAttribute('data-gatelang')); });
+  });
+
+  function wireHub() {
     var lockBtn = document.getElementById('lockBtn');
     if (lockBtn) lockBtn.addEventListener('click', function () {
       sessionStorage.removeItem('divopw');
       location.reload();
     });
+    document.querySelectorAll('[data-setlang]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var lang = b.getAttribute('data-setlang');
+        document.documentElement.setAttribute('data-lang', lang);
+        document.documentElement.setAttribute('lang', lang);
+        document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+        document.querySelectorAll('[data-setlang]').forEach(function (x) {
+          x.classList.toggle('active', x === b);
+        });
+        window.scrollTo(0, 0);
+      });
+    });
+    document.querySelectorAll('[data-setlang]').forEach(function (b) {
+      b.classList.toggle('active', b.getAttribute('data-setlang') === document.documentElement.getAttribute('data-lang'));
+    });
+  }
+
+  function openHub(html) {
+    document.getElementById('gate').outerHTML = html;
+    wireHub();
   }
 
   var saved = sessionStorage.getItem('divopw');
@@ -138,13 +225,14 @@ tbody tr.hl td{background:var(--sand);font-weight:600}
 
   f.addEventListener('submit', function (e) {
     e.preventDefault();
-    err.textContent = ''; go.disabled = true; go.textContent = 'Ouverture…';
+    var lang = document.documentElement.getAttribute('data-lang') || 'fr', t = T[lang];
+    err.textContent = ''; go.disabled = true; go.textContent = t.opening;
     GZ.load('./d/page.json', pw.value).then(function (html) {
       sessionStorage.setItem('divopw', pw.value);
       openHub(html);
     }).catch(function () {
-      err.textContent = 'Ce mot de passe est incorrect.';
-      go.disabled = false; go.textContent = 'Ouvrir';
+      err.textContent = t.bad;
+      go.disabled = false; go.textContent = t.go;
       pw.select();
     });
   });
